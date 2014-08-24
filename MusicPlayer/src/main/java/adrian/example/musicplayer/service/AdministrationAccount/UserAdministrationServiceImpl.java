@@ -43,7 +43,16 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 		}catch(ObjectNotFoundException exception){
 			exception.printStackTrace();
 		}
-		
+	}
+	
+	@Override
+	@Transactional
+	public void updateEmail(int user_id, String email) {
+		try{
+			this.userDao.updateEmail(user_id, email);
+		}catch(ObjectNotFoundException exception){
+			exception.printStackTrace();
+		}
 	}
 
 	@Override
@@ -71,5 +80,4 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	public void setEnabledTrue(int user_id) {
 		this.userDao.setEnabledTrue(user_id);
 	}
-
 }
