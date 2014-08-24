@@ -25,6 +25,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import adrian.example.musicplayer.validation.userValidation.CheckUserExist;
+import adrian.example.musicplayer.validation.userValidation.EmailEqualsConstraint;
 import adrian.example.musicplayer.validation.userValidation.PasswordEqualsConstraint;
 
 @Entity
@@ -35,6 +36,7 @@ import adrian.example.musicplayer.validation.userValidation.PasswordEqualsConstr
 @DynamicUpdate
 @PasswordEqualsConstraint(groups = {User.DefaultValidation.class, 
 		User.PasswordValidation.class})
+@EmailEqualsConstraint(groups = User.MailMatchValidation.class)
 public class User implements Serializable{
    
 	@Id
