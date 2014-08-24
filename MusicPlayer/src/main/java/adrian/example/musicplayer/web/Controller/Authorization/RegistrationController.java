@@ -52,15 +52,11 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String registrationPagePost(
-			  @RequestParam(value = "strategyPattern", required = true) 
-			  String strategyActivePattern,
-			/*  @ModelAttribute("user") @Valid User user*/
-			  @ModelAttribute("user") @Validated({DefaultValidation.class, 
-			  PasswordValidation.class, MailValidation.class})
-			  User user,   
-			  BindingResult result, 
-			  SessionStatus sessionStatus){
+	public String registrationPagePost(@RequestParam(value = "strategyPattern", required = true) 
+			                            String strategyActivePattern,
+                            			@ModelAttribute("user") @Validated({DefaultValidation.class, 
+			                            PasswordValidation.class, MailValidation.class})
+			                            User user,  BindingResult result, SessionStatus sessionStatus){
 		
 		if(result.hasErrors()){
 			return "authorization/registration";
