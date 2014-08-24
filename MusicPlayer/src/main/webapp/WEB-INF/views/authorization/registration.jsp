@@ -41,7 +41,7 @@
              </tr>    
              <tr>
                 <td><form:label path="password">Password:</form:label></td>
-                <td><form:input path="password"/></td>
+                <td><form:password path="password"/></td>
                 <td>
                   <div class="wrapper"><img alt="error" src="${warnign_icon}">
                      <form:errors path="password" cssClass="error"/> 
@@ -50,7 +50,7 @@
              </tr>
              <tr>
                  <td><form:label path="confirmPassword">ConfirmPassword</form:label></td>
-                 <td><form:input path="confirmPassword"/></td>
+                 <td><form:password path="confirmPassword"/></td>
                  <td>
                    <div class="wrapper"><img alt="" src="${warnign_icon}">
                      <form:errors path="confirmPassword" cssClass="error"/> 
