@@ -35,6 +35,7 @@
                 <tr>
                     <td><form:label path="surname">Surname:</form:label></td>
                     <td><form:input path="surname"/></td>
+               </tr>
               </table>           
               <input type="submit" value="submit" name="submit"/>
          
