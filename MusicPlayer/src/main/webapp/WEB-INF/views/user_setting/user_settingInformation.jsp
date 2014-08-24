@@ -8,10 +8,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <%--  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
    <script src="<spring:url value="/resources/javascript/errorHandler.js" /> " ></script>
-   <link rel="stylesheet" href="<spring:url value="/resources/css/settingsFormStyle.css"/>" /> 
-   <link rel="stylesheet" href='<spring:url value="/resources/css/errorHandler.css" /> '>
+   <link rel="stylesheet" href='<spring:url value="/resources/css/errorHandler.css" /> '> --%>
+   
+   <style>
+    #formBody{
+        border: 2px solid black;
+        width:  1000px;
+        height: 300px;
+        margin: 100px auto;
+        
+     }
+   
+   </style>
 </head>
 <body>
 
@@ -30,7 +40,7 @@
             <table class="settingsTable">
                 <tr>
                     <td><form:label path="age">AGE:</form:label></td>
-                    <td><form:input path="age"/></td>
+                    <td><form:input path="age" /></td>
                 </tr>  
                 <tr>
                     <td><form:label path="surname">Surname:</form:label></td>
