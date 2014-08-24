@@ -33,7 +33,16 @@ public interface UserAdministrationService {
 	 * @throws ObjectNotFoundException if user not found
 	 */
 	 void updatePassword(int user_id, String password);
-		
+	 
+     /**
+	  * Update <code>User</code>Email
+	  * using Hibernate load
+	  *  
+	  * @param user_id the user_id for search User
+	  * @param email the email to update
+	  */
+	 void updateEmail(int user_id, String email);
+	 
 	 /**
 	 * Check Verify User by user_id and active cod
      * using Hibernate Session load().
