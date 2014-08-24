@@ -33,12 +33,11 @@
           <li>
              <a href="${actionEmail}">Email</a>
           </li>
-       </ul>
-       <ul>
-          <li>
+           <li>
              <a  href="${actionUserInformation}">UserInformation</a>
           </li>
        </ul>
+         
     </div>
     
  </security:authorize>
