@@ -54,6 +54,7 @@
                    <td>
                       <div class="wrapper"><img alt="" src="${warnign_icon}">
                           <form:errors path="password" cssClass="error" />
+                          <div class="error">${wrongCurrentPassword}</div>
                       </div>  
                     </td>               
             </table>
