@@ -18,6 +18,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import adrian.example.musicplayer.model.User.User;
+import adrian.example.musicplayer.model.User.UserInformation;
 import adrian.example.musicplayer.model.User.User.FirstNameAndAddressValidation;
 import adrian.example.musicplayer.model.User.User.MailMatchValidation;
 import adrian.example.musicplayer.model.User.User.PasswordValidation;
@@ -26,7 +27,7 @@ import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccount;
 import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccountByEmail;
 
 @Controller
-@SessionAttributes("user")
+@SessionAttributes({"user","user_information"})
 public class UserSettingsController {
 	
 	private String messageError = " you are not logged user";
@@ -163,8 +164,8 @@ public class UserSettingsController {
 	
 	@RequestMapping(value = "/settings_account_user/{name}/userInformation", method = RequestMethod.GET)
 	public String settingUserInformation(@PathVariable("name") String login,
-			                            Model model,Principal principal,
-                                        RedirectAttributes redirectAttributes){
+			                             Model model,Principal principal,
+                                         RedirectAttributes redirectAttributes){
 		
 		if(!(principal.getName().equals(login))){
 			redirectAttributes.addFlashAttribute("errorMessage", 
@@ -173,8 +174,9 @@ public class UserSettingsController {
 			 return "redirect:/error403";
 		}
 		
-		User user = userAdministrationService.findLogin(login);
-		model.addAttribute("user", user);
+		/*User user = userAdministrationService.findLogin(login);*/
+		UserInformation userInformation = new UserInformation();
+		model.addAttribute("userInformation", userInformation);
 		
 		return "user_setting/user_settingInformation";
 	}
