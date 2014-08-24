@@ -1,5 +1,7 @@
 package adrian.example.musicplayer.model.User;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Entity
-public class UserInformation {
+public class UserInformation implements Serializable{
 	
 	@Id
 	@GeneratedValue(generator = "generator")
