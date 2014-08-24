@@ -125,6 +125,22 @@ public class UserSettingsController {
 		return "redirect:/settings_account_user/" + user.getLogin() +  "/password";
 	}
 	
+	@RequestMapping(value = "/settings_account_user/{name}/password", method = RequestMethod.GET)
+	public String settingUserEmail(@PathVariable("name") String login,Model model,Principal principal,
+            RedirectAttributes redirectAttributes){
+		
+		if(!(principal.getName().equals(login))){
+			redirectAttributes.addFlashAttribute("errorMessage", 
+					login + " you are not logged user");
+			
+			 return "redirect:/error403";
+		}
+		
+		User user = userAdministrationService.findLogin(login);
+		model.addAttribute("user", user);
+		
+		return "user_setting/user_settingEmail";
+	}
 	
 
 }
