@@ -142,5 +142,24 @@ public class UserSettingsController {
 		return "user_setting/user_settingEmail";
 	}
 	
+	@RequestMapping(value = "/settings_account_user/{name}/email", method = RequestMethod.POST)
+	public String settingUserEmail(@RequestParam(value = "user_password", required = true)
+                                      String CurrentPassword,
+			                          @ModelAttribute("user") 
+	                                  @Validated(PasswordValidation.class) User user,
+		                              BindingResult result, Model model){
+		
+		if(!(userAdministrationService.checkPassword(user.getUser_id(),CurrentPassword))){
+			model.addAttribute("wrongCurrentPassword", "Wrong Password");
+		}
+		
+		if(result.hasErrors()){
+			return "user_setting/user_settingEmail";
+		}
+		
+		return "redirect:/settings_account_user/" + user.getLogin() +  "/email";
+	}
+	
+	
 
 }
