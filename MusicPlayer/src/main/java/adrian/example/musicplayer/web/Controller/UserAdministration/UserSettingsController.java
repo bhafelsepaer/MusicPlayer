@@ -114,9 +114,7 @@ public class UserSettingsController {
 			model.addAttribute("wrongCurrentPassword", "Wrong Password");
 		}
 		
-		if(result.hasFieldErrors("password") || 
-		   result.hasFieldErrors("confirmPassword") ||
-		   result.hasGlobalErrors()){
+		if(result.hasErrors()){
 			return "user_setting/user_settignPassword";
 		}
 		
