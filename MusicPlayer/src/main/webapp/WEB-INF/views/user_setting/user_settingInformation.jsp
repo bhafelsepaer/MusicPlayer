@@ -39,7 +39,7 @@
                <tr>
                    <td>
                       <form:select path="interest" multiple="multiple">
-                        <form:options items="${interest}"/>
+                        <form:options items="${interestList}"/>
                      </form:select>
                   </td>
               </table>           
