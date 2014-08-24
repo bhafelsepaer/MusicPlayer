@@ -142,13 +142,11 @@ public class UserSettingsController {
 	}
 	
 	@RequestMapping(value = "/settings_account_user/{name}/email", method = RequestMethod.POST)
-	public String settingUserEmail(@RequestParam(value = "user_password", required = true)
-                                      String CurrentPassword,
-			                          @ModelAttribute("user") 
-	                                  @Validated(MailMatchValidation.class) User user,
+	public String settingUserEmail(@ModelAttribute("user") @Validated(
+			                          MailMatchValidation.class) User user,
 		                              BindingResult result, Model model){
 		
-		if(!(userAdministrationService.checkPassword(user.getUser_id(),CurrentPassword))){
+		if(!(userAdministrationService.checkPassword(user.getUser_id(),user.getPassword()))){
 			model.addAttribute("wrongCurrentPassword", "Wrong Password");
 		}
 		
