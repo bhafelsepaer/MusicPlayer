@@ -42,6 +42,18 @@
                         <form:options items="${interestList}"/>
                      </form:select>
                   </td>
+               </tr>
+               <tr>
+                  <td>
+                     <form:radiobutton path="sex" value="no" checked="checked" />No
+                     <form:radiobutton path="sex" value="yes" />Yes
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <form:checkboxes items="${programmingSkillList}" path="programmingSkill" />
+                  </td>
+               </tr>
               </table>           
               
               <input type="submit" value="submit" name="submit"/>
