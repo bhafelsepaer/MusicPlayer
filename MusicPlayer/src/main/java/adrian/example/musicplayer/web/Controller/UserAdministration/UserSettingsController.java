@@ -125,7 +125,7 @@ public class UserSettingsController {
 		return "redirect:/settings_account_user/" + user.getLogin() +  "/password";
 	}
 	
-	@RequestMapping(value = "/settings_account_user/{name}/password", method = RequestMethod.GET)
+	@RequestMapping(value = "/settings_account_user/{name}/email", method = RequestMethod.GET)
 	public String settingUserEmail(@PathVariable("name") String login,Model model,Principal principal,
             RedirectAttributes redirectAttributes){
 		
