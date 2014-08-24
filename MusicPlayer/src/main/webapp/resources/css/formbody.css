@@ -1,0 +1,17 @@
+ @CHARSET "UTF-8";
+ 
+ #formlogin {
+     width: 400px;
+     height: 200px;
+     margin: 100px auto;
+
+     background-color: #FFFFFF;
+     border: 2px solid black;
+     border-radius: 5px;
+          
+ }
+ 
+ #formlogin table{
+ border-collapse: separate;
+     border-spacing: 20px;
+}

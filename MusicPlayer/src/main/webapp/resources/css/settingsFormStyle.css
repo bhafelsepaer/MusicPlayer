@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+ #formBody{
+       width: 600px;
+       height: 250px;
+       margin: 100px auto;
+       padding: 20px;
+       border: 2px solid black;
+     }
+     
+ .settingsTable{
+ 	border-collapse: separate; 
+	border-spacing: 15px;
+ }
+ 
+ .Login {
+     position: relative;
+     left: 150px;
+ }

@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+#settings ul{
+     background-color: #000000;
+     margin: 0;
+     padding: 0;
+     list-style-type: none;
+     text-align: center;
+}
+  
+#settings ul li {
+    margin: 50px;
+    font-size: 25px;
+    display: inline;
+}
+
+#settings ul li a{
+	text-decoration: none;
+	color: #fff;
+}
+
+#settings ul li a:hover{
+	color: #0000ff;
+}

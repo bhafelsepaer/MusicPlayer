@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.wrapper {
+	position: relative;
+	visibility: hidden;
+}
+
+.wrapper .error {
+	display: none;
+	positon: absolute;
+	top: 100px;
+	left: 200px;
+}

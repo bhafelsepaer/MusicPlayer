@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+
+#head .image img{
+	width: 100%;
+	height:100px;
+}
+
+#navbar {
+	padding-top:-5px;
+	margin-top: -5px;
+	position: relative;
+	border-style: solid;
+	border-width: 20px;
+	border-color: #000000;
+}
+
+.link .login{
+	position: absolute;
+	right: 140px;
+	
+}
+
+.link .registration{
+	position: absolute;
+	right: 20px;
+}
+
+.link .current_user{
+	position: absolute;
+	right: 140px;
+}
+
+.link .logout {
+	position: absolute;
+	right: 20px;
+}
+

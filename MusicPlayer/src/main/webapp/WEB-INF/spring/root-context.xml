@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Root Context: defines shared resources visible to all other web components -->
+
+    <import resource="/appServlet/applicationContext/application-context.xml" />
+	<import resource="/appServlet/database/database.xml" />
+	<import resource="/appServlet/hibernate/hibernate.xml" />
+	<import resource="/appServlet/services/services-component-scan.xml" />
+	<import resource="/appServlet/springsecurity/spring-security.xml" />
+	<import resource="/appServlet/dao/dao-component-scan.xml" />
+	<import resource="/appServlet/activeAccount/emailConfiguration.xml" />
+
+</beans>

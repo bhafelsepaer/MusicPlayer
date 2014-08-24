@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+#headRegistration {
+	border: 2px solid black;
+	width: 800px;
+	height: 400px;
+	margin: 100px auto;
+	padding:20px;
+}
+
+.titleRegistration {
+	text-align: center;
+}
+
+.registrationTable {
+	border-collapse: separate; 
+	border-spacing: 15px;
+}
+
