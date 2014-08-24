@@ -10,12 +10,12 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Constraint(validatedBy = CheckUserExistValidator.class)
+@Constraint(validatedBy = EmailEqualsConstraintValidation.class)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EmailEqualsConstraint {
 
-    String message() default "{Default CheckUserExist}";
+    String message() default "{Default EmailEqualsConstraint}";
 	
 	Class<?>[] groups() default {};
 	
