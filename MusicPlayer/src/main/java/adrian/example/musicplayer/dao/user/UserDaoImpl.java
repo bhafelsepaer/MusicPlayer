@@ -77,6 +77,15 @@ public class UserDaoImpl  implements UserDao {
 		session.persist(user);
 	}
 	
+	@Override
+	public void updateEmail(int user_id, String email)
+			throws ObjectNotFoundException {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		User user = (User) session.load(User.class, user_id);
+		user.setEmail(email);
+		session.update(user);		
+	}
 
 	@Override
 	public boolean checkPassword(int user_id, String CurrentPassword) {
@@ -129,8 +138,5 @@ public class UserDaoImpl  implements UserDao {
 		
 		session.update(user);
 	}
-
-
-
 }
 
