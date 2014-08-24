@@ -19,6 +19,7 @@
     
     <spring:url value="/settings_account_user/${current_username}/profile" var="settings_account_user_profil"/>
     <spring:url value='/settings_account_user/${current_username}/password' var="actionPassword" />
+    <spring:url value='/settings_account_user/${current_username}/email' var="actionEmail" />
     
     <div id="settings">
        <ul>
@@ -29,7 +30,7 @@
                 <a href="${actionPassword}">Haslo</a>
            </li>
           <li>
-             <a href="#">Email</a>
+             <a href="${actionEmail}">Email</a>
           </li>
        </ul>
     </div>

@@ -38,9 +38,9 @@ public class UserSettingsController {
 			RedirectAttributes redirectAttribustes){
 		
 		if(!(userAdministrationService.checkUserVerify(user_id, active_code))){    //redirect to error 403 if                                                          
-			redirectAttribustes.addFlashAttribute("errorMessage", 
+			redirectAttribustes.addFlashAttribute("errorMessage",                  //user not found
 					"User not found or active_code not match");
-			return "redirect:/error403";                                           //user not found
+			return "redirect:/error403";                                           
 		}
 		
 		userAdministrationService.setEnabledTrue(user_id);
