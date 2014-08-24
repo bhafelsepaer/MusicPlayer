@@ -32,13 +32,13 @@ public class UserInformation implements Serializable{
 	private String surname;
 	
 	@Column(name = "interest", length = 255, nullable = true)
-	private String[] interest;
+	private String interest;
 	
 	@Column(name = "sex", length = 100, nullable = true)
 	private String sex;
 	
 	@Column(name = "programming_skill", length = 255, nullable = true)
-	private String[] programmingSkill;
+	private String programmingSkill;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
@@ -64,11 +64,11 @@ public class UserInformation implements Serializable{
 		this.surname = surname;
 	}
 
-	public String[] getInterest() {
+	public String getInterest() {
 		return interest;
 	}
 
-	public void setInterest(String[] interest) {
+	public void setInterest(String interest) {
 		this.interest = interest;
 	}
 
@@ -80,11 +80,11 @@ public class UserInformation implements Serializable{
 		this.sex = sex;
 	}
 
-	public String[] getProgrammingSkill() {
+	public String getProgrammingSkill() {
 		return programmingSkill;
 	}
 
-	public void setProgrammingSkill(String[] programmingSkill) {
+	public void setProgrammingSkill(String programmingSkill) {
 		this.programmingSkill = programmingSkill;
 	}
 
