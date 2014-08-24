@@ -20,6 +20,7 @@
     <spring:url value="/settings_account_user/${current_username}/profile" var="settings_account_user_profil"/>
     <spring:url value='/settings_account_user/${current_username}/password' var="actionPassword" />
     <spring:url value='/settings_account_user/${current_username}/email' var="actionEmail" />
+     <spring:url value='/settings_account_user/${current_username}/userInformation' var="actionUserInformation" />
     
     <div id="settings">
        <ul>
@@ -31,6 +32,11 @@
            </li>
           <li>
              <a href="${actionEmail}">Email</a>
+          </li>
+       </ul>
+       <ul>
+          <li>
+             <a  href="${actionUserInformation}">UserInformation</a>
           </li>
        </ul>
     </div>
