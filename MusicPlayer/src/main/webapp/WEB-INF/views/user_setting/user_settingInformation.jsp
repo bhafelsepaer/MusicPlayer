@@ -26,7 +26,7 @@
     <spring:url value='/settings_account_user/${current_login}/userInformation' var="actionuserInformation" />
     
     <div id="formBody">
-       <form:form action="${actionuserInformation}" modelAttribute="user" method="POST">
+       <form:form action="${actionuserInformation}" modelAttribute="userInformation" method="POST">
             <table class="settingsTable">
                 <tr>
                     <td><form:label path="age">AGE:</form:label></td>
