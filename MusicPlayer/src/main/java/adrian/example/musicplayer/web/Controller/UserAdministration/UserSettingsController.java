@@ -29,6 +29,8 @@ import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccountByEmai
 @SessionAttributes("user")
 public class UserSettingsController {
 	
+	private String messageError = " you are not logged user";
+	
 	@Autowired
 	@Qualifier("userAdministrationServiceImpl")
 	UserAdministrationService userAdministrationService;
@@ -57,7 +59,7 @@ public class UserSettingsController {
 		
 		if(!(principal.getName().equals(login))){
 			redirectAttributes.addFlashAttribute("errorMessage", 
-					login + " you are not logged user");
+					login + messageError);
 			
 			 return "redirect:/error403";
 		}
@@ -93,7 +95,7 @@ public class UserSettingsController {
 		
 		if(!(principal.getName().equals(login))){
 			redirectAttributes.addFlashAttribute("errorMessage", 
-					login + " you are not logged user");
+					login + messageError);
 			
 			 return "redirect:/error403";
 		}
@@ -130,7 +132,7 @@ public class UserSettingsController {
 		
 		if(!(principal.getName().equals(login))){
 			redirectAttributes.addFlashAttribute("errorMessage", 
-					login + " you are not logged user");
+					login + messageError);
 			
 			 return "redirect:/error403";
 		}
@@ -157,5 +159,23 @@ public class UserSettingsController {
 		userAdministrationService.updateEmail(user.getUser_id(), user.getEmail());
 		
 		return "redirect:/settings_account_user/" + user.getLogin() +  "/email";
+	}
+	
+	@RequestMapping(value = "/settings_account_user/{name}/userInformation", method = RequestMethod.GET)
+	public String settingUserInformation(@PathVariable("name") String login,
+			                            Model model,Principal principal,
+                                        RedirectAttributes redirectAttributes){
+		
+		if(!(principal.getName().equals(login))){
+			redirectAttributes.addFlashAttribute("errorMessage", 
+					login + messageError);
+			
+			 return "redirect:/error403";
+		}
+		
+		User user = userAdministrationService.findLogin(login);
+		model.addAttribute("user", user);
+		
+		return "user_setting/user_settingInformation";
 	}
 }
