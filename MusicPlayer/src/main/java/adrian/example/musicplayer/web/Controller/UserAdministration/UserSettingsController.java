@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import adrian.example.musicplayer.model.User.User;
 import adrian.example.musicplayer.model.User.User.FirstNameAndAddressValidation;
+import adrian.example.musicplayer.model.User.User.MailMatchValidation;
 import adrian.example.musicplayer.model.User.User.PasswordValidation;
 import adrian.example.musicplayer.service.AdministrationAccount.UserAdministrationService;
 
@@ -144,7 +145,7 @@ public class UserSettingsController {
 	public String settingUserEmail(@RequestParam(value = "user_password", required = true)
                                       String CurrentPassword,
 			                          @ModelAttribute("user") 
-	                                  @Validated(PasswordValidation.class) User user,
+	                                  @Validated(MailMatchValidation.class) User user,
 		                              BindingResult result, Model model){
 		
 		if(!(userAdministrationService.checkPassword(user.getUser_id(),CurrentPassword))){
