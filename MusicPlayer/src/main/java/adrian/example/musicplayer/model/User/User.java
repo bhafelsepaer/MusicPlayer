@@ -187,5 +187,4 @@ public class User implements Serializable{
 	public interface DefaultValidation {};
 	
 	public interface FirstNameAndAddressValidation {};
-	
 }
