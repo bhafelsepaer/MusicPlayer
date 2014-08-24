@@ -54,6 +54,15 @@ public interface UserDao {
 	void updatePassword(int user_id, String password) throws ObjectNotFoundException;
 	
 	/**
+	 * Update <code>User</code>Email
+	 * using Hibernate load
+	 *  
+	 * @param user_id the user_id for search User
+	 * @param email the email to update
+	 * @throws ObjectNotFoundException if user not found
+	 */
+	void updateEmail(int user_id, String email) throws ObjectNotFoundException;
+	/**
 	 * Check if the User pass correctPassword
 	 * 
 	 * @param password the password to check
