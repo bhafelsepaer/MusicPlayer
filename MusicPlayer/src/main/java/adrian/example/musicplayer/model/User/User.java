@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -92,6 +93,9 @@ public class User implements Serializable{
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL)
 	private Set<RoleUser> roleUser = new HashSet<RoleUser>(0);
+	
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private UserInformation userInformation;
 	
 	public User() {}
 	
@@ -180,6 +184,14 @@ public class User implements Serializable{
 		this.roleUser = roleUser;
 	}
 	
+	public UserInformation getUserInformation() {
+		return userInformation;
+	}
+
+	public void setUserInformation(UserInformation userInformation) {
+		this.userInformation = userInformation;
+	};
+	
 	public interface PasswordValidation {};
 	
 	public interface MailValidation {};
@@ -188,5 +200,6 @@ public class User implements Serializable{
 	
 	public interface DefaultValidation {};
 	
-	public interface FirstNameAndAddressValidation {};
+	public interface FirstNameAndAddressValidation {}
+
 }
