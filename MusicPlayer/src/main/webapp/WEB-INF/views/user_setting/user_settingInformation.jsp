@@ -36,7 +36,14 @@
                     <td><form:label path="surname">Surname:</form:label></td>
                     <td><form:input path="surname"/></td>
                </tr>
+               <tr>
+                   <td>
+                      <form:select path="interest" multiple="multiple">
+                        <form:options items="${interest}"/>
+                     </form:select>
+                  </td>
               </table>           
+              
               <input type="submit" value="submit" name="submit"/>
          
          </form:form>
