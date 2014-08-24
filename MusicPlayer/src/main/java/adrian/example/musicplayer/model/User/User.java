@@ -48,7 +48,8 @@ public class User implements Serializable{
 	private String login;
 	
 	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})", 
-			groups = {DefaultValidation.class, PasswordValidation.class})
+			groups = {DefaultValidation.class, PasswordValidation.class, 
+			          MailMatchValidation.class})
 	@Column(name = "password", length = 20, nullable = false)
 	private String password;
 	
