@@ -1,6 +1,7 @@
 package adrian.example.musicplayer.web.Controller.UserAdministration;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,6 +23,7 @@ import adrian.example.musicplayer.model.User.UserInformation;
 import adrian.example.musicplayer.model.User.User.FirstNameAndAddressValidation;
 import adrian.example.musicplayer.model.User.User.MailMatchValidation;
 import adrian.example.musicplayer.model.User.User.PasswordValidation;
+import adrian.example.musicplayer.service.UserInformationServiceList;
 import adrian.example.musicplayer.service.AdministrationAccount.UserAdministrationService;
 import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccount;
 import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccountByEmail;
@@ -35,6 +37,10 @@ public class UserSettingsController {
 	@Autowired
 	@Qualifier("userAdministrationServiceImpl")
 	UserAdministrationService userAdministrationService;
+	
+	@Autowired
+	@Qualifier("UserInformationServiceImpl")
+	UserInformationServiceList userInformationServiceList;
 	
 	@RequestMapping(value = "/verify", method = RequestMethod.GET)
 	public String activeUserFromEmail(
@@ -174,9 +180,14 @@ public class UserSettingsController {
 			 return "redirect:/error403";
 		}
 		
+		
 		/*User user = userAdministrationService.findLogin(login);*/
 		UserInformation userInformation = new UserInformation();
 		model.addAttribute("userInformation", userInformation);
+		
+		List<String> listInterest = userInformationServiceList.getInterest();
+		
+		model.addAttribute("interestList", listInterest);
 		
 		return "user_setting/user_settingInformation";
 	}
