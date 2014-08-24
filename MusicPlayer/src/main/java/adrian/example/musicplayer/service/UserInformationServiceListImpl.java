@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-@Service("userInformationServiceImpl")
+@Service("userInformationServiceListImpl")
 public class UserInformationServiceListImpl implements UserInformationServiceList{
 
 	@Override
