@@ -154,9 +154,8 @@ public class UserSettingsController {
 			return "user_setting/user_settingEmail";
 		}
 		
+		userAdministrationService.updateEmail(user.getUser_id(), user.getEmail());
+		
 		return "redirect:/settings_account_user/" + user.getLogin() +  "/email";
 	}
-	
-	
-
 }
