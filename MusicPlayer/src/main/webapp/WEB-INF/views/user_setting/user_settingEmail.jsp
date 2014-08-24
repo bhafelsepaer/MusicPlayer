@@ -31,7 +31,7 @@
             <table class="settingsTable">
                <tr>
                   <td><form:label path="email">Email:</form:label></td>
-                  <td><form:password path="email"/></td>
+                  <td><form:input path="email"/></td>
                   <td>
                     <div class="wrapper"><img alt="" src="${warnign_icon}">
                           <form:errors path="email" cssClass="error" />
@@ -40,7 +40,7 @@
                </tr>
                <tr>
                   <td><form:label path="confirmEmail">ConfirmEmail:</form:label></td>
-                  <td><form:password path="confirmEmail" /></td>
+                  <td><form:input path="confirmEmail" /></td>
                   <td>
                      <div class="wrapper"><img alt="" src="${warnign_icon}">
                           <form:errors path="confirmEmail" cssClass="error"/>
@@ -62,10 +62,7 @@
               <input type="submit" value="submit" name="submit"/>
          
          </form:form>
-    
     </div>  
-
-
    </security:authorize>
 </body>
 </html>
