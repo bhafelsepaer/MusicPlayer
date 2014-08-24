@@ -39,7 +39,7 @@ public class UserSettingsController {
 	UserAdministrationService userAdministrationService;
 	
 	@Autowired
-	@Qualifier("UserInformationServiceImpl")
+	@Qualifier("userInformationServiceListImpl")
 	UserInformationServiceList userInformationServiceList;
 	
 	@RequestMapping(value = "/verify", method = RequestMethod.GET)
