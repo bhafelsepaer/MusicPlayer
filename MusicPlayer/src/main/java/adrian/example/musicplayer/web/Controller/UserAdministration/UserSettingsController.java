@@ -2,8 +2,6 @@ package adrian.example.musicplayer.web.Controller.UserAdministration;
 
 import java.security.Principal;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import adrian.example.musicplayer.model.User.User;
@@ -23,6 +22,8 @@ import adrian.example.musicplayer.model.User.User.FirstNameAndAddressValidation;
 import adrian.example.musicplayer.model.User.User.MailMatchValidation;
 import adrian.example.musicplayer.model.User.User.PasswordValidation;
 import adrian.example.musicplayer.service.AdministrationAccount.UserAdministrationService;
+import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccount;
+import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccountByEmail;
 
 @Controller
 @SessionAttributes("user")
@@ -63,7 +64,6 @@ public class UserSettingsController {
 		
 		User user = userAdministrationService.findLogin(login);
 		model.addAttribute("user", user);
-		
 		return "user_setting/user_settingProfil";
 	}
 	

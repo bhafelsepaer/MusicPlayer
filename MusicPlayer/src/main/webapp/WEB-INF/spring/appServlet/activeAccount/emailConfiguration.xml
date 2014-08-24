@@ -32,5 +32,6 @@
         <property name="mailSender" ref="mailSender" />
         <property name="simpleMailMessage" ref="simpleMailMessage" />
    </bean>
+   
 	
 </beans>
