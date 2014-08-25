@@ -4,6 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
 
 import adrian.example.musicplayer.model.User.User;
+import adrian.example.musicplayer.model.User.UserInformation;
 
 /**
  *  Repository class for <code>User</code>
@@ -71,6 +72,16 @@ public interface UserDao {
 	 * @throws ObjectNotFoundException if user not found
 	 */
 	void updateEmail(int user_id, String email) throws ObjectNotFoundException;
+	
+	 /**
+	  * Update or Save UserInformation using Hibernate load
+	  * 
+	  * @param user_id the user_id to search User
+	  * @param userInformation the userInformation to save or update
+	  * @throws ObjectNotFoundException if user not found
+	  */
+	 void updateOrSaveUserInformation(int user_id, UserInformation userInformation) throws ObjectNotFoundException;
+	 
 	/**
 	 * Check if the User pass correctPassword
 	 * 
