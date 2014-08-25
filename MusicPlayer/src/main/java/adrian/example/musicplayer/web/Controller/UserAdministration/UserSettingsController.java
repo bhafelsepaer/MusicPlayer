@@ -179,7 +179,7 @@ public class UserSettingsController {
 			
 			 return "redirect:/error403";
 		}
-		/*User user = userAdministrationService.findLogin(login);*/
+		
 		UserInformation userInformation = new UserInformation();
 		model.addAttribute("userInformation", userInformation);
 		
@@ -193,15 +193,27 @@ public class UserSettingsController {
 	}
 	
 	@RequestMapping(value = "/settings_account_user/{name}/userInformation", method = RequestMethod.POST)
-	public String settingUserEmail(@ModelAttribute("userInformation") UserInformation user,
-		                              BindingResult result, Model model){
-		System.out.println("AGE " + user.getAge());
-		System.out.println("Surname " + user.getSurname());
-		System.out.println("INTEREST " + user.getInterest());
-		System.out.println("SEX " + user.getSex());
-		System.out.println("Programming Skill " + user.getProgrammingSkill());
+	public String settingUserEmail(@ModelAttribute("userInformation") UserInformation userInformation, 
+			                      Model model,Principal principal){
+		
+		String loginUser = principal.getName();
+		
+		int user_id = userAdministrationService.getUser_id(loginUser);
+		
 		
 		
 		return "redirect:/settings_account_user/{name}/userInformation";
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
