@@ -52,9 +52,11 @@ public interface UserAdministrationService {
 	  */
 	 void updateEmail(int user_id, String email);
 	 
-	 /*
+	 /**
+	  * Update or Save UserInformation using Hibernate load
 	  * 
-	  * 
+	  * @param user_id the user_id to search User
+	  * @param userInformation the userInformation to save or update
 	  */
 	 void updateOrSaveUserInformation(int user_id, UserInformation userInformation);
 	 
@@ -88,6 +90,3 @@ public interface UserAdministrationService {
 	  */
 	  void setEnabledTrue(int user_id);
 }
-
-
-
