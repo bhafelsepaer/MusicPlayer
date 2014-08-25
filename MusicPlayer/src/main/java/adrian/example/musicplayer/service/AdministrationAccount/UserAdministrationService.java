@@ -3,8 +3,17 @@ package adrian.example.musicplayer.service.AdministrationAccount;
 import org.hibernate.ObjectNotFoundException;
 
 import adrian.example.musicplayer.model.User.User;
+import adrian.example.musicplayer.model.User.UserInformation;
 
 public interface UserAdministrationService {
+	
+	/**
+	 * get user_id using login
+	 * 
+	 * @param login the login to search
+	 * @return user_id;
+	 */
+	int getUser_id(String login);
 	
 	/**
 	 * Retrive a <code>User</code> from data store by login.
@@ -42,6 +51,12 @@ public interface UserAdministrationService {
 	  * @param email the email to update
 	  */
 	 void updateEmail(int user_id, String email);
+	 
+	 /*
+	  * 
+	  * 
+	  */
+	 void updateOrSaveUserInformation(int user_id, UserInformation userInformation);
 	 
 	 /**
 	 * Check Verify User by user_id and active cod
