@@ -61,6 +61,17 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 			exception.printStackTrace();
 		}
 	}
+	
+	@Override
+	@Transactional
+	public void updateOrSaveUserInformation(int user_id,
+			UserInformation userInformation) {
+          try{
+        	  this.userDao.updateOrSaveUserInformation(user_id, userInformation);
+          }catch(ObjectNotFoundException exception){
+        	  exception.printStackTrace();
+          }
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -88,11 +99,4 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 		this.userDao.setEnabledTrue(user_id);
 	}
 
-
-	@Override
-	public void updateOrSaveUserInformation(int user_id,
-			UserInformation userInformation) {
-		// TODO Auto-generated method stub
-		
-	}
 }
