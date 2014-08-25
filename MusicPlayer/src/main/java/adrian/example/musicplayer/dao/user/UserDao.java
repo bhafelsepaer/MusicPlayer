@@ -12,6 +12,15 @@ import adrian.example.musicplayer.model.User.User;
  */
 public interface UserDao {
 	
+	
+	/**
+	 * get user_id using login
+	 * 
+	 * @param login the login to search
+	 * @return user_id;
+	 */
+	int getUser_id(String login);
+	
 	/**
 	 * Retrive a <code>User</code> from data store by login.
 	 * 
