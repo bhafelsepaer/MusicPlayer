@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import adrian.example.musicplayer.dao.user.UserDao;
 import adrian.example.musicplayer.model.User.User;
+import adrian.example.musicplayer.model.User.UserInformation;
 
 @Service("userAdministrationServiceImpl")
 public class UserAdministrationServiceImpl implements UserAdministrationService {
@@ -17,6 +18,12 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	@Qualifier("userDao")
 	UserDao userDao;
 
+	@Override
+	@Transactional(readOnly = true)
+	public int getUser_id(String login) {
+		return this.userDao.getUser_id(login);
+	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public User findLogin(String login) {
@@ -56,7 +63,7 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public boolean checkUserVerify(int user_id, int active_code) {
         
 		boolean checkedVerify = false;
@@ -70,7 +77,7 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public boolean checkPassword(int user_id, String CurrentPassword) {
 		return this.userDao.checkPassword(user_id, CurrentPassword);
 	}
@@ -79,5 +86,13 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	@Transactional
 	public void setEnabledTrue(int user_id) {
 		this.userDao.setEnabledTrue(user_id);
+	}
+
+
+	@Override
+	public void updateOrSaveUserInformation(int user_id,
+			UserInformation userInformation) {
+		// TODO Auto-generated method stub
+		
 	}
 }
