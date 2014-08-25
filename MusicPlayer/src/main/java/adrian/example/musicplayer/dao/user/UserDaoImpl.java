@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import adrian.example.musicplayer.model.User.RoleUser;
 import adrian.example.musicplayer.model.User.User;
+import adrian.example.musicplayer.model.User.UserInformation;
 
 /**
  * 
@@ -98,6 +99,18 @@ public class UserDaoImpl  implements UserDao {
 		User user = (User) session.load(User.class, user_id);
 		user.setEmail(email);
 		session.update(user);		
+	}
+	
+	@Override
+	public void updateOrSaveUserInformation(int user_id,
+			UserInformation userInformation) throws ObjectNotFoundException {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		User user = (User) session.load(User.class, user_id);
+		
+		user.setUserInformation(userInformation);
+		userInformation.setUser(user);
+		session.saveOrUpdate(user);
 	}
 
 	@Override
