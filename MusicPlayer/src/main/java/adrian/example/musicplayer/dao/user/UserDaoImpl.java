@@ -30,6 +30,19 @@ public class UserDaoImpl  implements UserDao {
 	@Qualifier("bcryptEncoder")
 	BCryptPasswordEncoder passwordEncoder;
 	
+	
+	@Override
+	public int getUser_id(String login) {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		Integer user_id = (Integer) session.createQuery(
+				"SELECT U.login FROM USER U WHERE U.login = :login")
+				.setParameter("login", login)
+				.uniqueResult();
+		
+		return user_id;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public User findLogin(String login) {
