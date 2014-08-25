@@ -200,20 +200,8 @@ public class UserSettingsController {
 		
 		int user_id = userAdministrationService.getUser_id(loginUser);
 		
+		userAdministrationService.updateOrSaveUserInformation(user_id, userInformation);
 		
-		
-		return "redirect:/settings_account_user/{name}/userInformation";
+		return "redirect:/settings_account_user/" + principal.getName() + "/userInformation";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
