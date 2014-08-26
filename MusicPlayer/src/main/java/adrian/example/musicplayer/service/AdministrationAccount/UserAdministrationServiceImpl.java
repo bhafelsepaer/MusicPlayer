@@ -98,5 +98,4 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	public void setEnabledTrue(int user_id) {
 		this.userDao.setEnabledTrue(user_id);
 	}
-
 }
