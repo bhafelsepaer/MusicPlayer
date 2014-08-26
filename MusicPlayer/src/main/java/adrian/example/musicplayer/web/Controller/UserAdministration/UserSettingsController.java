@@ -194,7 +194,7 @@ public class UserSettingsController {
 	
 	@RequestMapping(value = "/settings_account_user/{name}/userInformation", method = RequestMethod.POST)
 	public String settingUserEmail(@ModelAttribute("userInformation") UserInformation userInformation, 
-			                      Model model,Principal principal){
+			                      Model model,Principal principal,SessionStatus status){
 		
 		String loginUser = principal.getName();
 		
