@@ -18,7 +18,7 @@ public class UserInformationServiceListImpl implements UserInformationServiceLis
 		interest.add("Fight");
 		return interest;
 	}
-
+	
 	@Override
 	public List<String> getProgrammingStyle() {
 		List<String> programmingStyle = new ArrayList<String>();
