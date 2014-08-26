@@ -95,7 +95,7 @@ public class User implements Serializable{
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private Set<RoleUser> roleUser = new HashSet<RoleUser>(0);
 	
-	@OneToOne(mappedBy = "users")
+	@OneToOne(mappedBy = "user")
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private UserInformation userInformation;
 	
