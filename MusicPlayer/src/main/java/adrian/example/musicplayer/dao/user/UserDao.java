@@ -43,6 +43,14 @@ public interface UserDao {
 	User findUserById(int user_id) throws ObjectNotFoundException;
 	
 	/**
+	 * Return UserInformation from database
+	 * @param user_id the user_id for search UserInformation
+	 * @return UserInformation if found or null if UserInformation
+	 * dont exist in database
+	 */
+	UserInformation getUserInformationById(int user_id);
+	
+	/**
 	 * Update <code>User</code> from Administration User Profile
 	 * using Hibernate load
 	 * 
