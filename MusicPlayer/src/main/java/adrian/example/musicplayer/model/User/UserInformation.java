@@ -45,7 +45,7 @@ public class UserInformation implements Serializable{
 	@Column(name = "programming_skill", length = 255, nullable = true)
 	private String programmingSkill;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@PrimaryKeyJoinColumn
 	private User user;
 
