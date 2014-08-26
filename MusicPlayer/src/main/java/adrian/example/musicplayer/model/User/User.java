@@ -19,6 +19,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
@@ -39,7 +40,7 @@ import adrian.example.musicplayer.validation.userValidation.PasswordEqualsConstr
 		User.PasswordValidation.class})
 @EmailEqualsConstraint(groups = User.MailMatchValidation.class)
 public class User implements Serializable{
-   
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
@@ -94,7 +95,8 @@ public class User implements Serializable{
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private Set<RoleUser> roleUser = new HashSet<RoleUser>(0);
 	
-	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "users")
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private UserInformation userInformation;
 	
 	public User() {}
@@ -201,5 +203,4 @@ public class User implements Serializable{
 	public interface DefaultValidation {};
 	
 	public interface FirstNameAndAddressValidation {}
-
 }
