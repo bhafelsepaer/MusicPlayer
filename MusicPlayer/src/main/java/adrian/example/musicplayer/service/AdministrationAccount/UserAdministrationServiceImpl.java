@@ -26,6 +26,12 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	
 	@Override
 	@Transactional(readOnly = true)
+	public UserInformation getUserInformationById(int user_id) {
+        return	this.userDao.getUserInformationById(user_id);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public User findLogin(String login) {
 		return this.userDao.findLogin(login);
 	}
