@@ -2,11 +2,13 @@ package adrian.example.musicplayer.model.User;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -20,12 +22,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name = "user_information")
 public class UserInformation implements Serializable{
-	
+
 	@Id
 	@GeneratedValue(generator = "generator")
 	@GenericGenerator(name = "generator", strategy = "foreign", 
-	                  parameters = {@Parameter(name = "property", value = "user")})
-	@Column(name = "user_information_id")
+	                  parameters = {@Parameter(name = "property", value = "users")})
+	@Column(name = "user_information_id", unique = true)
 	private int user_information_id;
 	
 	@Column(name = "age", nullable = true)
