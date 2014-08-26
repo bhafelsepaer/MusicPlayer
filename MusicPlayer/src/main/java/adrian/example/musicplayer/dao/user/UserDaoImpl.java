@@ -37,7 +37,7 @@ public class UserDaoImpl  implements UserDao {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		Integer user_id = (Integer) session.createQuery(
-				"SELECT U.login FROM USER U WHERE U.login = :login")
+				"SELECT U.user_id FROM User U WHERE U.login = :login")
 				.setParameter("login", login)
 				.uniqueResult();
 		
@@ -105,12 +105,25 @@ public class UserDaoImpl  implements UserDao {
 	public void updateOrSaveUserInformation(int user_id,
 			UserInformation userInformation) throws ObjectNotFoundException {
 		Session session = this.sessionFactory.getCurrentSession();
+	
+		User user = (User) session.get(User.class, user_id);
 		
-		User user = (User) session.load(User.class, user_id);
-		
-		user.setUserInformation(userInformation);
-		userInformation.setUser(user);
-		session.saveOrUpdate(user);
+		if(user.getUserInformation() != null){
+	    UserInformation userInfo = user.getUserInformation();
+	    
+		userInfo.setAge(userInformation.getAge());
+		userInfo.setInterest(userInformation.getInterest());
+		userInfo.setProgrammingSkill(userInformation.getProgrammingSkill());
+		userInfo.setSex(userInformation.getSex());
+		userInfo.setSurname(userInformation.getSurname());
+		user.setUserInformation(userInfo);
+		userInfo.setUser(user);
+		}
+		else{
+			user.setUserInformation(userInformation);
+			userInformation.setUser(user);
+		}
+	    session.saveOrUpdate(user);
 	}
 
 	@Override
@@ -164,5 +177,6 @@ public class UserDaoImpl  implements UserDao {
 		
 		session.update(user);
 	}
+	
 }
 
