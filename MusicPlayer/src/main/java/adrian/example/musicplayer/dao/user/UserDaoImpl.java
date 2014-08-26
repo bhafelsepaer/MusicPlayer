@@ -71,6 +71,20 @@ public class UserDaoImpl  implements UserDao {
 	}
 	
 	@Override
+	public UserInformation getUserInformationById(int user_id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		UserInformation userInformation = 
+				(UserInformation) session.get(UserInformation.class, user_id);
+		
+		if(userInformation != null){
+		    return userInformation;
+		}else{
+		    return new UserInformation();
+		}
+	}
+
+	@Override
 	public void updateUserInformation(int user_id, String address, String firstName) 
 			    throws ObjectNotFoundException {
 		
@@ -177,6 +191,5 @@ public class UserDaoImpl  implements UserDao {
 		
 		session.update(user);
 	}
-	
 }
 

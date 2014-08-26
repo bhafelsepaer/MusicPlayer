@@ -180,7 +180,9 @@ public class UserSettingsController {
 			 return "redirect:/error403";
 		}
 		
-		UserInformation userInformation = new UserInformation();
+		int user_id = userAdministrationService.getUser_id(principal.getName());
+		UserInformation userInformation = userAdministrationService
+				                          .getUserInformationById(user_id);
 		model.addAttribute("userInformation", userInformation);
 		
 		List<String> listInterest = userInformationServiceList.getInterest();
@@ -196,9 +198,8 @@ public class UserSettingsController {
 	public String settingUserEmail(@ModelAttribute("userInformation") UserInformation userInformation, 
 			                      Model model,Principal principal,SessionStatus status){
 		
-		String loginUser = principal.getName();
 		
-		int user_id = userAdministrationService.getUser_id(loginUser);
+		int user_id = userAdministrationService.getUser_id(principal.getName());
 		
 		userAdministrationService.updateOrSaveUserInformation(user_id, userInformation);
 		
