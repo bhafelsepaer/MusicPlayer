@@ -16,6 +16,14 @@ public interface UserAdministrationService {
 	int getUser_id(String login);
 	
 	/**
+	 * Return UserInformation from database
+	 * @param user_id the user_id for search UserInformation
+	 * @return UserInformation if found or null if UserInformation
+	 * dont exist in database
+	 */
+	  UserInformation getUserInformationById(int user_id);
+	
+	/**
 	 * Retrive a <code>User</code> from data store by login.
 	 * 
 	 * @param login the login to search for User
