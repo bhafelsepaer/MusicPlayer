@@ -1,4 +1,4 @@
-package adrian.example.musicplayer.web.Controller;
+package adrian.example.musicplayer.web.Controller.Welcome;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
