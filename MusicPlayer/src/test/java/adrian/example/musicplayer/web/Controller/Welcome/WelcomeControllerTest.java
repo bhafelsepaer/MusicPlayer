@@ -1,6 +1,5 @@
 package adrian.example.musicplayer.web.Controller.Welcome;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -16,7 +15,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.sun.corba.se.spi.protocol.ForwardException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
