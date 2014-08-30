@@ -28,7 +28,9 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
     
-    <context:component-scan base-package="adrian.example.musicplayer.web.Controller.Welcome"/>
-
+  <!--   <context:component-scan base-package="adrian.example.musicplayer.web.Controller.Welcome"/> -->
+   
+    <bean id="welcomeController"
+          class="adrian.example.musicplayer.web.Controller.Welcome.WelcomeController" />
 
 </beans>
