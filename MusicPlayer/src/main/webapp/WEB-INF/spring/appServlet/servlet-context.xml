@@ -28,6 +28,25 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-    <bean id="loginController" class="adrian.example.musicplayer.web.Controller.Authorization.LoginController" />
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="eng" />
+		<property name="cookieName" value="myAppLocaleCookie"></property>
+		<property name="cookieMaxAge" value="3600"></property>
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="locale" />
+	</bean>
+
+	<bean class="org.springframework.context.support.ResourceBundleMessageSource"
+		id="messageSource">
+		<property name="basename" value="messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<context:component-scan
+		base-package="adrian.example.musicplayer.web.Controller,adrian.example.musicplayer.validation.userValidation" />
 
 </beans>

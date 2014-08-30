@@ -46,14 +46,14 @@
                </tr>
                <tr>
                    <td>
-                      <form:select path="interest" multiple="true">
+                      <form:select path="interest" multiple="multiple">
                         <form:options items="${interestList}"/>
                      </form:select>
                   </td>
                </tr>
                <tr>
                   <td>
-                     <form:radiobutton path="sex" value="no" />No
+                     <form:radiobutton path="sex" value="no" checked="checked" />No
                      <form:radiobutton path="sex" value="yes" />Yes
                   </td>
                </tr>
