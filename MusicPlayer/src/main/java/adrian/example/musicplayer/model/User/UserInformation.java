@@ -1,6 +1,7 @@
 package adrian.example.musicplayer.model.User;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -68,7 +69,7 @@ public class UserInformation implements Serializable{
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-
+	
 	public String getInterest() {
 		return interest;
 	}
@@ -100,5 +101,4 @@ public class UserInformation implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 }

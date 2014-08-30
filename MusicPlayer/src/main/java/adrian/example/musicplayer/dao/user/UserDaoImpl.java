@@ -132,6 +132,7 @@ public class UserDaoImpl  implements UserDao {
 		userInfo.setSurname(userInformation.getSurname());
 		user.setUserInformation(userInfo);
 		userInfo.setUser(user);
+		
 		}
 		else{
 			user.setUserInformation(userInformation);
