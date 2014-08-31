@@ -1,6 +1,5 @@
 package adrian.example.musicplayer.web.Controller.Authorization;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
@@ -29,21 +28,20 @@ import org.springframework.web.context.WebApplicationContext;
 @ContextConfiguration
 public class LoginControllerTest {
 
-	  
 	@Autowired
 	private WebApplicationContext wac;
 	 
 	private MockMvc mockMvc;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		this.mockMvc = webAppContextSetup(this.wac).build();
 	}
 
 	@Test
 	public void loginFormGetNullPrincipal() throws Exception {
 		this.mockMvc.perform(get("/login"))
-		            .andExpect(view().name(containsString("authorization/login")))
+		            .andExpect(view().name("authorization/login"))
 		            .andExpect(forwardedUrl("/WEB-INF/views/authorization/login.jsp"))
 		            .andExpect(status().isOk());
 	}
