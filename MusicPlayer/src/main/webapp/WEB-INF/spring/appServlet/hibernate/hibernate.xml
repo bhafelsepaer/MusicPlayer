@@ -6,6 +6,7 @@
     <description>Standart Configuration Hibernate using annotatedClasses
                  and MySQL5Dialect</description>
     
+    
     <bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
     
