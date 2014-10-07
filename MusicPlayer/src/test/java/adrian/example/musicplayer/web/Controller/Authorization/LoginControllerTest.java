@@ -50,7 +50,8 @@ public class LoginControllerTest {
 	@Test
 	public void loginFormGetPrincipalNotNull() throws Exception {
 		User user = new User("user1","",AuthorityUtils.createAuthorityList("ROLE_USER"));
-		Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+		Authentication authentication = 
+				new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 		
 		this.mockMvc.perform(get("/login").principal(authentication))
 		            .andExpect(redirectedUrl("/"))
