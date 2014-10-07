@@ -34,8 +34,6 @@ import org.springframework.web.context.WebApplicationContext;
 import adrian.example.musicplayer.service.user.UserService;
 
 
-
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration
@@ -129,13 +127,13 @@ public class RegistrationControllerTest {
 		
 		adrian.example.musicplayer.model.User.User user = userServiceImpl.findLogin("Adria");
 		
+		
 		assertNotNull(user);
 		assertEquals("Adria", user.getLogin());
 		assertTrue(bcryptEncoder.matches("qwerty1@A", user.getPassword()));
 		assertEquals("KAmil", user.getFirstName());
 		assertEquals("Ameryka", user.getAddress());
 		assertEquals("ameryka@gmail.com", user.getEmail());
-	
 	}
 }
 
