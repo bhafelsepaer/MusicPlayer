@@ -2,6 +2,7 @@ package adrian.example.musicplayer.web.Controller.Authorization;
 
 import java.security.Principal;
 
+
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import adrian.example.musicplayer.model.User.User;
 import adrian.example.musicplayer.model.User.User.DefaultValidation;
@@ -54,17 +54,14 @@ public class RegistrationController {
 			                            String strategyActivePattern,
                             			@ModelAttribute("user") @Validated({DefaultValidation.class, 
 			                            PasswordValidation.class, MailValidation.class})
-			                            User user,  BindingResult result, SessionStatus sessionStatus){
-		
+			                            User user,  BindingResult result){
 		if(result.hasErrors()){
 			return "authorization/registration";
 		}else{
 		     userService.saveUser(user);
 		     ActiveAccount activeAccountStrategy = beanFactory.getBean(strategyActivePattern, ActiveAccount.class);
 		     activeAccountStrategy.activeAccount(user.getUser_id(), user.getActive_cod(), user.getEmail());
-		     sessionStatus.setComplete();
+		     return "redirect:/";
 		}
-		
-		return "redirect:/";
 	}	
 }
