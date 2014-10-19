@@ -55,7 +55,6 @@ public class UserSettingsController {
 		}
 		
 		userAdministrationService.setEnabledTrue(user_id);
-		
 		return "redirect:/";
 	}
 	
@@ -63,6 +62,8 @@ public class UserSettingsController {
 	public String settingsUserHomePage(@PathVariable("name") String login, 
 			                           Model model, Principal principal,
 			                           RedirectAttributes redirectAttributes){
+		
+		System.out.println("CONTROLLER " + login + " PRINCIPAL " + principal.getName());
 		
 		if(!(principal.getName().equals(login))){
 			redirectAttributes.addFlashAttribute("errorMessage", 
@@ -120,11 +121,13 @@ public class UserSettingsController {
 	                                  @Validated(PasswordValidation.class) User user,
 		                              BindingResult result, Model model){
 		
+		
 		if(!(userAdministrationService.checkPassword(user.getUser_id(),CurrentPassword))){
 			model.addAttribute("wrongCurrentPassword", "Wrong Password");
 		}
 		
 		if(result.hasErrors()){
+			System.out.println("ERROR " + result.getFieldErrors());
 			return "user_setting/user_settignPassword";
 		}
 		
@@ -155,7 +158,7 @@ public class UserSettingsController {
 			                          MailMatchValidation.class) User user,
 		                              BindingResult result, Model model){
 		
-		if(!(userAdministrationService.checkPassword(user.getUser_id(),user.getPassword()))){
+		if(!(userAdministrationService.checkPassword(user.getUser_id(), user.getPassword()))){
 			model.addAttribute("wrongCurrentPassword", "Wrong Password");
 		}
 		
@@ -195,12 +198,10 @@ public class UserSettingsController {
 	}
 	
 	@RequestMapping(value = "/settings_account_user/{name}/userInformation", method = RequestMethod.POST)
-	public String settingUserEmail(@ModelAttribute("userInformation") UserInformation userInformation, 
+	public String settingUserInformation(@ModelAttribute("userInformation") UserInformation userInformation, 
 			                      Model model,Principal principal,SessionStatus status){
 		
-		
 		int user_id = userAdministrationService.getUser_id(principal.getName());
-		
 		userAdministrationService.updateOrSaveUserInformation(user_id, userInformation);
 		
 		return "redirect:/settings_account_user/" + principal.getName() + "/userInformation";
