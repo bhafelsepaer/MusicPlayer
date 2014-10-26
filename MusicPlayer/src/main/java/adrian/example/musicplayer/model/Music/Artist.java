@@ -1,12 +1,15 @@
 package adrian.example.musicplayer.model.Music;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -21,7 +24,7 @@ public class Artist implements Serializable{
 	@Column(name = "artist_id")
 	private int artist_id;
 	
-	@Column(name = "name", length = 255, nullable = false, unique = true)
+	@Column(name = "name", length = 255, nullable = false)
 	private String name;
 	
 	@Column(name = "years_active", nullable = true)
@@ -29,6 +32,9 @@ public class Artist implements Serializable{
 	
 	@Column(name = "description", length = 255, nullable = true)
 	private String description;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "artist")
+	private List<Track> track;
 
 	public int getArtist_id() {
 		return artist_id;
@@ -56,6 +62,14 @@ public class Artist implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Track> getTrack() {
+		return track;
+	}
+
+	public void setTrack(List<Track> track) {
+		this.track = track;
 	}
 
 }
