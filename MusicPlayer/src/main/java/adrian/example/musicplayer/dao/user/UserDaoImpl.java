@@ -44,10 +44,8 @@ public class UserDaoImpl  implements UserDao {
 		return user_id;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	public User findLogin(String login) {
-		
+	public User findUserByLogin(String login) {
 	    Session session = this.sessionFactory.getCurrentSession();
 	   
 	    User user = (User) session
@@ -63,7 +61,6 @@ public class UserDaoImpl  implements UserDao {
 	
 	@Override
 	public User findUserById(int user_id) throws ObjectNotFoundException {
-		
 		Session session = this.sessionFactory.getCurrentSession();
 		User user = (User) session.get(User.class, user_id);
 		
@@ -122,7 +119,7 @@ public class UserDaoImpl  implements UserDao {
 	
 		User user = (User) session.get(User.class, user_id);
 		
-		if(user.getUserInformation() != null){
+		
 	    UserInformation userInfo = user.getUserInformation();
 	    
 		userInfo.setAge(userInformation.getAge());
@@ -130,24 +127,20 @@ public class UserDaoImpl  implements UserDao {
 		userInfo.setProgrammingSkill(userInformation.getProgrammingSkill());
 		userInfo.setSex(userInformation.getSex());
 		userInfo.setSurname(userInformation.getSurname());
-		user.setUserInformation(userInfo);
 		userInfo.setUser(user);
-		}
-		else{
-			user.setUserInformation(userInformation);
-			userInformation.setUser(user);
-		}
-	    session.saveOrUpdate(user);
+		user.setUserInformation(userInfo);
+		
+		
+	    session.merge(user);
 	}
 
 	@Override
 	public boolean checkPassword(int user_id, String CurrentPassword) {
-		
 		Session session = this.sessionFactory.getCurrentSession();
 		User user  = (User) session.load(User.class, user_id);
 		String passwordUser = user.getPassword();
-		
 		boolean passwordMatch = passwordEncoder.matches(CurrentPassword, passwordUser);
+		
 		return passwordMatch;
 	}
 
@@ -177,13 +170,11 @@ public class UserDaoImpl  implements UserDao {
 		if(user.getActive_cod() != active_code){
 			return false;
 		}
-		
 		return true;
 	}
 
 	@Override
 	public void setEnabledTrue(int user_id) throws HibernateException {
-		
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		User user = (User) session.get(User.class, user_id);
