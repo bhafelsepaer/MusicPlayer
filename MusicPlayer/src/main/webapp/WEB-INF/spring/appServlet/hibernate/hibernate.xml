@@ -6,7 +6,6 @@
     <description>Standart Configuration Hibernate using annotatedClasses
                  and MySQL5Dialect</description>
     
-    
     <bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
     
@@ -18,6 +17,7 @@
 				<value>adrian.example.musicplayer.model.User.User</value>
 				<value>adrian.example.musicplayer.model.User.RoleUser</value>
 				<value>adrian.example.musicplayer.model.User.UserInformation</value>
+				<value>adrian.example.musicplayer.model.Music.Artist</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
