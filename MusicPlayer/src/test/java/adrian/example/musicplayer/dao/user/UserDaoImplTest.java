@@ -80,7 +80,7 @@ public class UserDaoImplTest {
 	
 	@Test
 	public void findLogin() throws Exception {
-		adrian.example.musicplayer.model.User.User user2 = userDaoImpl.findLogin(user.getLogin());
+		adrian.example.musicplayer.model.User.User user2 = userDaoImpl.findUserByLogin(user.getLogin());
 		assertEquals(user2.getLogin(), user.getLogin());
 		assertEquals(user2.getPassword(), user.getPassword());
 		assertEquals(user2.getUser_id(), user.getUser_id());
@@ -89,7 +89,7 @@ public class UserDaoImplTest {
 	
 	@Test
 	public void findLoginNull() throws Exception {
-		assertNull(userDaoImpl.findLogin("Janek"));
+		assertNull(userDaoImpl.findUserByLogin("Janek"));
 	}
 	
 	@Test
