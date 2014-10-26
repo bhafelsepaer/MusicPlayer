@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+#tabBar {
+	height: auto;
+	height: 35px;
+	margin-left: 0px;
+	margin-right: auto;
+	font-size: 16px;
+	font-family: sens-serif;
+	font-weight: bold;
+	background-color: black;
+}
+
+#tabBar ul {
+	height: auto;
+	padding: 8px 0px;
+	margin: 0px;
+}
+
+#tabBar li {
+	display: inline;
+	padding: 20px;
+}
+
+#tabBar a {
+	text-decoration: none;
+}
