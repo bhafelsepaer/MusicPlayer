@@ -9,6 +9,7 @@
 <head>
 <meta  charset="UTF-8">
 <link  rel="stylesheet" href="<spring:url value="/resources/css/musicplayer.css"/>" />
+<link rel="stylesheet" href="<spring:url value="/resources/css/tabNavigator.css"/>" />
 </head>
 <body>
  
@@ -43,5 +44,24 @@
             </security:authorize>
     </div>
 </div>
+<div id="tabBar">
+     <div class="navigator">
+       <ul>
+         <li>
+            <a href="#">Tab A</a>
+         </li>
+         <li>
+            <a href="#">Tab B</a>
+         </li>
+         <li>
+           <a href="#">Tab C</a>
+         </li>
+         <li>
+           <a href="#">Tab D</a>
+         </li>
+       </ul>
+     </div>
+</div>
+
 </body>
 </html>
