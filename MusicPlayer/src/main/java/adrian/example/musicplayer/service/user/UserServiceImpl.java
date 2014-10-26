@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(readOnly = true)
 	public User findLogin(String login) {
-		return this.userDao.findLogin(login);
+		return this.userDao.findUserByLogin(login);
 	}
 	
 	@Override
@@ -35,7 +35,9 @@ public class UserServiceImpl implements UserService {
 				passwordEncoder.encode(user.getPassword());
 		
 		user.setPassword(encodePassword);
+		if(user.getActive_cod() == 0) {
 		user.setActive_cod(active_code());
+		}
 		
 		this.userDao.saveUser(user);
 	}

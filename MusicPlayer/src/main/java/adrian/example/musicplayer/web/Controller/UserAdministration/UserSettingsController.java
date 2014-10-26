@@ -32,7 +32,7 @@ import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccountByEmai
 @SessionAttributes({"user","user_information"})
 public class UserSettingsController {
 	
-	private String messageError = " you are not logged user";
+	private final String messageError = " you are not logged user";
 	
 	@Autowired
 	@Qualifier("userAdministrationServiceImpl")
@@ -62,8 +62,6 @@ public class UserSettingsController {
 	public String settingsUserHomePage(@PathVariable("name") String login, 
 			                           Model model, Principal principal,
 			                           RedirectAttributes redirectAttributes){
-		
-		System.out.println("CONTROLLER " + login + " PRINCIPAL " + principal.getName());
 		
 		if(!(principal.getName().equals(login))){
 			redirectAttributes.addFlashAttribute("errorMessage", 
@@ -193,7 +191,8 @@ public class UserSettingsController {
 		
 		model.addAttribute("interestList", listInterest);
 		model.addAttribute("programmingSkillList", listProgrammingSkill);
-		
+		model.addAttribute("userInterestList", userInformation.getInterest());
+        model.addAttribute("userProgrammingSkillList", userInformation.getProgrammingSkill());		
 		return "user_setting/user_settingInformation";
 	}
 	

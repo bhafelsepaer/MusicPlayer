@@ -29,16 +29,16 @@ public class UserServiceSecurity implements UserDetailsService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public UserDetails loadUserByUsername(String username)
+	public UserDetails loadUserByUsername(String login)
 			throws UsernameNotFoundException {
 		
 		try {
-		 User user = this.userDao.findLogin(username);
+		 User user = this.userDao.findUserByLogin(login);
 		 List<GrantedAuthority> authorites = buildUserAuthority(user.getRoleUser());
 		 
 		 return convertionUseDetails(user,authorites);
 		}catch(NullPointerException message){
-			throw new UsernameNotFoundException("user " + username +  "dont exist");
+			throw new UsernameNotFoundException("user " + login +  "dont exist");
 		}
 	}
    
