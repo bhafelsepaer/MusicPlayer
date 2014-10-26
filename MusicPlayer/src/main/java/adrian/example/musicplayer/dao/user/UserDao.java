@@ -30,7 +30,7 @@ public interface UserDao {
 	 * null if not found
 	 * 
 	 */
-	User findLogin(String login);
+	User findUserByLogin(String login);
 	
 	/**
 	 * Retrive a <code>User</code> from data store by id
@@ -128,5 +128,6 @@ public interface UserDao {
 	 * @throws HibernateException
 	 */
 	void setEnabledTrue(int user_id) throws HibernateException;
+
 	
 }
