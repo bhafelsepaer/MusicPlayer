@@ -33,17 +33,17 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	@Override
 	@Transactional(readOnly = true)
 	public User findLogin(String login) {
-		return this.userDao.findLogin(login);
+		return this.userDao.findUserByLogin(login);
 	}
 	
 	@Override
 	@Transactional
-	public void updateUserInformation(int user_id, String address, String firstName) {
+	public void updateUserInformation(int user_id, String address, String firstName) throws ObjectNotFoundException {
 		
 		try{
 	    	this.userDao.updateUserInformation(user_id, address, firstName);
 		}catch(ObjectNotFoundException exception){
-			exception.printStackTrace();
+			throw new ObjectNotFoundException(23, "User");
 		}
 	}
 	
@@ -54,7 +54,7 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 		try{
 			this.userDao.updatePassword(user_id, password);
 		}catch(ObjectNotFoundException exception){
-			exception.printStackTrace();
+			throw new ObjectNotFoundException(23, "User");
 		}
 	}
 	
@@ -64,7 +64,7 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 		try{
 			this.userDao.updateEmail(user_id, email);
 		}catch(ObjectNotFoundException exception){
-			exception.printStackTrace();
+			throw new ObjectNotFoundException(55, "User");
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
           try{
         	  this.userDao.updateOrSaveUserInformation(user_id, userInformation);
           }catch(ObjectNotFoundException exception){
-        	  exception.printStackTrace();
+        	 throw new ObjectNotFoundException(101, "User");
           }
 	}
 
@@ -88,7 +88,7 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 		try{
 			checkedVerify  = this.userDao.checkUserVerify(user_id, active_code);
 		}catch(ObjectNotFoundException exception){
-			exception.printStackTrace();
+			throw new ObjectNotFoundException(102, "User");
 		}
 		return checkedVerify;
 	}
