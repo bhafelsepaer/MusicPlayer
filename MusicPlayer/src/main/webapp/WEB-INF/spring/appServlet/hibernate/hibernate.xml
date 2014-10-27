@@ -19,6 +19,7 @@
 				<value>adrian.example.musicplayer.model.User.UserInformation</value>
 				<value>adrian.example.musicplayer.model.Music.Artist</value>
 				<value>adrian.example.musicplayer.model.Music.Track</value>
+				<value>adrian.example.musicplayer.model.Music.Genres</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
