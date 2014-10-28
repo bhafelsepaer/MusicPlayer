@@ -27,12 +27,19 @@ public class Track implements Serializable {
 	@Column(name = "name", length = 255)
 	private String name;
 	
+	@Column(name = "metadate_track", length = 255)
+	private String metadate_file;
+	
 	@Column(name = "play_time")
 	private Time playTime;
     
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "artist_id")
-	private Artist artist;
+	private Artist artist_track;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "genre_id")
+	private Genres genres;
 	
 	public int getTrack_id() {
 		return track_id;
@@ -52,6 +59,22 @@ public class Track implements Serializable {
 
 	public void setPlayTime(Time playTime) {
 		this.playTime = playTime;
+	}
+
+	public Artist getArtist_track() {
+		return artist_track;
+	}
+
+	public void setArtist_track(Artist artist_track) {
+		this.artist_track = artist_track;
+	}
+
+	public Genres getGenres() {
+		return genres;
+	}
+
+	public void setGenres(Genres genres) {
+		this.genres = genres;
 	}
 	
 }
