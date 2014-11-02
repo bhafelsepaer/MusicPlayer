@@ -36,7 +36,7 @@ public class Artist implements Serializable{
 	@Column(name = "description", length = 255, nullable = true)
 	private String description;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "artist")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "artist_track")
 	@OrderBy("name")
 	private List<Track> track;
 	
