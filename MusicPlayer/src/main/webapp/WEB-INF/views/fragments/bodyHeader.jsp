@@ -77,17 +77,33 @@
 	<div id="tabBar">
 		<ul id="tabs">
 			<li class="active"><a href="#overwiewHome">Przeglad</a></li>
-			<li><a href="#TopList">Tab B</a></li>
-			<li><a href="#GenresAndModes">Tab C</a></li>
-			<li><a href="#NewRealses">Tab D</a></li>
+			<li><a href="#TopList">Genre</a></li>
+			<li><a href="#GenresAndModes">Album</a></li>
+			<li><a href="#NewRealses">Artist</a></li>
 		</ul>
 		<div id="tabInner">
 			<div id="overwiewHome" class="tab_content active">
-				<jsp:include page="/WEB-INF/views/musicplayer/overwiewHomePage.jsp" />
+			   <div id="GenreBlock">
+				  <jsp:include page="/WEB-INF/views/musicplayer/overwiewHomePage.jsp" />
+		       </div>
+		           <div class="spaceBetweenPage"></div>
+				<div id="AlbumBlock">
+				    <jsp:include page="/WEB-INF/views/musicplayer/Show Album.jsp" />
+				</div>
+				   <div class="spaceBetweenPage"></div>
+				<div id="ArtistBlock">
+				    <jsp:include page="/WEB-INF/views/musicplayer/show_artist.jsp" />
+				</div>
 			</div>
-			<div id="TopList" class="tab_content"></div>
-			<div id="GenresAndModes" class="tab_content">B</div>
-			<div id="NewRealses" class="tab_content">C</div>
+			<div id="TopList" class="tab_content">
+			     <jsp:include page="/WEB-INF/views/musicplayer/overwiewHomePage.jsp" />
+			</div>
+			<div id="GenresAndModes" class="tab_content">
+			<jsp:include page="/WEB-INF/views/musicplayer/Show Album.jsp" />
+			</div>
+			<div id="NewRealses" class="tab_content">
+			   <jsp:include page="/WEB-INF/views/musicplayer/show_artist.jsp" />
+			</div>
 		</div>
 	</div>
 
