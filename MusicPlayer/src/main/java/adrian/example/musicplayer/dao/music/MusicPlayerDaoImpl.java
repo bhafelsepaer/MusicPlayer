@@ -24,11 +24,20 @@ public class MusicPlayerDaoImpl implements MusicPlayerDao {
 				("FROM Song song Where song.genres.genresName = :genre_name")
 				.setParameter("genre_name", genre_name).list();
 		
-		System.out.println("SERVICE " + list_of_song.size());
-		
 		return list_of_song;
 	}
 
+
+	@Override
+	public List<Song> getSongByAlbum(String album_name) {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		List<Song> list_of_song_by_album = (List<Song>) 
+				session.createQuery("FROM Song song WHERE song.album.album_name = :album_name")
+				       .setParameter("album_name", album_name).list();
+		return list_of_song_by_album;
+	}
+	
 	@Override
 	public void saveSong(Song song) {
 		Session session = this.sessionFactory.getCurrentSession();
