@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "ALBUM", uniqueConstraints = @UniqueConstraint(columnNames = { "album_name" }))
+@Table(name = "ALBUM", uniqueConstraints = @UniqueConstraint(columnNames = "album_name"))
 public class Album implements Serializable {
 
 	@Id
@@ -33,10 +33,9 @@ public class Album implements Serializable {
 	@Column(name = "release_date", nullable = true)
 	private int release_date;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "artist_id")
-	private Artist artist_album;
-
+	@OneToMany
+	private Set<Song> song;
+	
 	public int getAlbum_id() {
 		return album_id;
 	}
@@ -65,12 +64,11 @@ public class Album implements Serializable {
 		this.release_date = release_date;
 	}
 
-	public Artist getArtist_album() {
-		return artist_album;
+	public Set<Song> getSong() {
+		return song;
 	}
 
-	public void setArtist_album(Artist artist_album) {
-		this.artist_album = artist_album;
+	public void setSong(Set<Song> song) {
+		this.song = song;
 	}
-
 }
