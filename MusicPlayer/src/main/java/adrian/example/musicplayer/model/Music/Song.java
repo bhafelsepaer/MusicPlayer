@@ -34,6 +34,10 @@ public class Song implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "genre_id")
 	private Genres genres;
+	
+	@ManyToOne
+	@JoinColumn(name = "album_id")
+	private Album album;
 
 	public int getSong_id() {
 		return song_id;
@@ -60,6 +64,14 @@ public class Song implements Serializable {
 
 	public void setGenres(Genres genres) {
 		this.genres = genres;
+	}
+
+	public Album getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(Album album) {
+		this.album = album;
 	}
 
 	
