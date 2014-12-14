@@ -32,8 +32,6 @@ public class MusicPlayerDaoImplTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		song.setAlbum_id(1);
-		song.setArtist_id(1);
 		song.setFilename("/location");
 		song.setName("nightcore-batman");
 		musicPlayer.saveSong(song);
