@@ -25,24 +25,42 @@ public class OverwiewMusicController {
 	
 	@RequestMapping(value = "/genre/nightcore_genre", method = RequestMethod.GET)
 	public String overwiewHomePage(
-			@RequestParam(value = "genre_name", required = true)String genre_name,
-			Model model,HttpSession session) {
+			@RequestParam(value = "genre_name", required = true) String genre_name,
+			HttpSession session) {
 		
 		List<Song> loadedSongByGenre = this.musicService.getSongByGenre(genre_name);
-		session.setAttribute("loadedSongByGenre", loadedSongByGenre);
-	/*	model.addAttribute("loadedSongByGenre",loadedSongByGenre);*/
+		session.setAttribute("loadedSong", loadedSongByGenre);
 		
+		return "/musicplayer/show_song";
+	}
+	
+	@RequestMapping(value = "/album/nightcore_album", method = RequestMethod.GET)
+	public String albumPage(
+			@RequestParam(value = "album_name", required = true) String album_name,
+		    HttpSession session){
+		
+		List<Song> loadSongByAlbum = this.musicService.getSongByAlbum(album_name);
+		session.setAttribute("loadedSong", loadSongByAlbum);
+		return "/musicplayer/show_song";
+	}
+	
+	@RequestMapping(value = "/artist/nightcore_artist", method = RequestMethod.GET)
+	public String artistPage(
+			@RequestParam(value = "artist_name", required = true) String artist_name,
+		    HttpSession session){
+		
+		/*List<Song> loadSongByAlbum = this.musicService.getSongByAlbum(album_name);
+		session.setAttribute("loadedSong", loadSongByAlbum);*/
 		return "/musicplayer/show_song";
 	}
 	
 	@RequestMapping(value = "/playSong", method = RequestMethod.GET)
 	public String choiseSong(@RequestParam(value="song_id", required = true)
-	                         int song_id,Model model, HttpSession session){
+	                         int song_id,Model model){
 		
 		Song song = musicService.loadSongById(song_id);
 		model.addAttribute("location",song.getFilename());
 		model.addAttribute("SongName", song.getName());
-		
 		return "/musicplayer/show_song";
 	}
 }
