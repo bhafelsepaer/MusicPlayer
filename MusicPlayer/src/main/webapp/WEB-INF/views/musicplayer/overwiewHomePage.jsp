@@ -19,7 +19,44 @@
 }
 
 #headCoverMetal {
-    background-image: url(<c:url value='/resources/images/album_picture/nightcore-metal.jpg' />);
+    background-image: url(<c:url value='/resources/images/album_picture/nightcore-Metal.jpg' />);
+    background-size: cover;
+    border: 1px solid blue;
+    width: 200px;
+    height: 300px; 
+    position: relative;
+}
+
+#headCoverHipHop {
+    background-image: url(<c:url value='/resources/images/album_picture/nightcore-HipHop.jpg' />);
+    background-size: cover;
+    border: 1px solid blue;
+    width: 200px;
+    height: 300px; 
+    position: relative;
+}
+
+#headCoverRock {
+    background-image: url(<c:url value='/resources/images/album_picture/nightcore-Rock.jpg' />);
+    background-size: cover;
+    border: 1px solid blue;
+    width: 200px;
+    height: 300px; 
+    position: relative;
+}
+
+#headCoverTrance {
+    background-image: url(<c:url value='/resources/images/album_picture/Trance.jpg' />);
+    background-size: cover;
+    border: 1px solid blue;
+    width: 200px;
+    height: 300px; 
+    position: relative;
+}
+
+
+#headCoverEpicMusic {
+    background-image: url(<c:url value='/resources/images/album_picture/EpicMusic.jpg' />);
     background-size: cover;
     border: 1px solid blue;
     width: 200px;
@@ -38,6 +75,7 @@
 .linkMusic {
    width: 200px;
    height: 300px;
+   margin: 10px;
    position: relative;
    display: inline-block;
 }
@@ -57,13 +95,53 @@
 </div>
 
 <div class="linkMusic">
-      <a href="<spring:url value="/genre/nightcore_genre?genre_name=nightcore-metal" />" rel="genre" id="linkMusic">
+      <a href="<spring:url value="/genre/nightcore_genre?genre_name=nightcore-metal" />" rel="genre">
           <div id="headCoverMetal">
              <div class="textCover">
               <h5>Best Nightcore Metal Music! Feel Black Power</h5>
            </div>
          </div>
      </a>
+</div>
+
+<div class="linkMusic">
+    <a href="<spring:url value="/genre/nightcore_genre?genre_name=nightcore-HipHop" />" rel="genre">
+        <div id="headCoverHipHop">
+             <div class="textCover">
+                 <h5>Best Nightcore Hip Hop Music! The Best Rap Here</h5>
+             </div>
+        </div>
+    </a>
+</div>
+
+<div class="linkMusic">
+     <a href="<spring:url value="/genre/nightcore_genre?genre_name=nightcore-Rock" />" rel="genre">
+        <div id="headCoverRock">
+           <div class="textCover">
+              <h5>Best Nightcore Rock Music! Rock will Eat You</h5>
+           </div>
+        </div>
+    </a>
+</div>
+
+<div class="linkMusic">
+     <a href="<spring:url value="/genre/nightcore_genre?genre_name=Trance" />" rel="genre">
+        <div id="headCoverTrance">
+           <div class="textCover">
+              <h5>Trance Music will Created by independent Artist</h5>
+           </div>
+        </div>
+    </a>
+</div>
+
+<div class="linkMusic">
+     <a href="<spring:url value="/genre/nightcore_genre?genre_name=Epic Music" />" rel="genre">
+        <div id="headCoverEpicMusic">
+           <div class="textCover">
+              <h5>Epci Music From Game Movie itp.</h5>
+           </div>
+        </div>
+    </a>
 </div>
 
 </body>
