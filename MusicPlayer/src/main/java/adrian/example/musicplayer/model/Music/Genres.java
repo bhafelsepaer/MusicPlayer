@@ -11,16 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "GENRES", uniqueConstraints = @UniqueConstraint(columnNames = { "name" }))
+@Table(name = "GENRES", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Genres implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "genres_id")
+	@Column(name = "genre_id")
 	private int genres_id;
 
 	@Column(name = "name", length = 255)
@@ -29,8 +31,8 @@ public class Genres implements Serializable {
 	@Column(name = "description", length = 255, nullable = true)
 	private String genresDescription;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "genres")
-	private Set<Track> genre_track;
+	@OneToMany
+	private Set<Song> song;
 	
 	public int getGenres_id() {
 		return genres_id;
@@ -52,12 +54,13 @@ public class Genres implements Serializable {
 		this.genresDescription = genresDescription;
 	}
 
-	public Set<Track> getGenre_track() {
-		return genre_track;
+	public Set<Song> getSong() {
+		return song;
 	}
 
-	public void setGenre_track(Set<Track> genre_track) {
-		this.genre_track = genre_track;
+	public void setSong(Set<Song> song) {
+		this.song = song;
 	}
+
 
 }
