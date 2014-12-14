@@ -26,8 +26,13 @@ public class MusicServiceImpl implements MusicService {
 	@Override
 	@Transactional
 	public List<Song> getSongByGenre(String genre_name) {
-		List<Song> loadedSong = this.musicPlayerDao.getSongByGenre(genre_name);
-		return loadedSong;
+		return this.musicPlayerDao.getSongByGenre(genre_name);
+	}
+	
+	@Override
+	@Transactional
+	public List<Song> getSongByAlbum(String album_name) {
+		return this.musicPlayerDao.getSongByAlbum(album_name);
 	}
 
 	@Override
