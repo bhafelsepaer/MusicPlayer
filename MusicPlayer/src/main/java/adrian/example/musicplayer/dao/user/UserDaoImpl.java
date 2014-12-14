@@ -49,7 +49,7 @@ public class UserDaoImpl  implements UserDao {
 	    Session session = this.sessionFactory.getCurrentSession();
 	   
 	    User user = (User) session
-	    .createQuery(" FROM User WHERE login = :login")
+	    .createQuery("FROM User WHERE login = :login")
 	    .setParameter("login", login).uniqueResult();
 		
 	    if(user != null){
