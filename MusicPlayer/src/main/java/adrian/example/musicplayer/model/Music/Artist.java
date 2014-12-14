@@ -36,13 +36,6 @@ public class Artist implements Serializable{
 	@Column(name = "description", length = 255, nullable = true)
 	private String description;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "artist_track")
-	@OrderBy("name")
-	private List<Track> track;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "artist_album")
-	private Set<Album> album;
-
 	public int getArtist_id() {
 		return artist_id;
 	}
@@ -69,22 +62,6 @@ public class Artist implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public List<Track> getTrack() {
-		return track;
-	}
-
-	public void setTrack(List<Track> track) {
-		this.track = track;
-	}
-
-	public Set<Album> getAlbum() {
-		return album;
-	}
-
-	public void setAlbum(Set<Album> album) {
-		this.album = album;
 	}
 
 }
