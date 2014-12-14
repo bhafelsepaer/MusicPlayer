@@ -11,15 +11,41 @@
 	background-color: black;
 }
 
+
 #tabBar ul {
 	height: auto;
 	padding: 8px 0px;
 	margin: 0px;
+	list-style: none;
 }
 
-#tabBar li {
+#tabBar ul li {
+    border: 1px #aaa solid;	
+    border-bottom: none;
 	display: inline;
-	padding: 20px;
+	padding: 5px;
+}
+
+#tabBar ul li.active {
+	margin-bottom: -1px;
+	padding-bottom: 6px;
+}
+
+#tabInner {
+   clear: both;
+   border: 1px solid #aaa;
+   overflow: hidden;
+   background: black;	
+}
+   .tab_content {
+     display:none;
+   }
+   
+   .tab_content.active {
+      display: block;
+   }
+#tabInner div {
+	padding: 10px;	
 }
 
 #tabBar a {
