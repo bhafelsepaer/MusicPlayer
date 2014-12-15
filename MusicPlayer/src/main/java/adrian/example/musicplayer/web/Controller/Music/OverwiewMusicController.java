@@ -49,8 +49,8 @@ public class OverwiewMusicController {
 			@RequestParam(value = "artist_name", required = true) String artist_name,
 		    HttpSession session){
 		
-		/*List<Song> loadSongByAlbum = this.musicService.getSongByAlbum(album_name);
-		session.setAttribute("loadedSong", loadSongByAlbum);*/
+		List<Song> loadSongByArtist = this.musicService.getSongByArtist(artist_name);
+		session.setAttribute("loadedSong", loadSongByArtist);
 		return "/musicplayer/show_song";
 	}
 	
