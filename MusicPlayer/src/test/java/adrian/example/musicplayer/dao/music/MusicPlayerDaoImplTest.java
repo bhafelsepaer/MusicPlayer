@@ -33,15 +33,47 @@ public class MusicPlayerDaoImplTest {
 	@Before
 	public void setUp() throws Exception {
 		song.setFilename("/location");
-		song.setName("nightcore-batman");
+		song.setName("nightcore_batman");
 		musicPlayer.saveSong(song);
 		
 	}
 
 	@Test
-	public void test() {
+	public void testGetSongByGenre() {
 		List<Song> loadedSong = musicPlayer.getSongByGenre("pop");
 		assertEquals("nightcore_batman", loadedSong.get(0).getName());
+		assertEquals("/location", loadedSong.get(0).getFilename());
+		assertEquals("pop", loadedSong.get(0).getGenres().getGenresName());
+		assertEquals("nice song", loadedSong.get(0).getGenres().getGenresDescription());
+	}
+	
+	@Test
+	public void testGetSongByAlbum() {
+		List<Song> loadedSong = musicPlayer.getSongByAlbum("AlbumTest");
+		assertEquals("nightcore_batman", loadedSong.get(0).getName());
+		assertEquals("/location", loadedSong.get(0).getFilename());
+		assertEquals("AlbumTest", loadedSong.get(0).getAlbum().getAlbum_name());
+		assertEquals("/resources/a", loadedSong.get(0).getAlbum().getPicture_metadate());
+		assertEquals(2012, loadedSong.get(0).getAlbum().getRelease_date());
+	}
+	
+	@Test
+	public void testGetSongByArtist() {
+		List<Song> loadedSong = musicPlayer.getSongByArtist("ArtistTest");
+		assertEquals("nightcore_batman", loadedSong.get(0).getName());
+		assertEquals("/location", loadedSong.get(0).getFilename());
+		assertEquals("ArtistTest", loadedSong.get(0).getArtist().getName());
+		assertEquals("ArtistTestDescription", loadedSong.get(0).
+				                              getArtist().getDescription());
+		assertEquals(2000, loadedSong.get(0).getArtist().getYears_active());
+	}
+	
+	@Test 
+	public void testLoadSongById() {
+		assertEquals(1, song.getSong_id());
+		assertEquals("nightcore_batman", song.getName());
+		assertEquals("/location", song.getFilename());
+		
 	}
 
 }
