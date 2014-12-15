@@ -18,7 +18,7 @@ public class MusicServiceImpl implements MusicService {
 	
 	@Override
 	@Transactional
-	public void SaveSong(Song song) {
+	public void saveSong(Song song) {
 		this.musicPlayerDao.saveSong(song);
 	}
 

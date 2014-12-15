@@ -6,7 +6,7 @@ import adrian.example.musicplayer.model.Music.Song;
 
 public interface MusicService {
 
-	void SaveSong(Song song);
+	void saveSong(Song song);
 	
 	List<Song> getSongByGenre(String genre_name);
 	
