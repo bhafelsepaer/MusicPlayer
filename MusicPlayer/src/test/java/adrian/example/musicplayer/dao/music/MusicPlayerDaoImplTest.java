@@ -35,7 +35,6 @@ public class MusicPlayerDaoImplTest {
 		song.setFilename("/location");
 		song.setName("nightcore_batman");
 		musicPlayer.saveSong(song);
-		
 	}
 
 	@Test
@@ -70,10 +69,10 @@ public class MusicPlayerDaoImplTest {
 	
 	@Test 
 	public void testLoadSongById() {
-		assertEquals(1, song.getSong_id());
-		assertEquals("nightcore_batman", song.getName());
-		assertEquals("/location", song.getFilename());
-		
+		Song loadedSong = this.musicPlayer.loadSongById(1);
+		assertEquals(1, loadedSong.getSong_id());
+		assertEquals("nightcore_batman", loadedSong.getName());
+		assertEquals("/location", loadedSong.getFilename());
 	}
 
 }
