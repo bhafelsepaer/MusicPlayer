@@ -77,9 +77,9 @@
 	<div id="tabBar">
 		<ul id="tabs">
 			<li class="active"><a href="#overwiewHome">Przeglad</a></li>
-			<li><a href="#TopList">Genre</a></li>
-			<li><a href="#GenresAndModes">Album</a></li>
-			<li><a href="#NewRealses">Artist</a></li>
+			<li><a href="#Genre">Genre</a></li>
+			<li><a href="#Album">Album</a></li>
+			<li><a href="#Artist">Artist</a></li>
 		</ul>
 		<div id="tabInner">
 			<div id="overwiewHome" class="tab_content active">
@@ -95,13 +95,13 @@
 				    <jsp:include page="/WEB-INF/views/musicplayer/show_artist.jsp" />
 				</div>
 			</div>
-			<div id="TopList" class="tab_content">
+			<div id="Genre" class="tab_content">
 			     <jsp:include page="/WEB-INF/views/musicplayer/overwiewHomePage.jsp" />
 			</div>
-			<div id="GenresAndModes" class="tab_content">
+			<div id="Album" class="tab_content">
 			<jsp:include page="/WEB-INF/views/musicplayer/Show Album.jsp" />
 			</div>
-			<div id="NewRealses" class="tab_content">
+			<div id="Artist" class="tab_content">
 			   <jsp:include page="/WEB-INF/views/musicplayer/show_artist.jsp" />
 			</div>
 		</div>
