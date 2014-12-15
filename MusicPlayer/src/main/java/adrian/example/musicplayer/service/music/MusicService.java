@@ -12,5 +12,7 @@ public interface MusicService {
 	
 	List<Song> getSongByAlbum(String album_name);
 	
+	List<Song> getSongByArtist(String artist_name);
+	
 	Song loadSongById(int id);
 }

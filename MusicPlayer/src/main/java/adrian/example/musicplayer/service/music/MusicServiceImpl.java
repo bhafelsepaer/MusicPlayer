@@ -37,8 +37,15 @@ public class MusicServiceImpl implements MusicService {
 
 	@Override
 	@Transactional
+	public List<Song> getSongByArtist(String artist_name) {
+		return this.musicPlayerDao.getSongByArtist(artist_name);
+	}
+	
+	@Override
+	@Transactional
 	public Song loadSongById(int id) {
 		return this.musicPlayerDao.loadSongById(id);
 	}
+	
 
 }
