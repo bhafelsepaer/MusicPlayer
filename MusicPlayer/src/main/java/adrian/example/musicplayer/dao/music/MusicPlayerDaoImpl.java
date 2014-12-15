@@ -39,6 +39,16 @@ public class MusicPlayerDaoImpl implements MusicPlayerDao {
 	}
 	
 	@Override
+	public List<Song> getSongByArtist(String artist_name) {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		List<Song> list_of_song_by_artist = (List<Song>)
+				session.createQuery("FROM Song song WHERE song.artist.name = :artist_name")
+				      .setParameter("artist_name", artist_name).list();
+		return list_of_song_by_artist;
+	}
+
+	@Override
 	public void saveSong(Song song) {
 		Session session = this.sessionFactory.getCurrentSession();
 		
