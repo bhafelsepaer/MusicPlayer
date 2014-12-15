@@ -46,6 +46,7 @@ public class Genres implements Serializable {
 		this.genresName = genresName;
 	}
 
+	
 	public String getGenresDescription() {
 		return genresDescription;
 	}
@@ -61,6 +62,4 @@ public class Genres implements Serializable {
 	public void setSong(Set<Song> song) {
 		this.song = song;
 	}
-
-
 }
