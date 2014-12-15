@@ -43,7 +43,6 @@ public class UserDaoImplTest {
 		user.setFirstName("Adam");
 		user.setLogin("Adam");
 		user.setPassword("$2a$10$/y3BTr9MlLNXvQ.vs8H2buLHbAcbnx.JOnXLBUA.kJ0efP3TS6Riq");
-		
 		userInformation.setAge(23);
 		userInformation.setInterest("Music");
 		userInformation.setProgrammingSkill("Java");
