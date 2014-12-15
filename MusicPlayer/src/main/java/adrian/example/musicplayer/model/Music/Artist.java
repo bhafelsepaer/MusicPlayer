@@ -36,6 +36,9 @@ public class Artist implements Serializable{
 	@Column(name = "description", length = 255, nullable = true)
 	private String description;
 	
+	@OneToMany
+	private Set<Song> song;
+	
 	public int getArtist_id() {
 		return artist_id;
 	}
@@ -62,6 +65,14 @@ public class Artist implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<Song> getSong() {
+		return song;
+	}
+
+	public void setSong(Set<Song> song) {
+		this.song = song;
 	}
 
 }
