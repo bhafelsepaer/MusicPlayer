@@ -10,7 +10,7 @@
 <style>
 
 #headCover {
-    background-image: url(<c:url value='/resources/images/album_picture/nightcore-pop.jpg' />);
+    background-image: url(<c:url value='/resources/images/album_picture/byGenre/nightcore-pop.jpg' />);
     background-size: cover;
     border: 1px solid blue;
     width: 200px;
@@ -19,7 +19,7 @@
 }
 
 #headCoverMetal {
-    background-image: url(<c:url value='/resources/images/album_picture/nightcore-Metal.jpg' />);
+    background-image: url(<c:url value='/resources/images/album_picture/byGenre/nightcore-Metal.jpg' />);
     background-size: cover;
     border: 1px solid blue;
     width: 200px;
@@ -28,7 +28,7 @@
 }
 
 #headCoverHipHop {
-    background-image: url(<c:url value='/resources/images/album_picture/nightcore-HipHop.jpg' />);
+    background-image: url(<c:url value='/resources/images/album_picture/byGenre/nightcore-HipHop.jpg' />);
     background-size: cover;
     border: 1px solid blue;
     width: 200px;
@@ -37,7 +37,7 @@
 }
 
 #headCoverRock {
-    background-image: url(<c:url value='/resources/images/album_picture/nightcore-Rock.jpg' />);
+    background-image: url(<c:url value='/resources/images/album_picture/byGenre/nightcore-Rock.jpg' />);
     background-size: cover;
     border: 1px solid blue;
     width: 200px;
@@ -46,7 +46,7 @@
 }
 
 #headCoverTrance {
-    background-image: url(<c:url value='/resources/images/album_picture/Trance.jpg' />);
+    background-image: url(<c:url value='/resources/images/album_picture/byGenre/Trance.jpg' />);
     background-size: cover;
     border: 1px solid blue;
     width: 200px;
@@ -56,7 +56,7 @@
 
 
 #headCoverEpicMusic {
-    background-image: url(<c:url value='/resources/images/album_picture/EpicMusic.jpg' />);
+    background-image: url(<c:url value='/resources/images/album_picture/byGenre/EpicMusic.jpg' />);
     background-size: cover;
     border: 1px solid blue;
     width: 200px;
