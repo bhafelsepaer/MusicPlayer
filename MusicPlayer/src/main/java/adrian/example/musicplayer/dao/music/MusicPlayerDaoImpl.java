@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import adrian.example.musicplayer.model.Music.Album;
+import adrian.example.musicplayer.model.Music.Artist;
 import adrian.example.musicplayer.model.Music.Genres;
 import adrian.example.musicplayer.model.Music.Song;
 
@@ -52,16 +54,27 @@ public class MusicPlayerDaoImpl implements MusicPlayerDao {
 	public void saveSong(Song song) {
 		Session session = this.sessionFactory.getCurrentSession();
 		
+		session.persist(song);
+		
 		Genres genre = new Genres();
 		genre.setGenresName("pop");
 		genre.setGenresDescription("nice song");
-		genre.getSong().add(song);
-		
 		song.setGenres(genre);
+		session.persist(genre);
 		
-		session.persist(song);
+		Album album = new Album();
+		album.setAlbum_name("AlbumTest");
+		album.setPicture_metadate("/resources/a");
+		album.setRelease_date(2012);
+		song.setAlbum(album);
+		session.persist(album);
 		
-		
+		Artist artist = new Artist();
+		artist.setDescription("ArtistTestDescription");
+		artist.setName("ArtistTest");
+		artist.setYears_active(2000);
+		song.setArtist(artist);
+    	session.persist(artist);
 	}
 
 	@Override
