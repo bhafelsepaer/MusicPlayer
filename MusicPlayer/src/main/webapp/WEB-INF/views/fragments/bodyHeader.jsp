@@ -10,16 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="<spring:url value="/resources/css/musicplayer.css"/>" />
-<link rel="stylesheet"
 	href="<spring:url value="/resources/css/tabNavigator.css"/>" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <script>
-	function formSubmit() {
-		document.getElementById("logoutForm").submit();
-	}
-
 	$(document).ready(function() {
 		$("#tabs li").click(function() {
 			$("#tabs li").removeClass("active");
@@ -30,50 +24,14 @@
 			return false;
 		});
 	});
-	function load() {
-		<spring:url value="/resources/images/music-header.jpg" var="head" />
-	}
 </script>
 
 </head>
 <body>
 
-	<form action="${logoutUrl}" method="post" id="logoutForm">
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-	</form>
-
-	<c:url value="/logout_music_store" var="logoutUrl" />
-
-	<div id="head">
-		<div class="image">
-			<img alt="error" src="${head}">
-		</div>
-	</div>
-	<div id="navbar">
-		<div class="link">
-			<security:authorize access="isAuthenticated()">
-				<security:authentication property="principal.username"
-					var="current_user" />
-				<div class="current_user">
-					<a
-						href='<spring:url  value='/settings_account_user/${current_user}/profile'/>'>${current_user}</a>
-				</div>
-				<div class="logout">
-					<a href="javascript:formSubmit()">Logout</a>
-				</div>
-			</security:authorize>
-			<security:authorize access="isAnonymous()">
-				<div class="login">
-					<a href='<spring:url value="/login" /> '>Login</a>
-				</div>
-				<div class="registration">
-					<a href='<spring:url value="/registration" /> '>Registration</a>
-				</div>
-			</security:authorize>
-		</div>
-	</div>
-	<jsp:include page="/WEB-INF/views/fragments/sidebar.jsp" />
+<jsp:include page="/WEB-INF/views/fragments/sidebar.jsp" />
+<jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
+	
 	<div id="tabBar">
 		<ul id="tabs">
 			<li class="active"><a href="#overwiewHome">Przeglad</a></li>
