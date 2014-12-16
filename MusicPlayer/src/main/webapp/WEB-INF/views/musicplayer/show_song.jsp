@@ -8,33 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<spring:url value="/resources/css/desing_showSong.css"/>" />
 
-<style>
-
-html, body {
-   width: 100%;
-}
-table {
-  border-collapse: collapse;
-  margin: 0 auto;
-}
-
-td {
-  padding: 15px;
-  background-color: red;
-}
-
-table, tr, td {
-  border: 1px solid black;
-}
-
-</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/fragments/sidebar.jsp" />
 <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
 
-
+<security:authorize access="permitAll">
 <table>
     <tr>
        <td><a href="<spring:url value="/" />" >Main Page</a></td>
@@ -45,5 +26,7 @@ table, tr, td {
     </tr>
     </c:forEach>
 </table>
+
+</security:authorize>
 </body>
 </html>
