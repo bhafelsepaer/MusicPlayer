@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-#settings ul{
+#settings ul {
      background-color: #000000;
      margin: 0;
      padding: 0;
@@ -14,11 +14,11 @@
     display: inline;
 }
 
-#settings ul li a{
+#settings ul li a {
 	text-decoration: none;
 	color: #fff;
 }
 
-#settings ul li a:hover{
+#settings ul li a:hover {
 	color: #0000ff;
 }

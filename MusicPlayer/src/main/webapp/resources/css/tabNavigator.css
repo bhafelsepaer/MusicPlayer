@@ -44,6 +44,7 @@
    .tab_content.active {
       display: block;
    }
+   
 #tabInner div {
 	padding: 10px;	
 }
@@ -51,6 +52,7 @@
 #tabBar a {
 	text-decoration: none;
 }
+
 #AlbumBlock{
 	background-color: white;
 }
