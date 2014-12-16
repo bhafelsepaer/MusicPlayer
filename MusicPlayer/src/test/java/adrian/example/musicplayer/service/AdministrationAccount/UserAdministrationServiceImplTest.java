@@ -138,8 +138,8 @@ public class UserAdministrationServiceImplTest {
 		assertEquals("Kazik", userInformation.getSurname());
 	}
 	
-	@Test(expected = ObjectNotFoundException.class)
-	public void updateOrSaveUserInformationFail() throws ObjectNotFoundException {
+	@Test(expected = java.lang.NullPointerException.class)
+	public void updateOrSaveUserInformationFail() {
 		UserInformation userInformationTest = new UserInformation();
 		userInformationTest.setAge(55);
 		userInformationTest.setInterest("Eat");
@@ -148,6 +148,7 @@ public class UserAdministrationServiceImplTest {
 		userInformationTest.setSurname("Kazik");
 		
 		userServiceImpl.updateOrSaveUserInformation(1000, userInformationTest);
+		
 	}
 	
 	@Test
