@@ -72,11 +72,7 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	@Transactional
 	public void updateOrSaveUserInformation(int user_id,
 			UserInformation userInformation) {
-          try{
-        	  this.userDao.updateOrSaveUserInformation(user_id, userInformation);
-          }catch(ObjectNotFoundException exception){
-        	 throw new ObjectNotFoundException(101, "User");
-          }
+        this.userDao.updateOrSaveUserInformation(user_id, userInformation);
 	}
 
 	@Override
@@ -96,7 +92,15 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 	@Override
 	@Transactional(readOnly = true)
 	public boolean checkPassword(int user_id, String CurrentPassword) {
-		return this.userDao.checkPassword(user_id, CurrentPassword);
+		
+		boolean checkedPassword = false;
+		
+		try {
+		 checkedPassword = this.userDao.checkPassword(user_id, CurrentPassword);
+		}catch(ObjectNotFoundException exception){
+			throw new ObjectNotFoundException(103, "User");
+		}
+		return checkedPassword;
 	}
 
 	@Override
