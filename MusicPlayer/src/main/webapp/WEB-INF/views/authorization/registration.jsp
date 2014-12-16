@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core" %>
 <%@ taglib uri="http://www.springframework.org/tags"  prefix="spring"%>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page session="true" %>
 <!DOCTYPE>
 <html>
@@ -13,23 +13,19 @@
   <link rel="stylesheet" href='<spring:url value="/resources/css/registration.css"/> '>
   <link rel="stylesheet" href='<spring:url value="/resources/css/errorHandler.css" /> '>
   <script src="<spring:url value="/resources/javascript/errorHandler.js" /> " ></script>
+  
+  <spring:url value="/resources/images/warning-icon.png" var="warnign_icon" />
+  <core:url value="/registration" var="registration"/>
 <title>Registration</title>
 </head>
 <body>
-   
-   <!-- Warning image to display errors validation -->
-   <spring:url value="/resources/images/warning-icon.png" var="warnign_icon" />
-   
-   <core:url value="/registration" var="registration"/>
-   
-  <div id="headRegistration">
   
+  <security:authorize access="isAnonymous()" >
+   <div id="headRegistration">
       <div class="titleRegistration">Registration:</div>
-           
-      <form:form action="${registration}" modelAttribute="user"
+         <form:form action="${registration}" modelAttribute="user"
                  method="POST">
-                 
-         <table class="registrationTable"> 
+           <table class="registrationTable"> 
              <tr>
                 <td><form:label path="login">Login:</form:label></td>  
                 <td><form:input path="login" /></td>
@@ -89,10 +85,9 @@
                 <td><input type="radio" name="strategyPattern" value="mailActivation" checked="checked">Email Activation<br></td>  
                 <td><input type="radio" name="strategyPattern" value="smsActivation">Sms Activation<br></td>
              </tr>
-      </table>
+        </table>
       </form:form>
-
-  </div>
- 
+    </div>
+ </security:authorize>
 </body>
 </html>
