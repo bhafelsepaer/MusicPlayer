@@ -12,7 +12,6 @@
 </head>
 <body>
 
-
  <security:authorize access="isAuthenticated()">
  
     <security:authentication property="principal.username" var="current_username" />
@@ -39,7 +38,6 @@
        </ul>
          
     </div>
-    
  </security:authorize>
 
 </body>
