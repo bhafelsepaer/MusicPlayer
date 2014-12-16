@@ -23,10 +23,8 @@ import adrian.example.musicplayer.model.User.UserInformation;
 import adrian.example.musicplayer.model.User.User.FirstNameAndAddressValidation;
 import adrian.example.musicplayer.model.User.User.MailMatchValidation;
 import adrian.example.musicplayer.model.User.User.PasswordValidation;
-import adrian.example.musicplayer.service.UserInformationServiceList;
 import adrian.example.musicplayer.service.AdministrationAccount.UserAdministrationService;
-import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccount;
-import adrian.example.musicplayer.service.user.ActiveAccount.ActiveAccountByEmail;
+import adrian.example.musicplayer.service.list.UserInformationServiceList;
 
 @Controller
 @SessionAttributes({"user","user_information"})
@@ -125,7 +123,6 @@ public class UserSettingsController {
 		}
 		
 		if(result.hasErrors()){
-			System.out.println("ERROR " + result.getFieldErrors());
 			return "user_setting/user_settignPassword";
 		}
 		
@@ -145,8 +142,7 @@ public class UserSettingsController {
 			 return "redirect:/error403";
 		}
 		
-		User user = userAdministrationService.findLogin(login);
-		model.addAttribute("user", user);
+		model.addAttribute("user",  userAdministrationService.findLogin(login));
 		
 		return "user_setting/user_settingEmail";
 	}
@@ -184,15 +180,18 @@ public class UserSettingsController {
 		int user_id = userAdministrationService.getUser_id(principal.getName());
 		UserInformation userInformation = userAdministrationService
 				                          .getUserInformationById(user_id);
-		model.addAttribute("userInformation", userInformation);
+		
+		
 		
 		List<String> listInterest = userInformationServiceList.getInterest();
 		List<String> listProgrammingSkill = userInformationServiceList.getProgrammingStyle();
 		
 		model.addAttribute("interestList", listInterest);
 		model.addAttribute("programmingSkillList", listProgrammingSkill);
+		model.addAttribute("userInformation", userInformation);
 		model.addAttribute("userInterestList", userInformation.getInterest());
         model.addAttribute("userProgrammingSkillList", userInformation.getProgrammingSkill());		
+        
 		return "user_setting/user_settingInformation";
 	}
 	
@@ -200,8 +199,8 @@ public class UserSettingsController {
 	public String settingUserInformation(@ModelAttribute("userInformation") UserInformation userInformation, 
 			                      Model model,Principal principal,SessionStatus status){
 		
-		int user_id = userAdministrationService.getUser_id(principal.getName());
-		userAdministrationService.updateOrSaveUserInformation(user_id, userInformation);
+		userAdministrationService.updateOrSaveUserInformation(
+				userAdministrationService.getUser_id(principal.getName()), userInformation);
 		
 		return "redirect:/settings_account_user/" + principal.getName() + "/userInformation";
 	}
