@@ -21,9 +21,10 @@ function load() {
 	<spring:url value="/resources/images/music-header.jpg" var="head" />
 }
 </script>
+
+ <c:url value="/logout_music_store" var="logoutUrl" />
 </head>
 <body>
-    <c:url value="/logout_music_store" var="logoutUrl" />
     
 	<form action="${logoutUrl}" method="post" id="logoutForm">
 	
