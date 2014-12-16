@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+html, body {
+   width: 100%;
+}
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+td {
+  padding: 15px;
+  background-color: red;
+}
+
+table, tr, td {
+  border: 1px solid black;
+}
