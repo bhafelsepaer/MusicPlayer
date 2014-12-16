@@ -31,7 +31,6 @@ public class UserDaoImpl  implements UserDao {
 	@Qualifier("bcryptEncoder")
 	BCryptPasswordEncoder passwordEncoder;
 	
-	
 	@Override
 	public int getUser_id(String login) {
 		Session session = this.sessionFactory.getCurrentSession();
@@ -129,7 +128,6 @@ public class UserDaoImpl  implements UserDao {
 		userInfo.setSurname(userInformation.getSurname());
 		userInfo.setUser(user);
 		user.setUserInformation(userInfo);
-		
 		
 	    session.merge(user);
 	}

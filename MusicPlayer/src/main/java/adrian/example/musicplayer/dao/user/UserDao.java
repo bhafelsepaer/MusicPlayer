@@ -13,7 +13,6 @@ import adrian.example.musicplayer.model.User.UserInformation;
  */
 public interface UserDao {
 	
-	
 	/**
 	 * get user_id using login
 	 * 
