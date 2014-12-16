@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html>
@@ -12,8 +13,8 @@
 <link rel="stylesheet" href="<spring:url value="/resources/css/formbody.css" />" />
 </head>
 <body>
-
- <div id="formlogin">
+<security:authorize access="permitAll">
+   <div id="formlogin">
      <div>Authorization</div>
      
      <c:url value="/login_music_store" var="login_music_store" /> 
@@ -36,7 +37,7 @@
         <input type="hidden" name="${_csrf.parameterName}"
                   value="${_csrf.token}" />
     </form>
- </div>
-
+   </div>
+</security:authorize>
 </body>
 </html>
