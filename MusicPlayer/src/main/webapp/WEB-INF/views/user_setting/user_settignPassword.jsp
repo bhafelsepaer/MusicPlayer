@@ -16,7 +16,7 @@
 </head>
 <body>
 
- <jsp:include page="/WEB-INF/views/fragments/bodyHeader.jsp" />
+ <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
  <jsp:include page="/WEB-INF/views/fragments/settingsFragment.jsp" />
  <spring:url value="/resources/images/warning-icon.png" var="warnign_icon" />
  
