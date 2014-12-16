@@ -1,11 +1,6 @@
 package adrian.example.musicplayer.web.Controller.Authorization;
 
 import java.security.Principal;
-
-import javax.persistence.Access;
-
-import org.springframework.context.annotation.Role;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
