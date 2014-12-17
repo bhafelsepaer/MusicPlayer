@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/security/tags"prefix="security"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <%@ page session="false"%>
 <!DOCTYPE>
 <html>
@@ -41,11 +41,11 @@
 		<div id="tabInner">
 			<div id="overwiewHome" class="tab_content active">
 			   <div id="GenreBlock">
-				  <jsp:include page="/WEB-INF/views/musicplayer/overwiewHomePage.jsp" />
+				  <jsp:include page="/WEB-INF/views/musicplayer/show_genres.jsp" />
 		       </div>
 		           <div class="spaceBetweenPage"></div>
 				<div id="AlbumBlock">
-				    <jsp:include page="/WEB-INF/views/musicplayer/Show Album.jsp" />
+				    <jsp:include page="/WEB-INF/views/musicplayer/show_album.jsp" />
 				</div>
 				   <div class="spaceBetweenPage"></div>
 				<div id="ArtistBlock">
@@ -53,10 +53,10 @@
 				</div>
 			</div>
 			<div id="Genre" class="tab_content">
-			     <jsp:include page="/WEB-INF/views/musicplayer/overwiewHomePage.jsp" />
+			     <jsp:include page="/WEB-INF/views/musicplayer/show_genres.jsp" />
 			</div>
 			<div id="Album" class="tab_content">
-			<jsp:include page="/WEB-INF/views/musicplayer/Show Album.jsp" />
+			<jsp:include page="/WEB-INF/views/musicplayer/show_album.jsp" />
 			</div>
 			<div id="Artist" class="tab_content">
 			   <jsp:include page="/WEB-INF/views/musicplayer/show_artist.jsp" />
