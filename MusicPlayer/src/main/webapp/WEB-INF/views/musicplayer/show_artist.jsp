@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,6 +85,7 @@
 </head>
 <body>
 
+<security:authorize access="permitAll">
 <div class="linkMusic">
    <a href="<spring:url value="/artist/nightcore_artist?artist_name=ELZA" />" rel="artist">
       <div id="headCoverArtist_Elza">
@@ -143,6 +145,7 @@
      </div>
    </a>
 </div>
+</security:authorize>
 
 </body>
 </html>
