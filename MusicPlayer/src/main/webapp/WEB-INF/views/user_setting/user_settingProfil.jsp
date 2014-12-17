@@ -12,16 +12,14 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="<spring:url value="/resources/css/settingsFormStyle.css"/>" /> 
   <link rel="stylesheet" href='<spring:url value="/resources/css/errorHandler.css" /> '>
-<script src="<spring:url value="/resources/javascript/errorHandler.js" /> " ></script>
+  <script src="<spring:url value="/resources/javascript/errorHandler.js" /> " ></script>
+  <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
+  <jsp:include page="/WEB-INF/views/fragments/settingsFragment.jsp" />
+  <spring:url value="/resources/images/warning-icon.png" var="warnign_icon" />
 </head>
 <body>
- 
- <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
- <jsp:include page="/WEB-INF/views/fragments/settingsFragment.jsp" />
- <spring:url value="/resources/images/warning-icon.png" var="warnign_icon" />
- 
    <security:authorize access="isAuthenticated()">
-   <security:authentication property="principal.username" var="current_login"/>
+     <security:authentication property="principal.username" var="current_login"/>
     
    <spring:url value='/settings_account_user/${current_login}/profile' var="actionProfile" />
     
@@ -49,13 +47,10 @@
                   </td>
                </tr>
             </table>
-           
               <input type="submit" value="submit" name="submit"/>
-         
          </form:form>
       </div>
-   
-   </security:authorize>
+</security:authorize>
 
 </body>
 </html>

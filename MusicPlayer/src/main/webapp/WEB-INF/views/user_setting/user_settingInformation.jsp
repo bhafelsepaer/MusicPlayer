@@ -11,6 +11,9 @@
    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
    <script src="<spring:url value="/resources/javascript/errorHandler.js" /> " ></script>
    <link rel="stylesheet" href='<spring:url value="/resources/css/errorHandler.css" /> '>
+   <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
+   <jsp:include page="/WEB-INF/views/fragments/settingsFragment.jsp" />
+   <spring:url value="/resources/images/warning-icon.png" var="warnign_icon" />
    
    <style>
     #formBody{
@@ -72,10 +75,6 @@
    </script>
 </head>
 <body>
-
- <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
- <jsp:include page="/WEB-INF/views/fragments/settingsFragment.jsp" />
- <spring:url value="/resources/images/warning-icon.png" var="warnign_icon" />
  
  <security:authorize access="isAuthenticated()">
  
@@ -118,9 +117,7 @@
               </table>           
               
               <input type="submit" value="submit" name="submit"/>
-         
          </form:form>
-    
     </div>  
  </security:authorize>
    
