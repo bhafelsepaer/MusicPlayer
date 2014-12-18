@@ -13,6 +13,7 @@
 <spring:url value='/settings_account_user/${current_username}/password' var="actionPassword" />
 <spring:url value='/settings_account_user/${current_username}/email' var="actionEmail" />
 <spring:url value='/settings_account_user/${current_username}/userInformation' var="actionUserInformation" />
+<spring:url value='/playlist/${user.user_id}' var="playlistView" />
 </head>
 <body>
 
@@ -33,6 +34,9 @@
           </li>
            <li>
              <a  href="${actionUserInformation}">UserInformation</a>
+          </li>
+          <li>
+             <a href="${playlistView}">PlayList</a>
           </li>
        </ul>
     </div>
