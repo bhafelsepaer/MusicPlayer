@@ -2,6 +2,7 @@ package adrian.example.musicplayer.model.User;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,6 +28,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import adrian.example.musicplayer.model.Music.playlist.Playlist;
 import adrian.example.musicplayer.validation.userValidation.CheckUserExist;
 import adrian.example.musicplayer.validation.userValidation.EmailEqualsConstraint;
 import adrian.example.musicplayer.validation.userValidation.PasswordEqualsConstraint;
@@ -97,6 +100,10 @@ public class User implements Serializable{
 	
 	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private UserInformation userInformation;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = true, nullable = false)
+	private List<Playlist> playlist;
 	
 	public User() {}
 	
@@ -192,6 +199,14 @@ public class User implements Serializable{
 	public void setUserInformation(UserInformation userInformation) {
 		this.userInformation = userInformation;
 	};
+	
+	public List<Playlist> getPlaylist() {
+		return playlist;
+	}
+
+	public void setPlaylist(List<Playlist> playlist) {
+		this.playlist = playlist;
+	}
 	
 	public interface PasswordValidation {};
 	
