@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import adrian.example.musicplayer.model.Music.Song;
 import adrian.example.musicplayer.service.music.MusicService;
+import adrian.example.musicplayer.service.music.PlaylistService;
 
 @Controller
 @SessionAttributes("song")
@@ -22,13 +23,13 @@ public class OverwiewMusicController {
 	@Autowired
 	MusicService musicService;
 	
+	
 	@RequestMapping(value = "/genre/nightcore_genre", method = RequestMethod.GET)
 	public String genrePage(
 			@RequestParam(value = "genre_name", required = true) String genre_name,
 			HttpSession session) {
 		
-		List<Song> loadedSongByGenre = this.musicService.getSongByGenre(genre_name);
-		session.setAttribute("loadedSong", loadedSongByGenre);
+		session.setAttribute("loadedSong", this.musicService.getSongByGenre(genre_name));
 		
 		return "musicplayer/show_song";
 	}
@@ -38,8 +39,7 @@ public class OverwiewMusicController {
 			@RequestParam(value = "album_name", required = true) String album_name,
 		    HttpSession session){
 		
-		List<Song> loadSongByAlbum = this.musicService.getSongByAlbum(album_name);
-		session.setAttribute("loadedSong", loadSongByAlbum);
+		session.setAttribute("loadedSong", this.musicService.getSongByAlbum(album_name));
 		return "musicplayer/show_song";
 	}
 	
@@ -48,8 +48,7 @@ public class OverwiewMusicController {
 			@RequestParam(value = "artist_name", required = true) String artist_name,
 		    HttpSession session){
 		
-		List<Song> loadSongByArtist = this.musicService.getSongByArtist(artist_name);
-		session.setAttribute("loadedSong", loadSongByArtist);
+		session.setAttribute("loadedSong", this.musicService.getSongByArtist(artist_name));
 		return "musicplayer/show_song";
 	}
 	

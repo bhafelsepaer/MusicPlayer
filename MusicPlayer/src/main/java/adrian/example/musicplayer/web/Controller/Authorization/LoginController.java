@@ -1,6 +1,7 @@
 package adrian.example.musicplayer.web.Controller.Authorization;
 
 import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,7 @@ import adrian.example.musicplayer.model.User.User;
 
 @Controller
 public class LoginController {
-
+	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginFormGet(Principal principal){
 		
