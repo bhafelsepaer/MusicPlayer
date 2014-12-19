@@ -23,6 +23,7 @@
 		<org.mockito-version>1.9.5</org.mockito-version>
 		<com.googlecode.zohhak-version>1.0.2</com.googlecode.zohhak-version>
 		<hsqldb-version>2.3.2</hsqldb-version>
+		<org.codegaus.jackson-version>1.9.13</org.codegaus.jackson-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -205,6 +206,14 @@
 	       <artifactId>hamcrest-all</artifactId>
 	       <version>${org.hamcrest-version}</version>
         </dependency>
+        
+      <!-- jackson -->
+        <dependency>
+	       <groupId>org.codehaus.jackson</groupId>
+	       <artifactId>jackson-mapper-asl</artifactId>
+	      <version>${org.codegaus.jackson-version}</version>
+       </dependency>
+        
 		
 		<!-- Logging -->
 		<dependency>
