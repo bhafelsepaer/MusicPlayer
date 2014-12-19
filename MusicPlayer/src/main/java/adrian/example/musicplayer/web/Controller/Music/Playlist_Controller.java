@@ -1,15 +1,16 @@
 package adrian.example.musicplayer.web.Controller.Music;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import adrian.example.musicplayer.service.music.PlaylistService;
 
@@ -29,31 +30,34 @@ public class Playlist_Controller {
 	}
 	
 	@RequestMapping(value = "/playlist/{user_id}/save_playlist", 
-			       method = RequestMethod.GET)  
+			       method = RequestMethod.GET) 
+	@ResponseBody
 	public String savePlaylist(@PathVariable("user_id") int user_id,
 			      @RequestParam(value = "playlistName", required = true) String playlistName) {
 		    
 		this.playListService.savePlaylist(user_id, playlistName);
 		
-		return "musicplayer/playlist/show_playlist";
+		return "saved_playlist " + playlistName;
 	}
 	
-	@RequestMapping(value = "/playlist/{playlist_id}/update", method = RequestMethod.GET)
-	public String updatePlaylist(@PathVariable int playlist_id,
+	@RequestMapping(value = "/playlist/update", method = RequestMethod.GET)
+	@ResponseBody
+	public String updatePlaylist(
+		   @RequestParam(value = "playlist_id", required = true) int playlist_id,
 		   @RequestParam(value = "playlist_name", required = true) String playlistName_updatable){
 		
 		this.playListService.updatePlaylist(playlist_id, playlistName_updatable);
-		return "musicplayer/playlist/show_playlist";
-		
+		return "update_playlist " + playlistName_updatable;
 	}
 	
-	@RequestMapping(value = "/playlist/{playlist_id}/delete", method = RequestMethod.GET)
-	public String delatePlaylist(@PathVariable int playlist_id){
+	@RequestMapping(value = "/playlist/delete", method = RequestMethod.GET)
+	@ResponseBody
+	public String delatePlaylist(
+			@RequestParam(value = "playlist_id", required = true) int playlist_id,
+			@RequestParam(value = "playlist_name", required = true) String playlist_name){
 		
 		this.playListService.deletePlaylist(playlist_id);
 		
-		return "musicplayer/playlist/show_playlist";
+		return "delete_playlist " + playlist_name;
 	}
-	
-
 }
