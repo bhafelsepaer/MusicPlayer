@@ -9,7 +9,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <style>
 
-.playlist  div {
+.actual_playlist  div {
    vertical-align: top;
    display:inline-block;
 } 
@@ -29,31 +29,64 @@
   $(".submitButton").on("click", function(){
 	  $('.playlist_update').css("visibility", "hidden");
 	  $('.playlist_name').show();
+	     
   });
+  
+   $('#newPlaylistForm').submit(function(e){
+	$.get('http://localhost:8080/musicplayer/playlist/${user_id}/save_playlist',
+	     $(this).serialize(), function(response) {
+	    	alert(response);
+	    	location.reload();       //Refresh page
+                                    //Refresh Playlist without refrash whole page will be added later
+	});
+	e.preventDefault();
+  }); 
+   
+   $('.updatePlaylistForm').submit(function(e){
+	  $.get('http://localhost:8080/musicplayer/playlist/update',
+	       $(this).serialize(),function(response){
+		  alert(response);
+		  location.reload();
+	  });
+	  e.preventDefault();
+   });
+  
+   $('.playlist_delete a').click(function(e){
+	   e.preventDefault();
+	   var playlist_id = $(this).data('playlist-id');
+	   var playlist_name = $(this).data('playlist-name');
+	   alert(playlist_id + " and " + playlist_name);
+	   $.get('http://localhost:8080/musicplayer/playlist/delete',
+			 {playlist_id : playlist_id, playlist_name: playlist_name}, function(response){
+		   alert(response);
+		   location.reload();
+	   });
+   });
 }); 
 </script>
-<core:url value="/playlist/${user_id}/save_playlist" var="save_playlist"/>
 </head>
 <body>
 
- <core:forEach items="${playlist}" var="actualPlaylist">
-     <div class="playlist">
-       <div class="playlist_name">${actualPlaylist.name}</div> 
+   <core:forEach items="${playlist}" var="actualPlaylist">
+     <div class="actual_playlist">
+      <div class="playlist_name">${actualPlaylist.name}</div> 
        <div class="playlist_update">
-          <form  action="<core:url value="/playlist/${actualPlaylist.playlist_id}/update" />" method="GET">
+          <form  class="updatePlaylistForm">
+                <input type="hidden" value="${actualPlaylist.playlist_id}" name="playlist_id">
                 <input type="text" value="${actualPlaylist.name}" name="playlist_name">
                 <input type="submit" value="update" class="submitButton">
+                <div class="playlist_delete">
+                  <a href="http://localhost:8080/musicplayer/playlist/delete" 
+                     data-playlist-id="${actualPlaylist.playlist_id}" data-playlist-name="${actualPlaylist.name}">
+                     delete</a></div>
           </form>
        </div>
-       <a href="<core:url value="/playlist/${actualPlaylist.playlist_id}/delete" />" >delete</a></br>
     </div>
  </core:forEach>
  
- <form action="${save_playlist}" method="GET">
- New Element :<input type="text" name="playlistName">
- <input type="submit" value="submit"> 
+ <form  id="newPlaylistForm">
+   New Playlist :<input type="text" name="playlistName">
+   <input type="submit" value="submit"> 
  </form>
- 
-
 </body>
 </html>
