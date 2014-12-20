@@ -69,29 +69,29 @@ public class UserAdministrationServiceImplTest {
 	public void getUserInformationById() throws Exception {
 		UserInformation userInformationTest = userServiceImpl.getUserInformationById(user.getUser_id());
 		
-		assertEquals(userInformation.getAge(), userInformationTest.getAge());
-		assertEquals(userInformation.getInterest(), userInformationTest.getInterest());
-		assertEquals(userInformation.getProgrammingSkill(), userInformationTest.getProgrammingSkill());
-		assertEquals(userInformation.getSex(), userInformationTest.getSex());
-		assertEquals(userInformation.getSurname(), userInformationTest.getSurname());
-		assertEquals(userInformation.getUser(), userInformationTest.getUser());
-		assertEquals(userInformation.getUser_information_id(), userInformationTest.getUser_information_id());
+		assertEquals("Test Age", userInformation.getAge(), userInformationTest.getAge());
+		assertEquals("Test Interest", userInformation.getInterest(), userInformationTest.getInterest());
+		assertEquals("Test Programming Skill", userInformation.getProgrammingSkill(), userInformationTest.getProgrammingSkill());
+		assertEquals("Test Sex", userInformation.getSex(), userInformationTest.getSex());
+		assertEquals("Test Surname", userInformation.getSurname(), userInformationTest.getSurname());
+		assertEquals("Test User", userInformation.getUser(), userInformationTest.getUser());
+		assertEquals("Test id", userInformation.getUser_information_id(), userInformationTest.getUser_information_id());
 	}
 	
 	@Test
 	public void findLogin() throws Exception {
 		adrian.example.musicplayer.model.User.User userTest = userServiceImpl.findLogin("Armani");
 		
-		assertEquals(user.getLogin(), userTest.getLogin());
-		assertEquals(user.getUser_id(), userTest.getUser_id());
-		assertEquals(user.getUserInformation(), userTest.getUserInformation());
+		assertEquals("Test Login", user.getLogin(), userTest.getLogin());
+		assertEquals("Test id", user.getUser_id(), userTest.getUser_id());
+		assertEquals("Test UserInformation", user.getUserInformation(), userTest.getUserInformation());
 	}
 	
 	@Test
 	public void updateUserInformationSucced() throws Exception {
 		userServiceImpl.updateUserInformation(user.getUser_id(), "New York", "Kruger");
-		assertEquals("New York", user.getAddress());
-		assertEquals("Kruger", user.getFirstName());
+		assertEquals("Test Address", "New York", user.getAddress());
+		assertEquals("Test FirstName", "Kruger", user.getFirstName());
 	}
 	
 	@Test(expected = ObjectNotFoundException.class)
@@ -102,7 +102,7 @@ public class UserAdministrationServiceImplTest {
 	@Test
 	public void updatePasswordSucced() throws Exception {
 		userServiceImpl.updatePassword(user.getUser_id(), "asdfG12#");
-		assertTrue(bcryptEncoder.matches("asdfG12#",user.getPassword()));
+		assertTrue("Test Password", bcryptEncoder.matches("asdfG12#",user.getPassword()));
 	}
 	
 	@Test(expected = ObjectNotFoundException.class)
@@ -113,7 +113,7 @@ public class UserAdministrationServiceImplTest {
 	@Test
 	public void updateEmailSucced() throws Exception {
 		userServiceImpl.updateEmail(user.getUser_id(), "NewMail@gmail.com");
-		assertEquals("NewMail@gmail.com", user.getEmail());
+		assertEquals("Test Update Mail", "NewMail@gmail.com", user.getEmail());
 	}
 	
 	@Test(expected = ObjectNotFoundException.class)
@@ -131,11 +131,11 @@ public class UserAdministrationServiceImplTest {
 		userInformation.setSurname("Kazik");
 		
 		userServiceImpl.updateOrSaveUserInformation(user.getUser_id(), userInformation);
-		assertEquals(55, userInformation.getAge());
-		assertEquals("Eat", userInformation.getInterest());
-		assertEquals("HTML", userInformation.getProgrammingSkill());
-		assertEquals("K", userInformation.getSex());
-		assertEquals("Kazik", userInformation.getSurname());
+		assertEquals("Test Age", 55, userInformation.getAge());
+		assertEquals("Test Interest", "Eat", userInformation.getInterest());
+		assertEquals("Test Programming Skill", "HTML", userInformation.getProgrammingSkill());
+		assertEquals("Test Sex", "K", userInformation.getSex());
+		assertEquals("Test Surname", "Kazik", userInformation.getSurname());
 	}
 	
 	@Test(expected = java.lang.NullPointerException.class)
@@ -153,7 +153,7 @@ public class UserAdministrationServiceImplTest {
 	
 	@Test
 	public void checkUserVerifySucced() throws Exception {
-		assertTrue(userServiceImpl.checkUserVerify(user.getUser_id(), 123456));
+		assertTrue("Test Verify", userServiceImpl.checkUserVerify(user.getUser_id(), 123456));
 	}
 	
 	@Test(expected = ObjectNotFoundException.class)
@@ -163,7 +163,7 @@ public class UserAdministrationServiceImplTest {
 	
 	@Test
 	public void checkPassword() throws Exception {
-		assertTrue(userServiceImpl.checkPassword(user.getUser_id(), "qwertY12#"));
+		assertTrue("Test Password", userServiceImpl.checkPassword(user.getUser_id(), "qwertY12#"));
 	}
 	
 	@Test
