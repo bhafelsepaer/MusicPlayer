@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -50,6 +51,8 @@ public class PlayListImplDaoTest {
 		this.playlistDao.savePlaylist(1, "TestPlaylist2");
 		List<Playlist> testedPlaylist = (List<Playlist>) this.playlistDao.getPlaylistById(1);
 		assertEquals("Tested size", 2, testedPlaylist.size());
+		assertEquals("Tested id", 2, testedPlaylist.get(1).getPlaylist_id());
+		assertEquals("Tested name", "TestPlaylist2", testedPlaylist.get(1).getName());
 	}
 	
 	@Test 
