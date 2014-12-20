@@ -1,6 +1,5 @@
 package adrian.example.musicplayer.web.Controller.Music;
 
-import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -15,10 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.sun.mail.imap.protocol.Status;
 
 import adrian.example.musicplayer.model.Music.Song;
 import adrian.example.musicplayer.service.music.MusicServiceImpl;
