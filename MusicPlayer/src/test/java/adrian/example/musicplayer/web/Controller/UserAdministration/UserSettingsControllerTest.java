@@ -3,7 +3,6 @@ package adrian.example.musicplayer.web.Controller.UserAdministration;
 
 import javax.transaction.Transactional;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import adrian.example.musicplayer.model.User.UserInformation;
-import adrian.example.musicplayer.service.UserInformationServiceList;
 import adrian.example.musicplayer.service.AdministrationAccount.UserAdministrationService;
+import adrian.example.musicplayer.service.list.UserInformationServiceList;
 import adrian.example.musicplayer.service.user.UserServiceImpl;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
