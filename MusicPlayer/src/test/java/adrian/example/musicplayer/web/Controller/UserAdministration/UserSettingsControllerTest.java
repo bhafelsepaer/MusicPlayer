@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserSettingsControllerTest {
 
 	@Autowired
-	private WebApplicationContext wac;
+	private WebApplicationContext applicationContext;
 	
 	private MockMvc mockMvc;
 	
@@ -52,7 +52,7 @@ public class UserSettingsControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.mockMvc = webAppContextSetup(this.wac).build();
+		this.mockMvc = webAppContextSetup(this.applicationContext).build();
 	}
 	
 	@Test
@@ -158,6 +158,8 @@ public class UserSettingsControllerTest {
     	user.setActive_cod(12345);
     	user.setAddress("Krampnizer Weg 12/13");
     	user.setFirstName("Adrian");
+    	
+    	this.userServiceImplSettings.saveUser(user);
     	
     	this.mockMvc.perform(post("/settings_account_user/Adrian/profile")
 			     .param("login", "Adrian")
@@ -316,7 +318,7 @@ public class UserSettingsControllerTest {
     public void settingsUserEmailPostNoError() throws Exception {
     	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
     	user.setLogin("Adrian");
-    	user.setPassword("zxcvbnM123$");
+    	user.setPassword("$2a$10$X9oClXp6mM4a/Ka0xx095eIJ6s.qKYDDJGmDiV05I37tj4YHs.waW");
     	user.setActive_cod(12345);
     	user.setEmail("123@gmail.com");
     	
