@@ -1,1 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc     http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx.xsd">
+		
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+	
+	  <bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibernate4AnnotationSessionFactory" />
+	</bean>
+     
+     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+          <property name="driverClassName">
+               <value>org.hsqldb.jdbcDriver</value>
+          </property>
+          <property name="url">
+               <value>jdbc:hsqldb:file:data/cmon;shutdown=true</value>
+          </property>
+          <property name="username">
+              <value>sa</value>
+          </property>
+          <property name="password">
+              <value></value>
+          </property>
+     </bean>
+     
+       <bean id="hibernate4AnnotationSessionFactory"
+	         class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+			    <value>adrian.example.musicplayer.model.User.User</value>
+				<value>adrian.example.musicplayer.model.User.RoleUser</value>
+				<value>adrian.example.musicplayer.model.User.UserInformation</value>
+				<value>adrian.example.musicplayer.model.Music.playlist.Playlist</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.connection.pool_size">10</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</prop>
+				<prop key="javax.persistence.validation.factory">validator</prop>
+			</props>
+		</property>
+	</bean>
+     
+    <bean id="playListServiceImpl" 
+          class="adrian.example.musicplayer.service.music.PlaylistServiceImpl" />
+    
+   <bean id="playlistDao" class="adrian.example.musicplayer.dao.music.PlayListImplDao" />
+    
+		
+</beans>
