@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
+import adrian.example.musicplayer.model.User.RoleUser;
 import adrian.example.musicplayer.model.User.User;
+import adrian.example.musicplayer.model.User.UserInformation;
 
 @Repository("playListDao")
 public class PlayListImplDao implements PlayListDao {
@@ -25,7 +27,6 @@ public class PlayListImplDao implements PlayListDao {
 				("FROM Playlist  WHERE user_id = :user_id")
 				.setParameter("user_id", user_id).list();
          
-		System.out.println("SIZE PLAYLIST " + playlist.size());
 		return playlist;
 	}
 
@@ -57,8 +58,46 @@ public class PlayListImplDao implements PlayListDao {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		Playlist currentPlayList = (Playlist) session.get(Playlist.class, playList_id);
-		
 		session.delete(currentPlayList);
+	}
+
+	@Override
+	public void savePlaylistForJunit() {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		List<Playlist> myplaylist = new ArrayList<Playlist>();
+		Playlist playlist = new Playlist();
+		playlist.setName("TestPlaylist");
+		myplaylist.add(playlist);
+		
+		RoleUser roleUser = new RoleUser();
+		roleUser.setAuthority("TestAuthority");
+		roleUser.setLogin("TestRole");
+		
+		UserInformation userInformation = new UserInformation();
+		userInformation.setAge(23);
+		userInformation.setInterest("TestInformation");
+		userInformation.setProgrammingSkill("TestProgrammingSkill");
+		userInformation.setSex("TestSex");
+		userInformation.setSurname("TestUserName");
+		
+		
+		User user = new User();
+		user.setActive_cod(234);
+		user.setAddress("TestAdres");
+		user.setEmail("TestEmail");
+		user.setEnabled(true);
+		user.setFirstName("TestName");
+		user.setLogin("TestLogin");
+		user.setPassword("TestPassword");
+		user.setPlaylist(myplaylist);
+		user.getRoleUser().add(roleUser);
+		user.setUserInformation(userInformation);
+		roleUser.setUser(user);
+		userInformation.setUser(user);
+		
+		
+		session.save(user);
 	}
 
 }
