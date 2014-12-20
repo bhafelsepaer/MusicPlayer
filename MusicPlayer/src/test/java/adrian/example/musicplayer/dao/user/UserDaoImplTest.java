@@ -58,75 +58,74 @@ public class UserDaoImplTest {
 	
 	@Test
 	public void saveUser() throws Exception {
-		assertEquals(123456, user.getActive_cod());
-		assertEquals("KremnizerWeg", user.getAddress());
-		assertEquals("email@gmail.com", user.getEmail());
-		assertEquals("$2a$10$/y3BTr9MlLNXvQ.vs8H2buLHbAcbnx.JOnXLBUA.kJ0efP3TS6Riq", user.getPassword());
-		assertEquals(false, user.isEnabled());
-		assertEquals("Adam", user.getFirstName());
-		assertEquals("email@gmail.com", user.getEmail());
+		assertEquals("Test Active Cod", 123456, user.getActive_cod());
+		assertEquals("Tested Address", "KremnizerWeg", user.getAddress());
+		assertEquals("Tested Email", "email@gmail.com", user.getEmail());
+		assertEquals("Tested Password", "$2a$10$/y3BTr9MlLNXvQ.vs8H2buLHbAcbnx.JOnXLBUA.kJ0efP3TS6Riq", user.getPassword());
+		assertEquals("Tested Enabled", false, user.isEnabled());
+		assertEquals("Tested First Name", "Adam", user.getFirstName());
+		assertEquals("Tested Email", "email@gmail.com", user.getEmail());
 	}
 	
 	@Test
 	public void getUser_id() throws Exception {
 		int id = userDaoImpl.getUser_id(user.getLogin());
-		assertEquals(id, user.getUser_id());
+		assertEquals("Tested User id" ,id, user.getUser_id());
 	}
 	
 	@Test
 	public void findLogin() throws Exception {
 		adrian.example.musicplayer.model.User.User user2 = userDaoImpl.findUserByLogin(user.getLogin());
-		assertEquals(user2.getLogin(), user.getLogin());
-		assertEquals(user2.getPassword(), user.getPassword());
-		assertEquals(user2.getUser_id(), user.getUser_id());
-		assertEquals(user2.getFirstName(), user.getFirstName());
+		assertEquals("Tested Login", user2.getLogin(), user.getLogin());
+		assertEquals("Tested Password", user2.getPassword(), user.getPassword());
+		assertEquals("Tested User id", user2.getUser_id(), user.getUser_id());
+		assertEquals("Tested FirstName", user2.getFirstName(), user.getFirstName());
 	}
 	
 	@Test
 	public void findLoginNull() throws Exception {
-		assertNull(userDaoImpl.findUserByLogin("Janek"));
+		assertNull("Tested Login", userDaoImpl.findUserByLogin("Janek"));
 	}
 	
 	@Test
 	public void findUserById() throws Exception {
 		adrian.example.musicplayer.model.User.User user3 = userDaoImpl.findUserById(user.getUser_id());
-		assertEquals(user3.getLogin(), user.getLogin());
-		assertEquals(user3.getPassword(), user.getPassword());
-		assertEquals(user3.getUser_id(), user.getUser_id());
-		assertEquals(user3.getFirstName(), user.getFirstName());
+		assertEquals("Tested Login", user3.getLogin(), user.getLogin());
+		assertEquals("Tested Password", user3.getPassword(), user.getPassword());
+		assertEquals("Tested User id", user3.getUser_id(), user.getUser_id());
+		assertEquals("Tested First Name", user3.getFirstName(), user.getFirstName());
 	}
 	
 	@Test
 	public void getUserInformationByIdExist() throws Exception {
 		UserInformation userInformation2 = userDaoImpl.getUserInformationById(user.getUser_id());
-		assertEquals(userInformation2.getAge(), userInformation.getAge());
-		assertEquals(userInformation2.getInterest(), userInformation.getInterest());
-		assertEquals(userInformation2.getSex(), userInformation.getSex());
-		assertEquals(userInformation2.getUser_information_id(), userInformation.getUser_information_id());
+		assertEquals("Tested Age", userInformation2.getAge(), userInformation.getAge());
+		assertEquals("Tested Interest", userInformation2.getInterest(), userInformation.getInterest());
+		assertEquals("Tested Sex" ,userInformation2.getSex(), userInformation.getSex());
+		assertEquals("Tested id", userInformation2.getUser_information_id(), userInformation.getUser_information_id());
 	}
 	
 	@Test
 	public void getUserInformationByIdNewUserInformation() throws Exception {
 		UserInformation userInformation3 = userDaoImpl.getUserInformationById(5000);
-		assertNull(userInformation3.getInterest());
-		assertNull(userInformation3.getProgrammingSkill());
-		assertNull(userInformation3.getSex());
-		assertNull(userInformation3.getSurname());
-		assertEquals(0, userInformation3.getAge());
+		assertNull("Tested Interest",userInformation3.getInterest());
+		assertNull("Tested ProgrammingSkill", userInformation3.getProgrammingSkill());
+		assertNull("Tested Sex", userInformation3.getSex());
+		assertNull("Tested Surname", userInformation3.getSurname());
+		assertEquals("Tested Age", 0, userInformation3.getAge());
 	}
 	
 	@Test
 	public void updateUserInformation() throws Exception {
 		userDaoImpl.updateUserInformation(user.getUser_id(), "Wisla", "Aniki");
-		assertEquals("Wisla", user.getAddress());
-		assertEquals("Aniki", user.getFirstName());
+		assertEquals("Tested Address", "Wisla", user.getAddress());
+		assertEquals("Tested FirstName", "Aniki", user.getFirstName());
 	}
 	
 	@Test
 	public void updatePassword() throws Exception {
 		userDaoImpl.updatePassword(user.getUser_id(), "qwertY1@");
-		System.out.println(user.getPassword());
-		assertTrue(bcryptEncoder.matches("qwertY1@",user.getPassword()));
+		assertTrue("Tested Password", bcryptEncoder.matches("qwertY1@",user.getPassword()));
 	}
 	
 	@Test
@@ -146,25 +145,25 @@ public class UserDaoImplTest {
 		
 		userDaoImpl.updateOrSaveUserInformation(user.getUser_id(), userInformation2);
 		
-		assertEquals(userInformation.getAge(), userInformation2.getAge());
-		assertEquals(userInformation.getInterest(), userInformation2.getInterest());
-		assertEquals(userInformation.getProgrammingSkill(), userInformation2.getProgrammingSkill());
-		assertEquals(userInformation.getSex(), userInformation2.getSex());
-		assertEquals(userInformation.getSurname(), userInformation2.getSurname());
+		assertEquals("Tested Age", userInformation.getAge(), userInformation2.getAge());
+		assertEquals("Tested Interest", userInformation.getInterest(), userInformation2.getInterest());
+		assertEquals("Tested Programming Skill", userInformation.getProgrammingSkill(), userInformation2.getProgrammingSkill());
+		assertEquals("Tested Sex", userInformation.getSex(), userInformation2.getSex());
+		assertEquals("Tested Surname", userInformation.getSurname(), userInformation2.getSurname());
 	}
   
   @Test
   public void checkPassword() throws Exception {
-	  assertTrue(userDaoImpl.checkPassword(user.getUser_id(), "qwertY12#"));
+	  assertTrue("Tested Password", userDaoImpl.checkPassword(user.getUser_id(), "qwertY12#"));
   }
   
   @Test
   public void checkUserVerify() throws Exception {
-	  assertTrue(userDaoImpl.checkUserVerify(user.getUser_id(), user.getActive_cod()));
+	  assertTrue("Tested Active cod", userDaoImpl.checkUserVerify(user.getUser_id(), user.getActive_cod()));
   }
 	
   public void setEnebledTrue() throws Exception {
 	  userDaoImpl.setEnabledTrue(user.getUser_id());
-	  assertTrue(user.isEnabled());
+	  assertTrue("Tested Enabled", user.isEnabled());
   }
 }
