@@ -65,13 +65,13 @@ public class UserServiceImplTest {
 	@Test
 	public void findLogin() throws Exception {
 		 adrian.example.musicplayer.model.User.User user2 = userServiceImpl.findLogin(login);
-		 assertEquals(user2.getAddress(), user.getAddress());
-		 assertEquals(user2.getActive_cod(), user.getActive_cod());
-		 assertEquals(user2.getEmail(), user.getEmail());
-		 assertEquals(user2.getFirstName(), user.getFirstName());
-		 assertEquals(user2.getLogin(), user.getLogin());
-		 assertEquals(user2.getPassword(), user.getPassword());
-		 assertEquals(user2.getUser_id(), user.getUser_id());
+		 assertEquals("Test Address", user2.getAddress(), user.getAddress());
+		 assertEquals("Test Active Cod", user2.getActive_cod(), user.getActive_cod());
+		 assertEquals("Test Email", user2.getEmail(), user.getEmail());
+		 assertEquals("Test First Name", user2.getFirstName(), user.getFirstName());
+		 assertEquals("Test login", user2.getLogin(), user.getLogin());
+		 assertEquals("Test Password", user2.getPassword(), user.getPassword());
+		 assertEquals("Test id", user2.getUser_id(), user.getUser_id());
 	}
 	
 	@Test
@@ -87,13 +87,13 @@ public class UserServiceImplTest {
 		
 		userServiceImpl.saveUser(user2);
 		
-		assertEquals(543463, user2.getActive_cod());
-		assertEquals("Vegas", user2.getAddress());
-		assertEquals("Maradona@gmail.com", user2.getEmail());
-		assertFalse(user2.isEnabled());
-		assertEquals("Chikita", user2.getFirstName());
-		assertEquals("Kazik666Cebulak", user2.getLogin());
-	    assertTrue(passwordEncoder.matches("qwertY12#", user2.getPassword()));
+		assertEquals("Test Active Cod", 543463, user2.getActive_cod());
+		assertEquals("Test Address", "Vegas", user2.getAddress());
+		assertEquals("Test email", "Maradona@gmail.com", user2.getEmail());
+		assertFalse("Test Enabled", user2.isEnabled());
+		assertEquals("Test First Name", "Chikita", user2.getFirstName());
+		assertEquals("Test Login", "Kazik666Cebulak", user2.getLogin());
+	    assertTrue("Test Correct Password", passwordEncoder.matches("qwertY12#", user2.getPassword()));
 	}
 
 }
