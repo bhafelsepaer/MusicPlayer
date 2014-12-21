@@ -120,7 +120,6 @@ public class UserDaoImpl  implements UserDao {
 		
 		
 	    UserInformation userInfo = user.getUserInformation();
-	    
 		userInfo.setAge(userInformation.getAge());
 		userInfo.setInterest(userInformation.getInterest());
 		userInfo.setProgrammingSkill(userInformation.getProgrammingSkill());

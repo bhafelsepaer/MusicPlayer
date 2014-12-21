@@ -57,6 +57,7 @@
 				<value>adrian.example.musicplayer.model.User.User</value>
 				<value>adrian.example.musicplayer.model.User.RoleUser</value>
 				<value>adrian.example.musicplayer.model.User.UserInformation</value>
+				<value>adrian.example.musicplayer.model.Music.playlist.Playlist</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -73,14 +74,7 @@
 		</property>
 	</bean>
      
-    <bean id="userServiceImpl" 
-          class="adrian.example.musicplayer.service.user.UserServiceImpl" />
-    
-    <bean id="userDaoImpl"
-          class="adrian.example.musicplayer.dao.user.UserDaoImpl" />
-    
-    <bean name="bcryptEncoder"
-     class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+   
     
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
          <property name="host" value="smtp.gmail.com"/>
@@ -101,6 +95,15 @@
         </property>
     </bean>
     
+     <bean id="userServiceImpl" 
+          class="adrian.example.musicplayer.service.user.UserServiceImpl" />
+    
+    <bean id="userDaoImpl"
+          class="adrian.example.musicplayer.dao.user.UserDaoImpl" />
+    
+    <bean name="bcryptEncoder"
+     class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+     
     <bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
        <property name="from" value="email@email.com"/>
        <property name="subject" value="Confirm Registration in MusicStore"/>
