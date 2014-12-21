@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class OverwiewMusicControllerTest {
 
 	@Autowired
-	private WebApplicationContext wac;
+	private WebApplicationContext applicationContext;
 	
 	private MockMvc mockMvc;
 	
@@ -41,7 +41,7 @@ public class OverwiewMusicControllerTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		this.mockMvc = webAppContextSetup(this.wac).build();
+		this.mockMvc = webAppContextSetup(this.applicationContext).build();
 		
 		Song song = new Song();
 		song.setFilename("/location");

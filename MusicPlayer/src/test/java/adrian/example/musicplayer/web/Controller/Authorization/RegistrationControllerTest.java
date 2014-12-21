@@ -37,7 +37,7 @@ import adrian.example.musicplayer.service.user.UserService;
 public class RegistrationControllerTest {
 
 	@Autowired
-	private WebApplicationContext wac;
+	private WebApplicationContext applicationContext;
 	
 	private MockMvc mockMvc;
 	
@@ -49,7 +49,7 @@ public class RegistrationControllerTest {
 	
 	@Before
 	public void setUp()   {
-		this.mockMvc = webAppContextSetup(this.wac).build();
+		this.mockMvc = webAppContextSetup(this.applicationContext).build();
 	}
 	
 	@Test
@@ -131,32 +131,3 @@ public class RegistrationControllerTest {
 		assertEquals("ameryka@gmail.com", user.getEmail());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

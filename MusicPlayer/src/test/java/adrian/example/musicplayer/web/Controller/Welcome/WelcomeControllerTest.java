@@ -22,13 +22,13 @@ import org.springframework.web.context.WebApplicationContext;
 public class WelcomeControllerTest {
 
 	@Autowired
-	private WebApplicationContext wac;
+	private WebApplicationContext applicationContext;
 	
 	private MockMvc mockMvc;
 	
 	@Before
 	public void setUp() throws Exception {
-		this.mockMvc = webAppContextSetup(this.wac).alwaysExpect(status().isOk()).build();
+		this.mockMvc = webAppContextSetup(this.applicationContext).alwaysExpect(status().isOk()).build();
 	}
 
 	@Test

@@ -29,13 +29,13 @@ import org.springframework.web.context.WebApplicationContext;
 public class LoginControllerTest {
 
 	@Autowired
-	private WebApplicationContext wac;
+	private WebApplicationContext applicationContext;
 	 
 	private MockMvc mockMvc;
 	
 	@Before
 	public void setUp(){
-		this.mockMvc = webAppContextSetup(this.wac).build();
+		this.mockMvc = webAppContextSetup(this.applicationContext).build();
 	}
 	
 	@Test
