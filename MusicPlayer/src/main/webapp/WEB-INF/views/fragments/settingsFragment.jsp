@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="core"%>
 <%@ page session="false" %>
 <!DOCTYPE>
 <html>
@@ -9,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href='<spring:url value="/resources/css/settingsStyle.css" />' />
+<security:authentication property="principal.username" var="current_username" />
 <spring:url value="/settings_account_user/${current_username}/profile" var="settings_account_user_profil"/>
 <spring:url value='/settings_account_user/${current_username}/password' var="actionPassword" />
 <spring:url value='/settings_account_user/${current_username}/email' var="actionEmail" />
@@ -19,8 +21,7 @@
 
  <security:authorize access="isAuthenticated()">
  
-    <security:authentication property="principal.username" var="current_username" />
-    
+   
     <div id="settings">
        <ul>
           <li>
