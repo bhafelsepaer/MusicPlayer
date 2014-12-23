@@ -7,13 +7,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/mvc     http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx.xsd">
-
+		http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx.xsd" >
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
 		
-
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
 	
@@ -28,7 +26,7 @@
 			<value>org.hsqldb.jdbcDriver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:hsqldb:file:data/cmon;shutdown=true</value>
+			<value>jdbc:hsqldb:mem:musicStore</value>
 		</property>
 		<property name="username">
 			<value>sa</value>
@@ -52,7 +50,8 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
-				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+			 	<prop key="hibernate.hbm2ddl.auto">create-drop</prop> 
+			 	<prop key="hibernate.hbm2ddl.import_files">/testScript/WelcomeController.sql</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.connection.pool_size">10</prop>
@@ -66,7 +65,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<bean
@@ -75,8 +74,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
     
-  <!--   <context:component-scan base-package="adrian.example.musicplayer.web.Controller.Welcome"/> -->
-   
     <bean id="userService"
           class="adrian.example.musicplayer.service.user.UserServiceImpl" />
           
@@ -91,9 +88,7 @@
     
     <bean id="playListDao"
           class="adrian.example.musicplayer.dao.music.PlayListImplDao" />
-     
    
     <bean id="welcomeController"
           class="adrian.example.musicplayer.web.Controller.Welcome.WelcomeController" />
-
 </beans>
