@@ -46,28 +46,21 @@ public class WelcomeControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		this.mockMvc = webAppContextSetup(this.applicationContext).build();
-		
-		adrian.example.musicplayer.model.User.User userAfter = new adrian.example.musicplayer.model.User.User();
-		userAfter.setLogin("TestUser");
-		userAfter.setPassword("qwerty1@A");
-		userAfter.setFirstName("Adrian");
-		userAfter.setAddress("Nowa Street666");
-		userAfter.setEmail("Adrian@gmail.com");
-		this.userService.saveUser(userAfter);
 	}
 
 	@Test
 	public void test_homePrincipallNotNull() throws Exception {
-		User user = new User("TestUser", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
+		User user = new User("TestLogin", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
 		Authentication authentication = 
 				new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 		
-		int user_id =  this.userService.findLogin(authentication.getName()).getUser_id();
+		int user_id  =  this.userService.findLogin(authentication.getName()).getUser_id();
 		
 		this.mockMvc.perform(get("/").principal(authentication))
 		            .andExpect(view().name(containsString("home")))
 		            .andExpect(request().sessionAttribute("user_id", user_id))
-		            .andExpect(request().sessionAttribute("playlist", this.playListService.getPlaylistById(user_id)))
+		            .andExpect(request().sessionAttribute("playlist", 
+		            		   this.playListService.getPlaylistById(user_id)))
 		            .andExpect(forwardedUrl("/WEB-INF/views/home.jsp"))
 		            .andExpect(status().isOk());
 	}
