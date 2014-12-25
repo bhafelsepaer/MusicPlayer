@@ -23,63 +23,55 @@ import adrian.example.musicplayer.model.Music.playlist.Playlist;
 @WebAppConfiguration
 @ContextConfiguration
 @Transactional
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration
 public class PlayListImplDaoTest {
 
 	@Autowired
 	PlayListDao playlistDao;
 	
-	private static boolean setUpIsDone = false;
-	
 	@Before
 	public  void setUp() throws Exception {
-		if(setUpIsDone) {
-			return;
-		}
-		this.playlistDao.savePlaylistForJunit();
-		
-		setUpIsDone = true;
 	}
+	
 	@Test
 	public void  test_getPlaylistById() {
-	    List<Playlist> testedPlaylist = (List<Playlist>) this.playlistDao.getPlaylistById(1);
-	    assertEquals("Tested name", "TestPlaylist", testedPlaylist.get(0).getName());
+	    Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistById(1);
+	    assertEquals("Tested name", "TestPlaylist", testedPlaylist.getName());
 	}
 	
 	@Test
 	public void test_savePlaylist() {
-		this.playlistDao.savePlaylist(1, "TestPlaylist2");
-		List<Playlist> testedPlaylist = (List<Playlist>) this.playlistDao.getPlaylistById(1);
-		assertEquals("Tested size", 2, testedPlaylist.size());
-		assertEquals("Tested id", 2, testedPlaylist.get(1).getPlaylist_id());
-		assertEquals("Tested name", "TestPlaylist2", testedPlaylist.get(1).getName());
+		this.playlistDao.savePlaylist(1, "TestPlaylist3");
+		Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistById(2);
+		assertEquals("Tested id", 2, testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name", "TestPlaylist2", testedPlaylist.getName());
 	}
 	
 	@Test 
 	public void test_updatePlaylist() {
-		List<Playlist> testedPlaylist = (List<Playlist>) this.playlistDao.getPlaylistById(1);
-		assertEquals("Tested id before update", 1, testedPlaylist.get(0).getPlaylist_id());
-		assertEquals("Tested name before update", "TestPlaylist", testedPlaylist.get(0).getName());
+		Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistById(1);
+		assertEquals("Tested id before update", 1, testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name before update", "TestPlaylist", testedPlaylist.getName());
 		
 		this.playlistDao.updatePlaylist(1, "UpdateTestPlaylist");
-		List<Playlist> Update_testedPlaylist = (List<Playlist>) this.playlistDao.getPlaylistById(1);
-		assertEquals("Tested id after update", 1, Update_testedPlaylist.get(0).getPlaylist_id());
-		assertEquals("Tested name after update","UpdateTestPlaylist", Update_testedPlaylist.get(0).getName());
+		Playlist Update_testedPlaylist = (Playlist) this.playlistDao.getPlaylistById(1);
+		assertEquals("Tested id after update", 1, Update_testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name after update","UpdateTestPlaylist", Update_testedPlaylist.getName());
 	}
 	
 	@Test
 	public void test_deletePlaylist() {
-		List<Playlist> testedPlaylist = (List<Playlist>) this.playlistDao.getPlaylistById(1);
-		assertEquals("Tested size before delete", 2, testedPlaylist.size());
-		assertEquals("Tested id before delete", 1, testedPlaylist.get(0).getPlaylist_id());
-		assertEquals("Tested name before delete", "UpdateTestPlaylist", testedPlaylist.get(0).getName());
+		List<Playlist> testedListPlaylist = (List<Playlist>) this.playlistDao.getPlaylistByUserId(1);
+		assertEquals("Tested size before delete", 2, testedListPlaylist.size());
+		
+		Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistById(1);
+		assertEquals("Tested id of playlist", 1, testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name of playlist", "TestPlaylist", testedPlaylist.getName());
 		
 		this.playlistDao.deletePlaylist(1);
 		
-		List<Playlist> deleted_testedPlaylist = (List<Playlist>) this.playlistDao.getPlaylistById(1);
+		List<Playlist> deleted_testedPlaylist = (List<Playlist>) this.playlistDao.getPlaylistByUserId(1);
 		assertEquals("Tested size after delete", 1, deleted_testedPlaylist.size());
-		assertEquals("Tested id after delete", 2, deleted_testedPlaylist.get(0).getPlaylist_id());
-		assertEquals("Tested name after delete", "TestPlaylist2", deleted_testedPlaylist.get(0).getName());
 	}
 
 }

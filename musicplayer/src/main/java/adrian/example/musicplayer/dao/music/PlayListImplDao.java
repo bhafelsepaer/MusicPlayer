@@ -20,13 +20,21 @@ public class PlayListImplDao implements PlayListDao {
 	SessionFactory sessionFactory;
 	
 	@Override
-	public List<Playlist> getPlaylistById(int user_id) {
+	public List<Playlist> getPlaylistByUserId(int user_id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		List<Playlist> playlist = (List<Playlist>) session.createQuery
 				("FROM Playlist  WHERE user_id = :user_id")
 				.setParameter("user_id", user_id).list();
          
+		return playlist;
+	}
+	
+	@Override
+	public Playlist getPlaylistById(int playlist_id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		Playlist playlist = (Playlist) session.load(Playlist.class, playlist_id);
 		return playlist;
 	}
 
@@ -47,8 +55,13 @@ public class PlayListImplDao implements PlayListDao {
 	public void updatePlaylist(int playlist_id, String playlistName_updatable) {
        Session session = this.sessionFactory.getCurrentSession();
        
+       System.out.println("TEST ID " + playlist_id);
        Playlist currentPlaylist = (Playlist) session.get(Playlist.class, playlist_id);
+       
+       System.out.println("SELECTED PLAYLIST " + currentPlaylist.getPlaylist_id());
        currentPlaylist.setName(playlistName_updatable);
+       
+       
        
        session.update(currentPlaylist);
 	}

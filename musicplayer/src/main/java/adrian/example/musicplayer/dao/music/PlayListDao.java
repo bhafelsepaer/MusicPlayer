@@ -6,7 +6,9 @@ import adrian.example.musicplayer.model.Music.playlist.Playlist;
 
 public interface PlayListDao {
 
-	List<Playlist> getPlaylistById(int user_id);
+	List<Playlist> getPlaylistByUserId(int user_id);
+	
+	Playlist getPlaylistById(int playlist_id);
 	
 	void savePlaylist(int user_id, String playlistName);
 	
