@@ -15,12 +15,6 @@ public class MusicServiceImpl implements MusicService {
 
 	@Autowired
 	MusicPlayerDao musicPlayerDao;
-	
-	@Override
-	@Transactional
-	public void saveSong(Song song) {
-		this.musicPlayerDao.saveSong(song);
-	}
 
 	@Override
 	@Transactional

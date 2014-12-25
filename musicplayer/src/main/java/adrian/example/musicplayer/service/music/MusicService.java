@@ -5,8 +5,6 @@ import java.util.List;
 import adrian.example.musicplayer.model.Music.Song;
 
 public interface MusicService {
-
-	void saveSong(Song song);
 	
 	List<Song> getSongByGenre(String genre_name);
 	

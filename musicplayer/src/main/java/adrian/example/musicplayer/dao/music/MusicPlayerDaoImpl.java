@@ -50,32 +50,6 @@ public class MusicPlayerDaoImpl implements MusicPlayerDao {
 		return list_of_song_by_artist;
 	}
 
-	@Override
-	public void saveSong(Song song) {
-		Session session = this.sessionFactory.getCurrentSession();
-		
-		session.persist(song);
-		
-		Genres genre = new Genres();
-		genre.setGenresName("pop");
-		genre.setGenresDescription("nice song");
-		song.setGenres(genre);
-		session.persist(genre);
-		
-		Album album = new Album();
-		album.setAlbum_name("AlbumTest");
-		album.setPicture_metadate("/resources/a");
-		album.setRelease_date(2012);
-		song.setAlbum(album);
-		session.persist(album);
-		
-		Artist artist = new Artist();
-		artist.setDescription("ArtistTestDescription");
-		artist.setName("ArtistTest");
-		artist.setYears_active(2000);
-		song.setArtist(artist);
-    	session.persist(artist);
-	}
 
 	@Override
 	public Song loadSongById(int id) {
