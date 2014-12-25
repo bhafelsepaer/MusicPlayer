@@ -24,7 +24,7 @@ public class PlaylistController {
 	public String showPlaylist(@PathVariable int user_id, HttpSession session, 
 			Model model) {
 		
-		session.setAttribute("playlist", this.playListService.getPlaylistById(user_id));
+		session.setAttribute("playlist", this.playListService.getPlaylistByUserId(user_id));
 		return "musicplayer/playlist/show_playlist";
 	}
 	
