@@ -44,6 +44,10 @@
 				<value>adrian.example.musicplayer.model.User.User</value>
 				<value>adrian.example.musicplayer.model.User.RoleUser</value>
 				<value>adrian.example.musicplayer.model.User.UserInformation</value>
+				<value>adrian.example.musicplayer.model.Music.Song</value>
+				<value>adrian.example.musicplayer.model.Music.Genres</value>
+				<value>adrian.example.musicplayer.model.Music.Album</value>
+				<value>adrian.example.musicplayer.model.Music.Artist</value>
 				<value>adrian.example.musicplayer.model.Music.playlist.Playlist</value>
 			</list>
 		</property>
@@ -51,7 +55,7 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
 			 	<prop key="hibernate.hbm2ddl.auto">create-drop</prop> 
-			 	<prop key="hibernate.hbm2ddl.import_files">/testScript/WelcomeController.sql</prop>
+			 	<prop key="hibernate.hbm2ddl.import_files">/testScript/scriptSqlMusicPlayer.sql</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.connection.pool_size">10</prop>
