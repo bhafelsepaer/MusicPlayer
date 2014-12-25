@@ -69,7 +69,7 @@ public class UserDaoImplTest {
 	
 	@Test
 	public void findLogin() throws Exception {
-		User user = userDaoImpl.findUserByLogin("TestLogin");
+		User user = this.userDaoImpl.findUserByLogin("TestLogin");
 		
 		assertEquals("Tested User id", 1, user.getUser_id());
 		assertEquals("Tested User Login", "TestLogin", user.getLogin());
@@ -99,7 +99,7 @@ public class UserDaoImplTest {
 	
 	@Test
 	public void getUserInformationById() throws Exception {
-		UserInformation userInformation = userDaoImpl.getUserInformationById(1);
+		UserInformation userInformation = this.userDaoImpl.getUserInformationById(1);
 		
 		assertEquals("Tested UserInformation id", 1, userInformation.getUser_information_id());
 		assertEquals("Tested UserInformation Age", 23, userInformation.getAge());
@@ -217,10 +217,12 @@ public class UserDaoImplTest {
   
   @Test
   public void setEnebledTrue() throws Exception {
-	  User user = (User) this.userDaoImpl.findUserById(1);
-	  assertFalse("Tested Enabled before update", user.isEnabled());
+	  User userBeforeEnabled = (User) this.userDaoImpl.findUserById(1);
+	  assertFalse("Tested Enabled before update", userBeforeEnabled.isEnabled());
 	  
-	  userDaoImpl.setEnabledTrue(user.getUser_id());
-	  assertTrue("Tested Enabled After Update ", user.isEnabled());
+	  userDaoImpl.setEnabledTrue(userBeforeEnabled.getUser_id());
+	  
+	  User userAfterEnabled = (User) this.userDaoImpl.findUserById(1);
+	  assertTrue("Tested Enabled After Update ", userAfterEnabled.isEnabled());
   }
 }
