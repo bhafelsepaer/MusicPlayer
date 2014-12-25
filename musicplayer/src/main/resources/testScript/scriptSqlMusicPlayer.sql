@@ -10,7 +10,9 @@ INSERT INTO ARTIST VALUES (DEFAULT, 'TestDescription', 'TestArtist', 1999);
 
 INSERT INTO GENRES VALUES (DEFAULT, 'TestDescription', 'TestGenres');
 
-INSERT INTO SONG VALUES(DEFAULT, 'TestFilenameSong', 'TestNameSong', 1 ,1 ,1);
+INSERT INTO SONG VALUES(DEFAULT, 'TestFileNameSong', 'TestNameSong', 1 ,1 ,1);
 
-INSERT INTO playlist VALUES (1, 'TestPlaylist', 1);
+INSERT INTO playlist VALUES (DEFAULT, 'TestPlaylist', 1);
+
+INSERT INTO playlist VALUES (DEFAULT, 'TestPlaylist2', 1);
 
