@@ -21,64 +21,51 @@ import adrian.example.musicplayer.model.Music.Song;
 @WebAppConfiguration
 @ContextConfiguration
 @Transactional
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration
 public class MusicServiceImplTest {
 
 	@Autowired
 	MusicServiceImpl musicServiceImpl;
 	
-	Song song = new Song();
-	
-	private static boolean setUpIsDone = false;
-	
 	@Before
-	public void setUp() throws Exception {
-		if(setUpIsDone){
-			return;
-		}
-		song.setFilename("/location");
-		song.setName("nightcore_batman");
-		this.musicServiceImpl.saveSong(song);
-		
-		setUpIsDone = true;
-	}
-
+	public void setUp() throws Exception {}
+	
 	@Test
 	public void getSongByGenre() {
-		List<Song> loadedSong = this.musicServiceImpl.getSongByGenre("pop");
-		assertEquals("Tested name", "nightcore_batman", loadedSong.get(0).getName());
-		assertEquals("Tested filename", "/location", loadedSong.get(0).getFilename());
-		assertEquals("Tested GenresName", "pop", loadedSong.get(0).getGenres().getGenresName());
-		assertEquals("Tested Description", "nice song", loadedSong.get(0).getGenres().getGenresDescription());
+		List<Song> loadedSong = this.musicServiceImpl.getSongByGenre("TestGenres");
+		assertEquals("Tested name", "TestNameSong", loadedSong.get(0).getName());
+		assertEquals("Tested filename", "TestFileNameSong", loadedSong.get(0).getFilename());
+		assertEquals("Tested GenresName", "TestGenres", loadedSong.get(0).getGenres().getGenresName());
+		assertEquals("Tested Description", "TestDescription", loadedSong.get(0).getGenres().getGenresDescription());
 	}
 	
 	@Test
 	public void getSongByAlbum() {
-		List<Song> loadedSong = this.musicServiceImpl.getSongByAlbum("AlbumTest");
-		assertEquals("Tested name", "nightcore_batman", loadedSong.get(0).getName());
-		assertEquals("Tested FileName", "/location", loadedSong.get(0).getFilename());
-		assertEquals("Tested AlbumName", "AlbumTest", loadedSong.get(0).getAlbum().getAlbum_name());
-		assertEquals("Tested Metadate", "/resources/a", loadedSong.get(0).getAlbum().getPicture_metadate());
-		assertEquals("Tested Release_Date", 2012, loadedSong.get(0).getAlbum().getRelease_date());
+		List<Song> loadedSong = this.musicServiceImpl.getSongByAlbum("TestAlbum");
+		assertEquals("Tested name", "TestNameSong", loadedSong.get(0).getName());
+		assertEquals("Tested FileName", "TestFileNameSong", loadedSong.get(0).getFilename());
+		assertEquals("Tested AlbumName", "TestAlbum", loadedSong.get(0).getAlbum().getAlbum_name());
+		assertEquals("Tested Metadate", "/TestLocation", loadedSong.get(0).getAlbum().getPicture_metadate());
+		assertEquals("Tested Release_Date", 2000, loadedSong.get(0).getAlbum().getRelease_date());
 	}
 	
 	@Test
 	public void getSongByArtist() {
-		List<Song> loadedSong = this.musicServiceImpl.getSongByArtist("ArtistTest");
-		assertEquals("Tested Name", "nightcore_batman", loadedSong.get(0).getName());
-		assertEquals("Tested FileName", "/location", loadedSong.get(0).getFilename());
-		assertEquals("Tested Name", "ArtistTest", loadedSong.get(0).getArtist().getName());
-		assertEquals("Tested Description", "ArtistTestDescription", loadedSong.get(0).
+		List<Song> loadedSong = this.musicServiceImpl.getSongByArtist("TestArtist");
+		assertEquals("Tested Name", "TestNameSong", loadedSong.get(0).getName());
+		assertEquals("Tested FileName", "TestFileNameSong", loadedSong.get(0).getFilename());
+		assertEquals("Tested Name", "TestArtist", loadedSong.get(0).getArtist().getName());
+		assertEquals("Tested Description", "TestDescription", loadedSong.get(0).
 				                              getArtist().getDescription());
-		assertEquals("Tested YearsActive", 2000, loadedSong.get(0).getArtist().getYears_active());
+		assertEquals("Tested YearsActive", 1999, loadedSong.get(0).getArtist().getYears_active());
 	}
 	
 	@Test
 	public void testloadSongById() {
 		Song loadedSong = this.musicServiceImpl.loadSongById(1);
 		assertEquals("Tested SongId", 1, loadedSong.getSong_id());
-		assertEquals("Tested Name", "nightcore_batman", loadedSong.getName());
-		assertEquals("Tested FileName", "/location", loadedSong.getFilename());
+		assertEquals("Tested Name", "TestNameSong", loadedSong.getName());
+		assertEquals("Tested FileName", "TestFileNameSong", loadedSong.getFilename());
 	}
 
 }
