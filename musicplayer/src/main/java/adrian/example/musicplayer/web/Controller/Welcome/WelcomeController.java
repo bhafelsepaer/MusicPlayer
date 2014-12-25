@@ -28,7 +28,7 @@ public class WelcomeController {
 		if(principal != null){
 			int user_id = userService.findLogin(principal.getName()).getUser_id();
 			session.setAttribute("user_id", user_id);
-			session.setAttribute("playlist", this.playListService.getPlaylistById(user_id));
+			session.setAttribute("playlist", this.playListService.getPlaylistByUserId(user_id));
 		}
 		
 		return "home";
