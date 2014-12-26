@@ -98,12 +98,12 @@ public class User implements Serializable{
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private Set<RoleUser> roleUser = new HashSet<RoleUser>(0);
 	
-	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
 	private UserInformation userInformation;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = true, nullable = false)
-	private List<Playlist> playlist;
+	@JoinColumn(name = "user_id", insertable = true, nullable = false)
+	private Set<Playlist> playlist;
 	
 	public User() {}
 	
@@ -199,15 +199,15 @@ public class User implements Serializable{
 	public void setUserInformation(UserInformation userInformation) {
 		this.userInformation = userInformation;
 	};
-	
-	public List<Playlist> getPlaylist() {
+		
+	public Set<Playlist> getPlaylist() {
 		return playlist;
 	}
 
-	public void setPlaylist(List<Playlist> playlist) {
+	public void setPlaylist(Set<Playlist> playlist) {
 		this.playlist = playlist;
 	}
-	
+
 	public interface PasswordValidation {};
 	
 	public interface MailValidation {};
