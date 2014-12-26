@@ -98,7 +98,7 @@ public class User implements Serializable{
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private Set<RoleUser> roleUser = new HashSet<RoleUser>(0);
 	
-	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private UserInformation userInformation;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
