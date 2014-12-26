@@ -1,7 +1,5 @@
 package adrian.example.musicplayer.service.user;
 
-
-
 import static org.junit.Assert.*;
 
 import javax.transaction.Transactional;
@@ -27,37 +25,24 @@ import adrian.example.musicplayer.dao.user.UserDao;
 public class UserServiceSecurityTest {
 
 	@Autowired
-	UserDao userDao;
-	
-	@Autowired
 	UserServiceImpl userServiceImpl;
 	
 	@Autowired 
 	UserServiceSecurity userServiceSecurity;
 	
-	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-	
 	@Before
-	public void setUp() throws Exception {
-		user.setActive_cod(12345);
-		user.setAddress("KremnizerWeg");
-		user.setEmail("janekgabka@gmail.com");
-		user.setEnabled(true);
-		user.setFirstName("Kitajec");
-		user.setLogin("Kamil");
-		user.setPassword("qwertY12#");
-		
-		userServiceImpl.saveUser(user);
-	}
+	public void setUp() throws Exception {}
 
 	@Test
 	public void loadUserByUsername() throws Exception {
+		org.springframework.security.core.userdetails.User userTest = 
+				(User) userServiceSecurity.loadUserByUsername("TestLogin");
 		
-		org.springframework.security.core.userdetails.User userTest = (User) userServiceSecurity.loadUserByUsername("Kamil");
-		
-		assertEquals("Test Authority" ,user.getRoleUser().iterator().next().getAuthority().toString(),
+		assertEquals("Test Authority" ,"ROLE_USER",
 				userTest.getAuthorities().iterator().next().toString());
-		assertEquals("Test Login", user.getLogin() ,userTest.getUsername());
-		assertEquals("Test Password", user.getPassword(), userTest.getPassword());
+		assertEquals("Test Login", "TestLogin", userTest.getUsername());
+		assertEquals("Test Password", 
+				     "$2a$10$hhBN0WC0n.uVnFk5hqfTsOu4bnJ2UlCogeqELgib.jXqMj4dC6MsK", 
+				     userTest.getPassword());
 	}
 }
