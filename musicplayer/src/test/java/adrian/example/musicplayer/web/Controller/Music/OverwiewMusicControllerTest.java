@@ -1,6 +1,5 @@
 package adrian.example.musicplayer.web.Controller.Music;
 
-
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -38,25 +37,20 @@ public class OverwiewMusicControllerTest {
 	@Autowired
 	MusicServiceImpl musicService;
 	
-	
 	@Before
 	public void setUp() throws Exception {
 		this.mockMvc = webAppContextSetup(this.applicationContext).build();
-		
-		Song song = new Song();
-		song.setFilename("/location");
-		song.setName("nightcore_batman");
-		this.musicService.saveSong(song);
 	}
 
 	@Test
 	public void testGenrePage() throws Exception {
 		
-		List<Song> loadedSong = this.musicService.getSongByGenre("pop");
+		List<Song> loadedSong = this.musicService.getSongByGenre("TestGenres");
 		
 		this.mockMvc.perform(get("/genre/nightcore_genre")
-		            .param("genre_name","pop")
-		            .sessionAttr("loadedSong", loadedSong))
+		            .param("genre_name","TestGenres"))
+		            .andExpect(request().
+		            		sessionAttribute("loadedSong", loadedSong))
 		            .andExpect(view().name("musicplayer/show_song"))
 		            .andExpect(status().isOk())
 		            .andExpect(forwardedUrl("/WEB-INF/views/musicplayer/show_song.jsp"));
@@ -64,11 +58,11 @@ public class OverwiewMusicControllerTest {
 	
 	@Test
 	public void testAlbumPage() throws Exception {
-		List<Song> loadedSong = this.musicService.getSongByAlbum("AlbumTest");
+		List<Song> loadedSong = this.musicService.getSongByAlbum("TestAlbum");
 		
 		this.mockMvc.perform(get("/album/nightcore_album")
-				    .param("album_name", "AlbumTest")
-				    .sessionAttr("loadedSong", loadedSong))
+				    .param("album_name", "TestAlbum"))
+				    .andExpect(request().sessionAttribute("loadedSong", loadedSong))
 				    .andExpect(view().name("musicplayer/show_song"))
 				    .andExpect(status().isOk())
 				    .andExpect(forwardedUrl("/WEB-INF/views/musicplayer/show_song.jsp"));
@@ -76,41 +70,26 @@ public class OverwiewMusicControllerTest {
 	
 	@Test
 	public void testArtistPage() throws Exception {
-		List<Song> loadedSong = this.musicService.getSongByArtist("ArtistTest");
+		List<Song> loadedSong = this.musicService.getSongByArtist("TestArtist");
 		
 		this.mockMvc.perform(get("/artist/nightcore_artist")
-				    .param("artist_name", "ArtistTest")
-				    .sessionAttr("loadedSong", loadedSong))
+				    .param("artist_name", "TestArtist"))
+				    .andExpect(request().sessionAttribute("loadedSong", loadedSong))
 				    .andExpect(view().name("musicplayer/show_song"))
 				    .andExpect(status().isOk())
 				    .andExpect(forwardedUrl("/WEB-INF/views/musicplayer/show_song.jsp"));
 	}
 	
 	@Test
-	public void testPlaySong() throws Exception {
+	public void test_choiseSong() throws Exception {
 		Song song = this.musicService.loadSongById(1);
 		
 		this.mockMvc.perform(get("/playSong")
 				    .param("song_id", "1"))
-				    .andExpect(model().attributeExists("location"))
-				    .andExpect(model().attributeExists("SongName"))
+				    .andExpect(model().attribute("location", song.getFilename()))
+				    .andExpect(model().attribute("SongName", song.getName()))
 				    .andExpect(view().name("musicplayer/show_song"))
 				    .andExpect(status().isOk())
 				    .andExpect(forwardedUrl("/WEB-INF/views/musicplayer/show_song.jsp"));
 	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
