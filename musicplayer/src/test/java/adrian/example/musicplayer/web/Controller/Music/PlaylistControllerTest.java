@@ -14,6 +14,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
+import static org.mockito.Mockito.*;  
 
 import adrian.example.musicplayer.dao.music.PlayListDao;
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
@@ -27,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @ContextConfiguration
 @Transactional
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration
 public class PlaylistControllerTest {
 
 	@Autowired
@@ -37,32 +38,19 @@ public class PlaylistControllerTest {
 	
 	@Autowired
 	PlaylistService playlistService;
-	
-	@Autowired
-	PlayListDao playlistDao;
-	
-	private static boolean setUpIsDone = false;
 	 
 	@Before
 	public void setUp() throws Exception {
-		if(setUpIsDone){
-			this.mockMvc = webAppContextSetup(this.applicationContext).build();
-			return;
-		}
-		
 		this.mockMvc = webAppContextSetup(this.applicationContext).build();
-		this.playlistDao.savePlaylistForJunit();
-		setUpIsDone = true;
-		
 	}
 
 	@Test
 	public void test_showPlaylist() throws Exception {
-		List<Playlist> testedPlaylist = this.playlistService.getPlaylistById(1);
+		List<Playlist> testedPlaylist = this.playlistService.getPlaylistByUserId(1);
 		
 		this.mockMvc.perform(get("/playlist/1")
-				    .param("user_id", "1")
-				    .sessionAttr("playlist", testedPlaylist))
+				    .param("user_id", "1"))
+				    .andExpect(request().sessionAttribute("playlist", testedPlaylist))
 				    .andExpect(view().name("musicplayer/playlist/show_playlist"))
 				    .andExpect(status().isOk())
 				    .andExpect(forwardedUrl("/WEB-INF/views/musicplayer/playlist/show_playlist.jsp"));
