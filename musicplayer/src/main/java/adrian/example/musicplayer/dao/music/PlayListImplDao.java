@@ -49,7 +49,7 @@ public class PlayListImplDao implements PlayListDao {
 		newPlaylist.setName(playlistName);
 		currentUser.getPlaylist().add(newPlaylist);
 		
-		session.save(currentUser);
+		session.persist(currentUser);
 	}
 	
 	@Override
