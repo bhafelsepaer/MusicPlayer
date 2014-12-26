@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -23,6 +24,8 @@ import adrian.example.musicplayer.service.AdministrationAccount.UserAdministrati
 import adrian.example.musicplayer.service.list.UserInformationServiceList;
 import adrian.example.musicplayer.service.user.UserServiceImpl;
 import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -48,44 +51,29 @@ public class UserSettingsControllerTest {
 	
 	@Autowired
 	UserInformationServiceList userInformationServiceList;
-	
 
+	@Autowired
+	BCryptPasswordEncoder bcryptEncoder;
 	@Before
 	public void setUp() throws Exception {
 		this.mockMvc = webAppContextSetup(this.applicationContext).build();
 	}
 	
 	@Test
-	public void activeUserFromEmailUserNotFound () throws Exception {
-		
-		adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-		user.setLogin("Adrian");
-		user.setPassword("qwerty1@A");
-		user.setEmail("MY EMAIL");
-		user.setActive_cod(12345);
-		
-		userServiceImplSettings.saveUser(user);
-		
+	public void activeUserFromEmailUserActiveCodeNotMatch () throws Exception {
 		this.mockMvc.perform(get("/verify")
-	            	.param("user_id", "" + user.getUser_id())
-	            	.param("active_code", "123456")
+	            	.param("user_id", "1")
+	            	.param("active_code", "54321")
 	            	.sessionAttr("user", new adrian.example.musicplayer.model.User.User()))
 		            .andExpect(redirectedUrl("/error403"))
 		            .andExpect(status().is3xxRedirection());
 	}
 
 	@Test
-	public void activeUserFromEmailUserFound() throws Exception {
-		
-		adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-		user.setLogin("Adrian");
-		user.setPassword("qwerty1@A");
-		user.setActive_cod(12345);
-		
-		userServiceImplSettings.saveUser(user);
+	public void activeUserFromEmailUserActiveCodeMatch() throws Exception {
 		
 		this.mockMvc.perform(get("/verify")
-	            	.param("user_id", "" + user.getUser_id())
+	            	.param("user_id", "" + 1)
 	            	.param("active_code","12345")
 	            	.sessionAttr("user", new adrian.example.musicplayer.model.User.User()))
 		            .andExpect(redirectedUrl("/"))
@@ -95,32 +83,21 @@ public class UserSettingsControllerTest {
 	@Test
 	public void settingsUserHomePageLoginAndPrincipalNotMatch() throws Exception {
 		
-		adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-		user.setLogin("Adrian");
-		
 		User userSpring = new User("user", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
 		Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
 		
-		this.mockMvc.perform(get("/settings_account_user/Adrian/profile")
+		this.mockMvc.perform(get("/settings_account_user/TestLogin/profile")
 				             .principal(authentication))
 				             .andExpect(redirectedUrl("/error403"))
 				             .andExpect(status().is3xxRedirection());
 	}
-
+   
     @Test
     public void settingsUserHomePageLoginAndPrincipalMatch() throws Exception {
-    	
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-		user.setLogin("Adrian");
-		user.setPassword("qwerty1@A");
-		user.setActive_cod(12345);
-		
-		userServiceImplSettings.saveUser(user);
-		
-		User userSpring = new User("Adrian", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
+		User userSpring = new User("TestLogin", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
 		Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
 		
-		this.mockMvc.perform(get("/settings_account_user/Adrian/profile")
+		this.mockMvc.perform(get("/settings_account_user/TestLogin/profile")
 	             .principal(authentication))
 	             .andExpect(view().name("user_setting/user_settingProfil"))
 	             .andExpect(status().isOk())
@@ -129,16 +106,10 @@ public class UserSettingsControllerTest {
     
     @Test
     public void settingsUserProfilePageHasError() throws Exception {
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("qwerty0");
-    	user.setActive_cod(12345);
-    	user.setAddress("Krampnizer Weg 12/13");
-    	user.setFirstName("Adrian");
+    	adrian.example.musicplayer.model.User.User user = 
+    			this.userAdministrationService.findLogin("TestLogin");
     	
-    	userServiceImplSettings.saveUser(user);
-    	
-    	this.mockMvc.perform(post("/settings_account_user/Adrian/profile")
+    	this.mockMvc.perform(post("/settings_account_user/TestLogin/profile")
     			     .param("login", "Adrian")
     			     .param("password", "qwerty0")
     			     .param("active_cod", "12345")
@@ -152,16 +123,10 @@ public class UserSettingsControllerTest {
     
     @Test
     public void  settingsUserProfilePageHasNoError() throws Exception {
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("qwerty0");
-    	user.setActive_cod(12345);
-    	user.setAddress("Krampnizer Weg 12/13");
-    	user.setFirstName("Adrian");
+    	adrian.example.musicplayer.model.User.User user  = 
+    			this.userAdministrationService.findLogin("TestLogin");
     	
-    	this.userServiceImplSettings.saveUser(user);
-    	
-    	this.mockMvc.perform(post("/settings_account_user/Adrian/profile")
+    	this.mockMvc.perform(post("/settings_account_user/TestLogin/profile")
 			     .param("login", "Adrian")
 			     .param("password", "qwerty0")
 			     .param("active_cod", "12345")
@@ -170,9 +135,6 @@ public class UserSettingsControllerTest {
 			     .sessionAttr("user", user))
 			     .andExpect(redirectedUrl("/settings_account_user/" + user.getLogin() + "/profile"))
 			     .andExpect(status().is3xxRedirection());
-    	
-    	assertEquals(user.getAddress(), "Nowy Adres");
-    	assertEquals(user.getFirstName(), "firstName");
     }
     
     @Test
@@ -181,14 +143,7 @@ public class UserSettingsControllerTest {
     	User userSpring = new User("user", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
 		Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
 		
-		adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("qwerty0");
-    	user.setActive_cod(12345);
-    	user.setAddress("Krampnizer Weg 12/13");
-    	user.setFirstName("Adrian");
-    	
-    	this.mockMvc.perform(get("/settings_account_user/Adrian/password")
+    	this.mockMvc.perform(get("/settings_account_user/TestLogin/password")
     			    .principal(authentication))
     	            .andExpect(redirectedUrl("/error403"))
     	            .andExpect(status().is3xxRedirection());
@@ -196,38 +151,30 @@ public class UserSettingsControllerTest {
 
     @Test
     public void settingUserPasswordGetPrincipalEqualsLogin() throws Exception {
-    	User userSpring = new User("Adrian", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
+    	User userSpring = new User("TestLogin", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
 		Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
 		
-		adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("qwerty0");
-    	user.setActive_cod(12345);
-    	user.setAddress("Krampnizer Weg 12/13");
-    	user.setFirstName("Adrian");
+		adrian.example.musicplayer.model.User.User user = 
+				this.userAdministrationService.findLogin("TestLogin");
     	
-    	userServiceImplSettings.saveUser(user);
-    	
-    	this.mockMvc.perform(get("/settings_account_user/Adrian/password")
+    	this.mockMvc.perform(get("/settings_account_user/TestLogin/password")
     			    .principal(authentication))
     			    .andExpect(view().name("user_setting/user_settignPassword"))
     			    .andExpect(forwardedUrl("/WEB-INF/views/user_setting/user_settignPassword.jsp"))
-    			    .andExpect(model().attributeExists("user"))
+    			    .andExpect(model().attribute("user", hasProperty("login", is("TestLogin"))))
+    			    .andExpect(model().attribute("user", hasProperty("active_cod", is(12345))))
+    			    .andExpect(model().attribute("user", hasProperty("address", is("TestAddress"))))
+    			    .andExpect(model().attribute("user", hasProperty("firstName", is("TestFirstName"))))
+    			    .andExpect(model().attribute("user", hasProperty("email", is("TestEmail@Test.com"))))
     			    .andExpect(status().isOk());
     }
     
     @Test
     public void settingUserPasswordHasError() throws Exception {
-		adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("qwerty0");
-    	user.setActive_cod(12345);
-    	user.setAddress("Krampnizer Weg 12/13");
-    	user.setFirstName("Adrian");
+		adrian.example.musicplayer.model.User.User user = 
+				this.userAdministrationService.findLogin("TestLogin");
     	
-        userServiceImplSettings.saveUser(user);
-    	
-    	this.mockMvc.perform(post("/settings_account_user/Adrian/password")
+    	this.mockMvc.perform(post("/settings_account_user/TestLogin/password")
     			    .param("user_password", "errorpassword")
     			    .sessionAttr("user", user))
     			    .andExpect(view().name("user_setting/user_settignPassword"))
@@ -238,39 +185,26 @@ public class UserSettingsControllerTest {
     
     @Test
     public void settingUserPasswordNoError() throws Exception {
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("$2a$10$27EDo8MqErgfPgkTHOgTgud3gmdSgRdi.aWWP5Wav.9tR9dkRbPta");
-    	user.setActive_cod(12345);
-    	user.setAddress("Krampnizer Weg 12/13");
-    	user.setFirstName("Adrian");
-    	
-        userServiceImplSettings.saveUser(user);
-    	
-    	this.mockMvc.perform(post("/settings_account_user/Adrian/password")
-    			    .param("user_password", "zxcvbnM123$")
-    			    .param("password", "zxcvbnM123$")
-    			    .param("confirmPassword", "zxcvbnM123$")
-    			    .param("user_id", "" + user.getUser_id())
-    			    .sessionAttr("user", user))
+    	adrian.example.musicplayer.model.User.User user = 
+    			this.userAdministrationService.findLogin("TestLogin");
+        
+    	this.mockMvc.perform(post("/settings_account_user/TestLogin/password")
+    			    .sessionAttr("user", user)
+    			    .param("user_password", "TestPassword12345@")
+    			    .param("password", "TestPassword123456@")
+    			    .param("confirmPassword", "TestPassword123456@")
+    			    .param("user_id", "" + user.getUser_id()))
     			    .andExpect(redirectedUrl("/settings_account_user/" + user.getLogin() +  "/password"))
     			    .andExpect(status().is3xxRedirection());
     }
     
     @Test
     public void settingUserEmailGETPrincipalAndLoginNotMatch() throws Exception {
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("zxcvbnM123$");
-    	user.setActive_cod(12345);
-    	
-    	userServiceImplSettings.saveUser(user);
-    	
-    	
+    		
       	User userSpring = new User("user", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
     		
-    	this.mockMvc.perform(get("/settings_account_user/Adrian/email")
+    	this.mockMvc.perform(get("/settings_account_user/TestLogin/email")
     			    .principal(authentication))
     	            .andExpect(redirectedUrl("/error403"))
     	            .andExpect(status().is3xxRedirection());
@@ -278,20 +212,17 @@ public class UserSettingsControllerTest {
     
     @Test
     public void settingUserEmailGetPrincipalAndLoginMatch() throws Exception{
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("zxcvbnM123$");
-    	user.setActive_cod(12345);
     	
-    	userServiceImplSettings.saveUser(user);
-    	
-    	
-      	User userSpring = new User("Adrian", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
+      	User userSpring = new User("TestLogin", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
         
-        this.mockMvc.perform(get("/settings_account_user/Adrian/email")
+        this.mockMvc.perform(get("/settings_account_user/TestLogin/email")
         		    .principal(authentication))
-        		    .andExpect(model().attributeExists("user"))
+        		    .andExpect(model().attribute("user", hasProperty("login", is("TestLogin"))))
+        		    .andExpect(model().attribute("user", hasProperty("address", is("TestAddress"))))
+        		    .andExpect(model().attribute("user", hasProperty("email", is("TestEmail@Test.com"))))
+        		    .andExpect(model().attribute("user", hasProperty("firstName", is("TestFirstName"))))
+        		    .andExpect(model().attribute("user", hasProperty("active_cod", is(12345))))
         		    .andExpect(view().name("user_setting/user_settingEmail"))
         		    .andExpect(forwardedUrl("/WEB-INF/views/user_setting/user_settingEmail.jsp"))
         		    .andExpect(status().isOk());
@@ -299,15 +230,10 @@ public class UserSettingsControllerTest {
     
     @Test
     public void settingUserEmailPostHasError() throws Exception {
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("zxcvbnM123$");
-    	user.setActive_cod(12345);
-    	user.setEmail("123@gmail.com");
+    	adrian.example.musicplayer.model.User.User user = 
+    			this.userAdministrationService.findLogin("TestLogin");
     	
-    	userServiceImplSettings.saveUser(user);
-    	
-    	this.mockMvc.perform(post("/settings_account_user/Adrian/email")
+    	this.mockMvc.perform(post("/settings_account_user/TestLogin/email")
     			    .param("email", "123sad")
     			    .sessionAttr("user", user))
     			    .andExpect(view().name("user_setting/user_settingEmail"))
@@ -316,18 +242,13 @@ public class UserSettingsControllerTest {
     
     @Test
     public void settingsUserEmailPostNoError() throws Exception {
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("$2a$10$X9oClXp6mM4a/Ka0xx095eIJ6s.qKYDDJGmDiV05I37tj4YHs.waW");
-    	user.setActive_cod(12345);
-    	user.setEmail("123@gmail.com");
+    	adrian.example.musicplayer.model.User.User user =
+    			this.userAdministrationService.findLogin("TestLogin");
     	
-    	userServiceImplSettings.saveUser(user);
-    	
-    	User userSpring = new User("Adrian", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
+    	User userSpring = new User("TestLogin", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
     	
-    	this.mockMvc.perform(post("/settings_account_user/Adrian/email")
+    	this.mockMvc.perform(post("/settings_account_user/TestLogin/email")
 			    .param("email", "Adrian12@gmail.com")
 			    .param("confirmEmail", "Adrian12@gmail.com")
 			    .param("password", "zxcvbnM123$")
@@ -342,7 +263,7 @@ public class UserSettingsControllerTest {
     	User userSpring = new User("user", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
         
-        this.mockMvc.perform(get("/settings_account_user/Adrian/userInformation")
+        this.mockMvc.perform(get("/settings_account_user/TestLogin/userInformation")
         		    .principal(authentication))
         		    .andExpect(redirectedUrl("/error403"))
         		    .andExpect(status().is3xxRedirection()); 
@@ -350,49 +271,40 @@ public class UserSettingsControllerTest {
     
     @Test
     public void settingUserInformationGetPrincipalAndLoginMatch() throws Exception {
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("zxcvbnM123$");
-    	user.setActive_cod(12345);
-    	user.setEmail("123@gmail.com");
+    	adrian.example.musicplayer.model.User.User user = 
+    			this.userAdministrationService.findLogin("TestLogin");
     	
-    	userServiceImplSettings.saveUser(user);
-    	
-    	User userSpring = new User("Adrian", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
+    	User userSpring = new User("TestLogin", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
         
-        this.mockMvc.perform(get("/settings_account_user/Adrian/userInformation")
+    	UserInformation userInformation = 
+    			this.userAdministrationService.getUserInformationById(user.getUser_id());
+    	
+        this.mockMvc.perform(get("/settings_account_user/TestLogin/userInformation")
         		    .principal(authentication))
-        		    .andExpect(model().attributeExists("userInformation"))
-        		    .andExpect(model().attributeExists("interestList"))
-        		    .andExpect(model().attributeExists("programmingSkillList"))
+        		    .andExpect(model().attribute("interestList", 
+        		    		this.userInformationServiceList.getInterest()))
+        		    .andExpect(model().attribute("programmingSkillList", 
+        		            this.userInformationServiceList.getProgrammingStyle()))
+        		    .andExpect(model().attribute("userInformation", 
+        		    	userInformation))
+        		    .andExpect(model().attribute("userInterestList", 
+        		    		userInformation.getInterest()))
+        		     .andExpect(model().attribute("userProgrammingSkillList",
+        		    		 userInformation.getProgrammingSkill()))
         		    .andExpect(view().name("user_setting/user_settingInformation"))
         		    .andExpect(status().isOk());
     }
     
      @Test
      public void settingUserInformationPost() throws Exception {
-    	adrian.example.musicplayer.model.User.User user = new adrian.example.musicplayer.model.User.User();
-    	user.setLogin("Adrian");
-    	user.setPassword("zxcvbnM123$");
-    	user.setActive_cod(12345);
-    	
-    	UserInformation userInformation = new UserInformation();
-   	    userInformation.setAge(23);
-   	    userInformation.setSurname("Adrian");
-   	    userInformation.setInterest("Football");
-   	    userInformation.setSex("M");
-   	    userInformation.setProgrammingSkill("Java");
+    	adrian.example.musicplayer.model.User.User user = 
+    			this.userAdministrationService.findLogin("TestLogin");
    	    
-   	    user.setUserInformation(userInformation);
-   	    userInformation.setUser(user);
-
-   	    userServiceImplSettings.saveUser(user);
-   	    
-   	    User userSpring = new User("Adrian", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
+   	    User userSpring = new User("TestLogin", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
         
-        this.mockMvc.perform(post("/settings_account_user/Adrian/userInformation")
+        this.mockMvc.perform(post("/settings_account_user/TestLogin/userInformation")
         		    .principal(authentication)
         		    .param("age", 33 + "")
         		    .param("surname", "Paul")
@@ -401,13 +313,5 @@ public class UserSettingsControllerTest {
         		    .param("programmingSkill", "Spring"))
         		    .andExpect(redirectedUrl("/settings_account_user/" + authentication.getName() + "/userInformation"))
         		    .andExpect(status().is3xxRedirection());
-
-        assertEquals(user.getUser_id(), userAdministrationService.getUser_id(authentication.getName()));
-        assertEquals(33, userInformation.getAge());
-        assertEquals("Paul", userInformation.getSurname());
-        assertEquals("Music", userInformation.getInterest());
-        assertEquals("K", userInformation.getSex());
-        assertEquals("Spring", userInformation.getProgrammingSkill());
-        
     }
 }
