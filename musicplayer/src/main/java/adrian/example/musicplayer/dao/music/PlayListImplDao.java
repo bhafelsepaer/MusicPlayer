@@ -45,6 +45,7 @@ public class PlayListImplDao implements PlayListDao {
 		User currentUser = (User) session.get(User.class, user_id);
 		
 		Playlist newPlaylist = new Playlist();
+		
 		newPlaylist.setName(playlistName);
 		currentUser.getPlaylist().add(newPlaylist);
 		
@@ -61,8 +62,6 @@ public class PlayListImplDao implements PlayListDao {
        System.out.println("SELECTED PLAYLIST " + currentPlaylist.getPlaylist_id());
        currentPlaylist.setName(playlistName_updatable);
        
-       
-       
        session.update(currentPlaylist);
 	}
 
@@ -73,44 +72,4 @@ public class PlayListImplDao implements PlayListDao {
 		Playlist currentPlayList = (Playlist) session.get(Playlist.class, playList_id);
 		session.delete(currentPlayList);
 	}
-
-	@Override
-	public void savePlaylistForJunit() {
-		Session session = this.sessionFactory.getCurrentSession();
-		
-		List<Playlist> myplaylist = new ArrayList<Playlist>();
-		Playlist playlist = new Playlist();
-		playlist.setName("TestPlaylist");
-		myplaylist.add(playlist);
-		
-		RoleUser roleUser = new RoleUser();
-		roleUser.setAuthority("TestAuthority");
-		roleUser.setLogin("TestRole");
-		
-		UserInformation userInformation = new UserInformation();
-		userInformation.setAge(23);
-		userInformation.setInterest("TestInformation");
-		userInformation.setProgrammingSkill("TestProgrammingSkill");
-		userInformation.setSex("TestSex");
-		userInformation.setSurname("TestUserName");
-		
-		
-		User user = new User();
-		user.setActive_cod(234);
-		user.setAddress("TestAdres");
-		user.setEmail("TestEmail");
-		user.setEnabled(true);
-		user.setFirstName("TestName");
-		user.setLogin("TestLogin");
-		user.setPassword("TestPassword");
-		user.setPlaylist(myplaylist);
-		user.getRoleUser().add(roleUser);
-		user.setUserInformation(userInformation);
-		roleUser.setUser(user);
-		userInformation.setUser(user);
-		
-		
-		session.save(user);
-	}
-
 }

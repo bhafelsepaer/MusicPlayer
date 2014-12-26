@@ -15,6 +15,4 @@ public interface PlayListDao {
 	void updatePlaylist(int playlist_id, String playlistName_updatable);
 	
 	void deletePlaylist(int playList_id);
-	
-	void savePlaylistForJunit();
 }
