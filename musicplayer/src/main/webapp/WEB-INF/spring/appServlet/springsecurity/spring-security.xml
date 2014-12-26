@@ -21,7 +21,8 @@
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/login" access="permitAll"/>
         <intercept-url pattern="/registration" access="permitAll"/>
-        <intercept-url pattern="/settings_account_user/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/settings_account_user/**" access="isAuthenticated()" />
+        <intercept-url pattern="/playlist/**" access="isAuthenticated()" />
 	
 		<form-login 
 		       login-page="/login" 
