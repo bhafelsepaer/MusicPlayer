@@ -27,7 +27,7 @@ public class UserInformation implements Serializable{
 	@GeneratedValue(generator = "generator")
 	@GenericGenerator(name = "generator", strategy = "foreign", 
 	                  parameters = {@Parameter(name = "property", value = "user")})
-	@Column(name = "user_information_id", unique = true)
+	@Column(name = "user_information_id", unique = true, nullable = false)
 	private int user_information_id;
 	
 	@Column(name = "age", nullable = true)
