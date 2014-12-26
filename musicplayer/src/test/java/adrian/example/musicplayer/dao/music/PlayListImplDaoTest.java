@@ -42,9 +42,9 @@ public class PlayListImplDaoTest {
 	@Test
 	public void test_savePlaylist() {
 		this.playlistDao.savePlaylist(1, "TestPlaylist3");
-		Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistById(2);
-		assertEquals("Tested id", 2, testedPlaylist.getPlaylist_id());
-		assertEquals("Tested name", "TestPlaylist2", testedPlaylist.getName());
+		Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistById(3);
+		assertEquals("Tested id", 3, testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name", "TestPlaylist3", testedPlaylist.getName());
 	}
 	
 	@Test 
