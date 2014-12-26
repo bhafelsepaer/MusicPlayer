@@ -28,7 +28,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import adrian.example.musicplayer.service.user.UserService;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration
@@ -54,7 +53,6 @@ public class RegistrationControllerTest {
 	
 	@Test
 	public void registrationPageGetPrincipalNull() throws Exception {
-		
 		this.mockMvc.perform(get("/registration"))
 		            .andExpect(view().name("authorization/registration"))
 		            .andExpect(forwardedUrl("/WEB-INF/views/authorization/registration.jsp"))
@@ -77,16 +75,6 @@ public class RegistrationControllerTest {
 	
 	@Test
 	public void registrationPagePostResultHasErrors() throws Exception {
-		
-		adrian.example.musicplayer.model.User.User userAfter = new adrian.example.musicplayer.model.User.User();
-		userAfter.setLogin("Adrian");
-		userAfter.setPassword("qwerty1@A");
-		userAfter.setFirstName("Adrian");
-		userAfter.setAddress("Nowa Street666");
-		userAfter.setEmail("Adrian@gmail.com");
-		this.userServiceImpl.saveUser(userAfter);
-		
-		
 		this.mockMvc.perform(post("/registration")
 		            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
 		            .param("strategyPattern", "smsActivation")
@@ -121,7 +109,6 @@ public class RegistrationControllerTest {
 				    .andExpect(status().is3xxRedirection());
 		
 		adrian.example.musicplayer.model.User.User user = userServiceImpl.findLogin("Adria");
-		
 		
 		assertNotNull(user);
 		assertEquals("Adria", user.getLogin());
