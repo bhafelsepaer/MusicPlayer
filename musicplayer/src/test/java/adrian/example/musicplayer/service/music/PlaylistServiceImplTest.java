@@ -15,106 +15,61 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import adrian.example.musicplayer.dao.music.PlayListDao;
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration
 @Transactional
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration
 public class PlaylistServiceImplTest {
-
-	private static boolean setUpIsDone = false;
-
-	
-	@Autowired
-	PlayListDao playlistDao;
 	
 	@Autowired
 	PlaylistServiceImpl playListServiceImpl;
 	
 	@Before
-	public void setUp() throws Exception {
-		if(setUpIsDone) {
-			return;
-		}
-		
-		this.playlistDao.savePlaylistForJunit();
-		
-		setUpIsDone = true;
-	}
+	public void setUp() throws Exception {}
 
 	@Test
 	public void test_getPlaylistById() {
-	    List<Playlist> testedPlaylist = this.playListServiceImpl.getPlaylistById(1);
-	    assertEquals("Tested id", 1, testedPlaylist.get(0).getPlaylist_id());
-	    assertEquals("Tested name", "TestPlaylist", testedPlaylist.get(0).getName());
+	    Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(1);
+	    assertEquals("Tested Playlist id", 1, testedPlaylist.getPlaylist_id());
+	    assertEquals("Tested Playlist name", "TestPlaylist", testedPlaylist.getName());
 	}
 	
 	@Test
 	public void test_savePlaylist() {
-		this.playListServiceImpl.savePlaylist(1, "TestPlaylist2");
-		List<Playlist> testedPlaylist = (List<Playlist>) this.playListServiceImpl.getPlaylistById(1);
-		assertEquals("Tested size", 2, testedPlaylist.size());
-		assertEquals("Tested id", 2, testedPlaylist.get(1).getPlaylist_id());
-		assertEquals("Tested name", "TestPlaylist2", testedPlaylist.get(1).getName());
+		this.playListServiceImpl.savePlaylist(1, "TestPlaylist3");
+		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(3);
+		assertEquals("Tested id", 3, testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name", "TestPlaylist3", testedPlaylist.getName());
 	}
 	
 	@Test
 	public void test_updatePlaylist() {
-		List<Playlist> testedPlaylist = (List<Playlist>) this.playListServiceImpl.getPlaylistById(1);
-		assertEquals("Tested id before update", 1, testedPlaylist.get(0).getPlaylist_id());
-		assertEquals("Tested name before update", "TestPlaylist", testedPlaylist.get(0).getName());
+		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(1);
+		assertEquals("Tested id before update", 1, testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name before update", "TestPlaylist", testedPlaylist.getName());
 		
 		this.playListServiceImpl.updatePlaylist(1, "UpdateTestPlaylist");
-		List<Playlist> Update_testedPlaylist = (List<Playlist>) this.playListServiceImpl.getPlaylistById(1);
-		assertEquals("Tested id after update", 1, Update_testedPlaylist.get(0).getPlaylist_id());
-		assertEquals("Tested name after update","UpdateTestPlaylist", Update_testedPlaylist.get(0).getName());
+		Playlist Update_testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(1);
+		assertEquals("Tested id after update", 1, Update_testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name after update","UpdateTestPlaylist", Update_testedPlaylist.getName());
 	}
 	
 	@Test
 	public void test_deletePlaylist() {
-		List<Playlist> testedPlaylist = (List<Playlist>) this.playListServiceImpl.getPlaylistById(1);
-		assertEquals("Tested size before delete", 2, testedPlaylist.size());
-		assertEquals("Tested id before delete", 1, testedPlaylist.get(0).getPlaylist_id());
-		assertEquals("Tested name before delete", "UpdateTestPlaylist", testedPlaylist.get(0).getName());
+		List<Playlist> testedListPlaylist = (List<Playlist>) this.playListServiceImpl
+				        .getPlaylistByUserId(1);
+		assertEquals("Tested size before delete", 2, testedListPlaylist.size());
+		
+		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(1);
+		assertEquals("Tested id of playlist", 1, testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name of playlist", "TestPlaylist", testedPlaylist.getName());
 		
 		this.playListServiceImpl.deletePlaylist(1);
 		
-		List<Playlist> deleted_testedPlaylist = (List<Playlist>) this.playListServiceImpl.getPlaylistById(1);
+		List<Playlist> deleted_testedPlaylist = (List<Playlist>) this.playListServiceImpl.getPlaylistByUserId(1);
 		assertEquals("Tested size after delete", 1, deleted_testedPlaylist.size());
-		assertEquals("Tested id after delete", 2, deleted_testedPlaylist.get(0).getPlaylist_id());
-		assertEquals("Tested name after delete", "TestPlaylist2", deleted_testedPlaylist.get(0).getName());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
