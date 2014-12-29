@@ -22,7 +22,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration
@@ -62,6 +61,5 @@ public class LoginControllerTest {
 		this.mockMvc.perform(post("/login"))
 		            .andExpect(redirectedUrl("/"))
 		            .andExpect(status().is3xxRedirection());
-		
 	}
 }

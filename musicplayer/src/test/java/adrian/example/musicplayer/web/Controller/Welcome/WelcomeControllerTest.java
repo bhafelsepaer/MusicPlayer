@@ -54,7 +54,7 @@ public class WelcomeControllerTest {
 		Authentication authentication = 
 				new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 		
-		int user_id  =  this.userService.findLogin(authentication.getName()).getUser_id();
+		int user_id  =  this.userService.findLogin("TestLogin").getUser_id();
 		
 		this.mockMvc.perform(get("/").principal(authentication))
 		            .andExpect(view().name(containsString("home")))

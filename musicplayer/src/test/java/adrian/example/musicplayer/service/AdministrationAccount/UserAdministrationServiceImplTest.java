@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import adrian.example.musicplayer.dao.user.UserDao;
 import adrian.example.musicplayer.model.User.User;
 import adrian.example.musicplayer.model.User.UserInformation;
 
@@ -33,8 +32,7 @@ public class UserAdministrationServiceImplTest {
 	 BCryptPasswordEncoder bcryptEncoder;
 	
 	@Before
-	public void setUp() throws Exception {
-	}
+	public void setUp() throws Exception {}
 
 	@Test
 	public void getUser_id() {

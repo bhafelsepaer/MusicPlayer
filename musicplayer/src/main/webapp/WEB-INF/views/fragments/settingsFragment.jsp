@@ -25,7 +25,7 @@
     <div id="settings">
        <ul>
           <li>
-                 <a href="${settings_account_user_profil}">Profil</a>
+               <a href="${settings_account_user_profil}">Profil</a>
            </li>
           <li>
                 <a href="${actionPassword}">Haslo</a>

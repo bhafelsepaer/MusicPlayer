@@ -1,4 +1,4 @@
-INSERT INTO user VALUES (DEFAULT, 10716, 'TestAddress', 'TestEmail@Test.com', 1, 'TestFristName', 'TestLogin', '$2a$10$hhBN0WC0n.uVnFk5hqfTsOu4bnJ2UlCogeqELgib.jXqMj4dC6MsK');
+INSERT INTO user VALUES (DEFAULT, 12345, 'TestAddress', 'TestEmail@Test.com', 0, 'TestFirstName', 'TestLogin', '$2a$10$hhBN0WC0n.uVnFk5hqfTsOu4bnJ2UlCogeqELgib.jXqMj4dC6MsK');
 
 INSERT INTO user_information VALUES (1, 23, 'Football, Video Game, Travel', 'JAVA, JAVAEE', 'yes', 'TestSurname');
 

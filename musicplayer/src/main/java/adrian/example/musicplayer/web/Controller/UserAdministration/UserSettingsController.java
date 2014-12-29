@@ -47,7 +47,7 @@ public class UserSettingsController {
 			RedirectAttributes redirectAttribustes){
 		
 		if(!(userAdministrationService.checkUserVerify(user_id, active_code))){    //redirect to error 403 if                                                          
-			redirectAttribustes.addFlashAttribute("errorMessage",                  //user not found
+			redirectAttribustes.addFlashAttribute("errorMessage",                  //user active code not match
 					"User not found or active_code not match");
 			return "redirect:/error403";                                           
 		}
@@ -63,7 +63,8 @@ public class UserSettingsController {
 		
 		if(!(principal.getName().equals(login))){
 			redirectAttributes.addFlashAttribute("errorMessage", 
-					login + messageError);
+					redirectAttributes.addFlashAttribute("errorMessage", 
+					login + messageError));
 			
 			 return "redirect:/error403";
 		}
@@ -117,8 +118,7 @@ public class UserSettingsController {
 	                                  @Validated(PasswordValidation.class) User user,
 		                              BindingResult result, Model model){
 		
-		
-		if(!(userAdministrationService.checkPassword(user.getUser_id(),CurrentPassword))){
+		if(!(userAdministrationService.checkPassword(user.getUser_id(), CurrentPassword))){
 			model.addAttribute("wrongCurrentPassword", "Wrong Password");
 		}
 		

@@ -134,16 +134,18 @@ public class UserDaoImpl  implements UserDao {
 	@Override
 	public boolean checkPassword(int user_id, String CurrentPassword) {
 		Session session = this.sessionFactory.getCurrentSession();
+		
 		User user  = (User) session.load(User.class, user_id);
 		String passwordUser = user.getPassword();
-		boolean passwordMatch = passwordEncoder.matches(CurrentPassword, passwordUser);
 		
+		boolean passwordMatch = passwordEncoder.matches(CurrentPassword, passwordUser);
 		return passwordMatch;
 	}
 
 	@Override
 	public void saveUser(User user) {
 		Session session = this.sessionFactory.getCurrentSession();
+		
 		
 		session.persist(user);
 		
