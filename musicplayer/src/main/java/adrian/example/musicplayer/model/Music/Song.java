@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
+import adrian.example.musicplayer.model.Music.playlist.PlaylistSong;
 
 @Entity
 @Table(name = "SONG", uniqueConstraints = 
@@ -49,6 +50,8 @@ public class Song implements Serializable {
 	@JoinColumn(name = "artist_id")
 	private Artist artist;
 	
+	@OneToMany(mappedBy = "song", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<PlaylistSong> playlistSong;
 
 	public int getSong_id() {
 		return song_id;
@@ -91,6 +94,14 @@ public class Song implements Serializable {
 
 	public void setArtist(Artist artist) {
 		this.artist = artist;
+	}
+
+	public Set<PlaylistSong> getPlaylistSong() {
+		return playlistSong;
+	}
+
+	public void setPlaylistSong(Set<PlaylistSong> playlistSong) {
+		this.playlistSong = playlistSong;
 	}
 
 	

@@ -1,12 +1,16 @@
 package adrian.example.musicplayer.model.Music.playlist;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -25,6 +29,9 @@ public class Playlist implements Serializable{
 	@Column(name = "name")
 	private String name;
 	
+	@OneToMany(mappedBy = "playlist", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<PlaylistSong> playlistSong;
+	
 	public int getPlaylist_id() {
 		return playlist_id;
 	}
@@ -35,6 +42,14 @@ public class Playlist implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<PlaylistSong> getPlaylistSong() {
+		return playlistSong;
+	}
+
+	public void setPlaylistSong(Set<PlaylistSong> playlistSong) {
+		this.playlistSong = playlistSong;
 	}
 
 }
