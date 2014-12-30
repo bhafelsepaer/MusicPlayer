@@ -16,3 +16,5 @@ INSERT INTO playlist VALUES (DEFAULT, 'TestPlaylist', 1);
 
 INSERT INTO playlist VALUES (DEFAULT, 'TestPlaylist2', 1);
 
+INSERT INTO playlist_song VALUES(DEFAULT, 1, 1);
+
