@@ -13,14 +13,28 @@
  
  <script>
   $(document).ready(function(){
+	  
 	  $(".addSong").on("click", function(){
 		  var position = $(this).position();
 		  $(this).parent('.playlistbutton').find(".playlistId")
 		                                   .css({right: position.left - 420,
 		                                	     top: position.top - 2});
 		  
-		  $(this).parent('.playlistbutton').find(".playlistId").toggle();
+		   $(this).parent('.playlistbutton').find(".playlistId").toggle();
      });
+	
+	  $(".playlistId").change(function(){
+		 var playlistToSaveSong = $(this).find('option:selected').val();
+		 var a = $.parseJSON(playlistToSaveSong)
+		 
+		 $.get("http://localhost:8080/musicplayer/saveSongToPlaylist",
+				 {song_id : a.song, playlist_id : a.playlist},
+				 function(response){
+				 });
+		 $(this).toggle();
+		 
+	  });
+	 
   });
  </script>
  
@@ -52,10 +66,10 @@
           <div class="playlistbutton">
              <button type="submit" class="addSong">AddSong</button>
                <div class='playlistId'>
-                <select name="choicePlaylist">
+                <select class="choicePlaylist">
                 <option selected disabled class="selectedPlaylist">Choose playlist</option>
 			       <c:forEach items='${loadedPlaylist}' var='actualPlaylist'>
-			         <option value='${actualPlaylist.name}'>${actualPlaylist.name}</option>
+			         <option value='{"playlist": "${actualPlaylist.playlist_id}", "song":"${song.song_id}"}'>${actualPlaylist.name}</option>
 			        </c:forEach>
 			     </select>
 	          </div>
