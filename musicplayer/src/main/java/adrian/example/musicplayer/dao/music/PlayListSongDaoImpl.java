@@ -6,11 +6,13 @@ import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import adrian.example.musicplayer.model.Music.Song;
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
 import adrian.example.musicplayer.model.Music.playlist.PlaylistSong;
 
+@Repository
 public class PlayListSongDaoImpl implements PlayListSongDao{
 
 	@Autowired
