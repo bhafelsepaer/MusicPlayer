@@ -26,7 +26,7 @@ public class PlaylistSong {
 	@JoinColumn(name = "playlist_id", nullable = false)
 	private Playlist playlist;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "song_id", nullable = false)
 	private Song song;
 	
