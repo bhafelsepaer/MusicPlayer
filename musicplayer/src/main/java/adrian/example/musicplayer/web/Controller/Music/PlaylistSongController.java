@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import adrian.example.musicplayer.service.music.PlayListSongService;
 
 @Controller
+@RequestMapping(value = "/playlist")
 public class PlaylistSongController {
 	
 	@Autowired
@@ -24,6 +25,14 @@ public class PlaylistSongController {
 		
 		this.playListSongService.savePlaylistSong(song_id, playlist_id);
 		return "succed";
+	}
+	
+	@RequestMapping(value = "/getSongPlaylist", method = RequestMethod.GET)
+	public String getSongPlaylist(
+			@RequestParam(value = "playlist_id", required = true) int  playlist_id){
+
+		  
+		return null;
 	}
 
 }
