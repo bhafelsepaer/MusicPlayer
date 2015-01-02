@@ -41,7 +41,7 @@ public class PlayListImplDaoTest {
 	
 	@Test
 	public void test_savePlaylist() {
-		this.playlistDao.savePlaylist(1, "TestPlaylist3");
+		this.playlistDao.savePlaylist(1, "TestPlaylist4");
 		Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistById(3);
 		assertEquals("Tested id", 3, testedPlaylist.getPlaylist_id());
 		assertEquals("Tested name", "TestPlaylist3", testedPlaylist.getName());
@@ -62,7 +62,7 @@ public class PlayListImplDaoTest {
 	@Test
 	public void test_deletePlaylist() {
 		List<Playlist> testedListPlaylist = (List<Playlist>) this.playlistDao.getPlaylistByUserId(1);
-		assertEquals("Tested size before delete", 2, testedListPlaylist.size());
+		assertEquals("Tested size before delete", 3, testedListPlaylist.size());
 		
 		Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistById(1);
 		assertEquals("Tested id of playlist", 1, testedPlaylist.getPlaylist_id());
@@ -71,7 +71,7 @@ public class PlayListImplDaoTest {
 		this.playlistDao.deletePlaylist(1);
 		
 		List<Playlist> deleted_testedPlaylist = (List<Playlist>) this.playlistDao.getPlaylistByUserId(1);
-		assertEquals("Tested size after delete", 1, deleted_testedPlaylist.size());
+		assertEquals("Tested size after delete", 2, deleted_testedPlaylist.size());
 	}
 
 }
