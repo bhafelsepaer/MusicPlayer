@@ -39,10 +39,10 @@ public class PlaylistServiceImplTest {
 	
 	@Test
 	public void test_savePlaylist() {
-		this.playListServiceImpl.savePlaylist(1, "TestPlaylist3");
-		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(3);
-		assertEquals("Tested id", 3, testedPlaylist.getPlaylist_id());
-		assertEquals("Tested name", "TestPlaylist3", testedPlaylist.getName());
+		this.playListServiceImpl.savePlaylist(1, "TestPlaylist4");
+		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(4);
+		assertEquals("Tested id", 4, testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name", "TestPlaylist4", testedPlaylist.getName());
 	}
 	
 	@Test
@@ -61,7 +61,7 @@ public class PlaylistServiceImplTest {
 	public void test_deletePlaylist() {
 		List<Playlist> testedListPlaylist = (List<Playlist>) this.playListServiceImpl
 				        .getPlaylistByUserId(1);
-		assertEquals("Tested size before delete", 2, testedListPlaylist.size());
+		assertEquals("Tested size before delete", 3, testedListPlaylist.size());
 		
 		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(1);
 		assertEquals("Tested id of playlist", 1, testedPlaylist.getPlaylist_id());
@@ -70,6 +70,6 @@ public class PlaylistServiceImplTest {
 		this.playListServiceImpl.deletePlaylist(1);
 		
 		List<Playlist> deleted_testedPlaylist = (List<Playlist>) this.playListServiceImpl.getPlaylistByUserId(1);
-		assertEquals("Tested size after delete", 1, deleted_testedPlaylist.size());
+		assertEquals("Tested size after delete", 2, deleted_testedPlaylist.size());
 	}
 }
