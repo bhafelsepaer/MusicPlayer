@@ -45,24 +45,37 @@ public class OverwiewMusicController {
 		    session.setAttribute("loadedPlaylist", 
 				this.playlistService.getPlaylistByUserId(user.getUser_id()));
 		}
+		
 		return "musicplayer/show_song";
 	}
 	
 	@RequestMapping(value = "/album/nightcore_album", method = RequestMethod.GET)
 	public String albumPage(
 			@RequestParam(value = "album_name", required = true) String album_name,
-		    HttpSession session){
+		    HttpSession session, Principal principal){
 		
 		session.setAttribute("loadedSong", this.musicService.getSongByAlbum(album_name));
+		if(principal != null){
+			User user = this.userService.findLogin(principal.getName());
+		    session.setAttribute("loadedPlaylist", 
+				this.playlistService.getPlaylistByUserId(user.getUser_id()));
+		}
+		
 		return "musicplayer/show_song";
 	}
 	
 	@RequestMapping(value = "/artist/nightcore_artist", method = RequestMethod.GET)
 	public String artistPage(
 			@RequestParam(value = "artist_name", required = true) String artist_name,
-		    HttpSession session){
+		    HttpSession session, Principal principal){
 		
 		session.setAttribute("loadedSong", this.musicService.getSongByArtist(artist_name));
+		if(principal != null){
+			User user = this.userService.findLogin(principal.getName());
+		    session.setAttribute("loadedPlaylist", 
+				this.playlistService.getPlaylistByUserId(user.getUser_id()));
+		}
+		
 		return "musicplayer/show_song";
 	}
 	
