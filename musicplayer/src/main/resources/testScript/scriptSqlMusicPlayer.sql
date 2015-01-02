@@ -12,9 +12,19 @@ INSERT INTO GENRES VALUES (DEFAULT, 'TestDescription', 'TestGenres');
 
 INSERT INTO SONG VALUES(DEFAULT, 'TestFileNameSong', 'TestNameSong', 1 ,1 ,1);
 
+INSERT INTO SONG VALUES(DEFAULT, 'TestFileNameSong2', 'TestNameSong2', 1 ,1 ,1);
+
+INSERT INTO SONG VALUES(DEFAULT, 'TestFileNameSong3', 'TestNameSong3', 1 ,1 ,1);
+
 INSERT INTO playlist VALUES (DEFAULT, 'TestPlaylist', 1);
 
 INSERT INTO playlist VALUES (DEFAULT, 'TestPlaylist2', 1);
 
+INSERT INTO playlist VALUES (DEFAULT, 'TestPlaylist3', 1);
+
 INSERT INTO playlist_song VALUES(DEFAULT, 1, 1);
+
+INSERT INTO playlist_song VALUES(DEFAULT, 1, 2);
+
+INSERT INTO playlist_song VALUES(DEFAULT, 1, 3);
 
