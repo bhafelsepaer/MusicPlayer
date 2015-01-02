@@ -1,5 +1,7 @@
 package adrian.example.musicplayer.service.music;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ public class PlayListSongServiceImpl implements PlayListSongService {
 
 	@Override
 	@Transactional
-	public PlaylistSong getPlaylistSongById(int playlistSongId) {
+	public List<PlaylistSong> getPlaylistSongById(int playlistSongId) {
 		return this.playlistSongDao.
 				   getPlaylistSongById(playlistSongId);
 	}
