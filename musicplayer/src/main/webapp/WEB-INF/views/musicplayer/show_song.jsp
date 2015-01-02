@@ -27,7 +27,7 @@
 		 var playlistToSaveSong = $(this).find('option:selected').val();
 		 var a = $.parseJSON(playlistToSaveSong)
 		 
-		 $.get("http://localhost:8080/musicplayer/saveSongToPlaylist",
+		 $.get("http://localhost:8080/musicplayer/playlist/saveSongToPlaylist",
 				 {song_id : a.song, playlist_id : a.playlist},
 				 function(response){
 				 });
