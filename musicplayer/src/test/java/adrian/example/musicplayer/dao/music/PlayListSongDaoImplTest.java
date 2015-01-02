@@ -2,6 +2,8 @@ package adrian.example.musicplayer.dao.music;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.Before;
@@ -31,31 +33,30 @@ public class PlayListSongDaoImplTest {
 
 	@Test
 	public void test_savePlaylistSong() {
-		this.playListSongDao.savePlaylistSong(1, 2);
+		this.playListSongDao.savePlaylistSong(1, 1);
+		List<PlaylistSong> playlistSong = 
+				this.playListSongDao.getPlaylistSongById(1);
 		
-		PlaylistSong playlistSong = 
-				this.playListSongDao.getPlaylistSongById(2);
-		
-		assertEquals(2, playlistSong.getPlaylistSong_id());
-		
-		assertEquals("TestNameSong", playlistSong.getSong().getName());
-		
-		assertEquals("TestPlaylist2", playlistSong.getPlaylist().getName());
+		assertEquals("Test Id from Entity PlayListSong", 
+				4, playlistSong.get(3).getPlaylistSong_id());
+		assertEquals("Test Song Name from Entity PlayListSong", 
+				"TestNameSong", playlistSong.get(3).getSong().getName());
+		assertEquals("Test Playlist Name from PlayListSong",
+				"TestPlaylist", playlistSong.get(3).getPlaylist().getName());
 	}
 	
 	@Test
 	public void test_getPlaylistById() {
-		PlaylistSong playlistSong = 
+		List<PlaylistSong> playlistSong = 
 				this.playListSongDao.getPlaylistSongById(1);
 		
-        assertEquals(1, playlistSong.getPlaylistSong_id());
-		
-		assertEquals("TestNameSong", playlistSong.getSong().getName());
-		
-		assertEquals("TestPlaylist", playlistSong.getPlaylist().getName());
-		
+		assertEquals("Test Size of List playlistSong", 
+				3, playlistSong.size());
+        assertEquals("Test Id From PlayListSong", 
+        		2, playlistSong.get(1).getPlaylistSong_id());
+		assertEquals("Test Song Name from Entity PlayListSong", 
+				"TestNameSong2", playlistSong.get(1).getSong().getName());
+		assertEquals("Test Playlist Name from Entity PlayListSong",
+				"TestPlaylist", playlistSong.get(1).getPlaylist().getName());
 	}
-	
-	
-
 }
