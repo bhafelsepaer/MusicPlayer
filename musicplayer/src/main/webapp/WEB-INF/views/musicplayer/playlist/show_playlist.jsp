@@ -91,7 +91,7 @@
   
    <core:forEach items="${playlist}" var="actualPlaylist">
      <div class="actual_playlist">
-      <div class="playlist_name"><a href='<spring:url value="/playlist/showPlaylistSong/{actualPlaylist.name}"/>' >
+      <div class="playlist_name"><a href="<spring:url value="/playlist/showPlaylistSong/${actualPlaylist.playlist_id}" />" >
                                    ${actualPlaylist.name}</a></div> 
       <button class="activePlaylistEdit">Edit</button>
        <div class="playlist_edit">
