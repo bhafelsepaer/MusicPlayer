@@ -47,7 +47,8 @@ public class PlayListSongDaoImpl implements PlayListSongDao{
 		
 		@SuppressWarnings("unchecked")
 		List<PlaylistSong> playlistSong = (List<PlaylistSong>) 
-				session.createQuery("FROM PlaylistSong playlistSong WHERE playlistSong.playlist.playlist_id  = :playlistSongId")
+				session.createQuery("FROM PlaylistSong playlistSong JOIN FETCH playlistSong.song "
+						+ "WHERE playlistSong.playlist.playlist_id  = :playlistSongId")
 				.setParameter("playlistSongId", playlistSongId).list();
 		
 		return playlistSong;
