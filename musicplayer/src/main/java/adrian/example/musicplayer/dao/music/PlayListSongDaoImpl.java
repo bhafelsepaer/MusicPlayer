@@ -1,6 +1,7 @@
 package adrian.example.musicplayer.dao.music;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -41,11 +42,13 @@ public class PlayListSongDaoImpl implements PlayListSongDao{
 	}
 
 	@Override
-	public PlaylistSong getPlaylistSongById(int playlistSongId) {
+	public List<PlaylistSong> getPlaylistSongById(int playlistSongId) {
 		Session session = this.SessionFactory.getCurrentSession();
 		
-		PlaylistSong playlistSong = (PlaylistSong) 
-				session.get(PlaylistSong.class, playlistSongId);
+		@SuppressWarnings("unchecked")
+		List<PlaylistSong> playlistSong = (List<PlaylistSong>) 
+				session.createQuery("FROM PlaylistSong playlistSong WHERE playlistSong.playlist.playlist_id  = :playlistSongId")
+				.setParameter("playlistSongId", playlistSongId).list();
 		
 		return playlistSong;
 	}
