@@ -74,7 +74,22 @@
    
     <bean id="musicService" 
           class="adrian.example.musicplayer.service.music.MusicServiceImpl" />
-          
+    
+    <bean id="playlistService"
+          class="adrian.example.musicplayer.service.music.PlaylistServiceImpl" />
+    
+    <bean id="playListDao"
+          class="adrian.example.musicplayer.dao.music.PlayListImplDao" />
+    
+    <bean id="userService"
+          class="adrian.example.musicplayer.service.user.UserServiceImpl" />
+    
+    <bean id="userDao"
+          class="adrian.example.musicplayer.dao.user.UserDaoImpl" />
+    
+    <bean name="bcryptEncoder"
+            class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+     
     <bean id="overwiewMusicController"
 		class="adrian.example.musicplayer.web.Controller.Music.OverwiewMusicController" />  
 		
