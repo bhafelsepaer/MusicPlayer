@@ -9,8 +9,6 @@
 		http://www.springframework.org/schema/mvc     http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<!-- Enables the Spring MVC @Controller programming model -->
-	<mvc:annotation-driven />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -77,8 +75,19 @@
    
    <bean id="playlistSongDao" 
          class="adrian.example.musicplayer.dao.music.PlayListSongDaoImpl" />
+
+   <bean id="musicService"
+         class="adrian.example.musicplayer.service.music.MusicServiceImpl" />
+         
+   <bean id="musicPlayerDao"
+         class="adrian.example.musicplayer.dao.music.MusicPlayerDaoImpl" />
+   
+   <bean id="playlistService"
+         class="adrian.example.musicplayer.service.music.PlaylistServiceImpl" />
+   
+   <bean id="playListDao" 
+         class="adrian.example.musicplayer.dao.music.PlayListImplDao" />
    
    <bean id="playlistSongController"
          class="adrian.example.musicplayer.web.Controller.Music.PlaylistSongController" />
-   
 </beans>
