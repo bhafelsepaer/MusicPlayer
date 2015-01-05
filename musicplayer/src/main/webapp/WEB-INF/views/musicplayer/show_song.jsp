@@ -27,14 +27,20 @@
 		 var playlistToSaveSong = $(this).find('option:selected').val();
 		 var a = $.parseJSON(playlistToSaveSong)
 		 
-		 $.get("http://localhost:8080/musicplayer/playlist/saveSongToPlaylist",
-				 {song_id : a.song, playlist_id : a.playlist},
-				 function(response){
-				 });
+		 $.ajax({
+			type: "GET",
+			url: "http://localhost:8080/musicplayer/playlist/saveSongToPlaylist",
+			data:  {song_id : a.song, playlist_id : a.playlist},
+			success: function(response){
+				alert(response);
+			},
+			error: function(xhr, ajaxOptions, thrownError){
+				alert(thrownError);
+			}
+		 });
+		 $(this).find(".choicePlaylist").prop('selectedIndex', 0);
 		 $(this).toggle();
-		 
 	  });
-	 
   });
  </script>
  
@@ -49,7 +55,9 @@
 
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/fragments/sidebar.jsp" />
+<div id="sidebar">
+   <jsp:include page="/WEB-INF/views/fragments/sidebar.jsp" />
+</div>
 <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
 
 <security:authorize access="permitAll">
@@ -60,7 +68,9 @@
     </tr>
     <c:forEach items="${loadedSong}" var="song" varStatus="xd">
      <tr>
-        <td><a href="/musicplayer/playSong?song_id=${song.song_id}">${song.name}</a></td>
+        <td><div class="activeSong">
+           <a href="/musicplayer/playSong?song_id=${song.song_id}">${song.name}</a>
+       </div></td>
       <security:authorize access="isAuthenticated()">
         <td>
           <div class="playlistbutton">
