@@ -114,8 +114,6 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
-		
-		
 
 		<!-- Hibernates -->
 		<dependency>
