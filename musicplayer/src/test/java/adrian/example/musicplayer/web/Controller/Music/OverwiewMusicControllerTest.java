@@ -98,8 +98,8 @@ public class OverwiewMusicControllerTest {
 				    .andExpect(forwardedUrl("/WEB-INF/views/musicplayer/show_song.jsp"));
 	}
 	
-	/*@Test
-	public void test_choiseSong() throws Exception {
+	@Test
+	public void test_showeSong() throws Exception {
 		Song song = this.musicService.loadSongById(1);
 		
 		this.mockMvc.perform(get("/playSong")
@@ -109,5 +109,5 @@ public class OverwiewMusicControllerTest {
 				    .andExpect(view().name("musicplayer/show_song"))
 				    .andExpect(status().isOk())
 				    .andExpect(forwardedUrl("/WEB-INF/views/musicplayer/show_song.jsp"));
-	}*/
+	}
 }
