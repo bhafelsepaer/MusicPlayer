@@ -23,7 +23,6 @@ import adrian.example.musicplayer.model.User.UserInformation;
 import adrian.example.musicplayer.service.AdministrationAccount.UserAdministrationService;
 import adrian.example.musicplayer.service.list.UserInformationServiceList;
 import adrian.example.musicplayer.service.user.UserServiceImpl;
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;

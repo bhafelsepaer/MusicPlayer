@@ -6,6 +6,7 @@ import adrian.example.musicplayer.model.Music.Song;
 
 public interface MusicPlayerDao {
 	
+	
 	List<Song> getSongByGenre(String genre_name);
 	
 	List<Song> getSongByAlbum(String album_name);

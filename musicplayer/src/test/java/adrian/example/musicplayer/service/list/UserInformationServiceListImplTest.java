@@ -23,8 +23,7 @@ public class UserInformationServiceListImplTest {
 	UserInformationServiceList userInformationServiceListImpl;
 	
 	@Before
-	public void setUp() throws Exception {
-	}
+	public void setUp() throws Exception {}
 
 	@Test
 	public void test_getInterest() {

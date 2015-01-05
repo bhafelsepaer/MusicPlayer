@@ -16,6 +16,7 @@
  
  <script type="text/javascript">
     $(document).ready(function(){
+    	
       $("#jquery_jplayer_1").jPlayer({
         ready: function () {
           $(this).jPlayer("setMedia", {

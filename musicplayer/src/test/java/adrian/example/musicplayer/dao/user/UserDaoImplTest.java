@@ -30,10 +30,8 @@ public class UserDaoImplTest {
 	@Autowired
 	private BCryptPasswordEncoder bcryptEncoder;
 	
-	
 	@Before
-	public void setUp() throws Exception {
-	}
+	public void setUp() throws Exception {}
 	
 	@Test
 	public void saveUser() throws Exception {

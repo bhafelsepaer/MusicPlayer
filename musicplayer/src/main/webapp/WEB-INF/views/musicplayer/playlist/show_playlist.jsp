@@ -73,7 +73,6 @@
    $('.playlist_delete a').click(function(e){
 	   e.preventDefault();
 	   var playlist_id = $(this).data('playlist-id');
-	   alert(playlist_id);
 	   var playlist_name = $(this).data('playlist-name');
 	   $.get('http://localhost:8080/musicplayer/playlist/delete',
 			 {playlist_id : playlist_id, playlist_name: playlist_name}, function(response){
@@ -100,7 +99,7 @@
                 <input type="text" value="${actualPlaylist.name}" name="playlist_name">
                 <input type="submit" value="update" class="submitButton">
                 <div class="playlist_delete">
-                  <a href="http://localhost:8080/musicplayer/playlist/delete" 
+                <a href="http://localhost:8080/musicplayer/playlist/delete" 
                      data-playlist-id="${actualPlaylist.playlist_id}" data-playlist-name="${actualPlaylist.name}">
                      delete</a></div>
           </form>

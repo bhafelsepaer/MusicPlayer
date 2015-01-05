@@ -9,7 +9,7 @@
 
     <description>Add all Service to applicatonContext from adrian.example.musicplayer.service</description>
     
-     <context:component-scan base-package="adrian.example.musicplayer.service" />
+    <context:component-scan base-package="adrian.example.musicplayer.service" />
      
 </beans>
 	

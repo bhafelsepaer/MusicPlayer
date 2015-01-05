@@ -14,9 +14,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
-import static org.mockito.Mockito.*;  
 
-import adrian.example.musicplayer.dao.music.PlayListDao;
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
 import adrian.example.musicplayer.service.music.PlaylistService;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;

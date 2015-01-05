@@ -17,7 +17,6 @@ public class ActiveAccountByEmail implements ActiveAccount {
 		msg.setTo(email);
 		msg.setText("http://localhost:8080/musicplayer/verify?user_id=" + user_id + 
 				    "&active_code=" + active_code);
-		
 		try{
 			this.mailSender.send(msg);
 		}catch(MailException e){
