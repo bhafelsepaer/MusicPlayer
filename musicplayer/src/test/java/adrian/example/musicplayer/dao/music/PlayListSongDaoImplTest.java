@@ -28,27 +28,26 @@ public class PlayListSongDaoImplTest {
 	PlayListSongDao playListSongDao;
 	
 	@Before
-	public void setUp() throws Exception {
-	}
+	public void setUp() throws Exception {}
 
 	@Test
 	public void test_savePlaylistSong() {
-		this.playListSongDao.savePlaylistSong(1, 1);
+		this.playListSongDao.savePlaylistSong(1, 2);
 		List<PlaylistSong> playlistSong = 
-				this.playListSongDao.getPlaylistSongById(1);
+				this.playListSongDao.getListOfPlaylistSongById(2);
 		
 		assertEquals("Test Id from Entity PlayListSong", 
-				4, playlistSong.get(3).getPlaylistSong_id());
+				4, playlistSong.get(0).getPlaylistSong_id());
 		assertEquals("Test Song Name from Entity PlayListSong", 
-				"TestNameSong", playlistSong.get(3).getSong().getName());
+				"TestNameSong", playlistSong.get(0).getSong().getName());
 		assertEquals("Test Playlist Name from PlayListSong",
-				"TestPlaylist", playlistSong.get(3).getPlaylist().getName());
+				"TestPlaylist2", playlistSong.get(0).getPlaylist().getName());
 	}
 	
 	@Test
-	public void test_getPlaylistById() {
+	public void test_getListOfPlaylistSongById() {
 		List<PlaylistSong> playlistSong = 
-				this.playListSongDao.getPlaylistSongById(1);
+				this.playListSongDao.getListOfPlaylistSongById(1);
 		
 		assertEquals("Test Size of List playlistSong", 
 				3, playlistSong.size());
@@ -58,5 +57,38 @@ public class PlayListSongDaoImplTest {
 				"TestNameSong2", playlistSong.get(1).getSong().getName());
 		assertEquals("Test Playlist Name from Entity PlayListSong",
 				"TestPlaylist", playlistSong.get(1).getPlaylist().getName());
+	}
+	
+	@Test
+	public void test_getPlaylistSong() {
+		PlaylistSong playlistSong = 
+				this.playListSongDao.getPlaylistSong(1, 1);
+		
+		assertEquals("Test PlaylistSong Id", 
+				1, playlistSong.getPlaylistSong_id());
+		assertEquals("Test Song Id", 
+				1, playlistSong.getSong().getSong_id());
+		assertEquals("Test Playlist Id", 
+				1, playlistSong.getPlaylist().getPlaylist_id());
+		assertEquals("Test Name of Song", 
+				"TestNameSong", playlistSong.getSong().getName());
+		assertEquals("Test Playlist Name", 
+				"TestPlaylist", playlistSong.getPlaylist().getName());
+	}
+	
+	@Test 
+	public void test_deleteSongFromPlaylistSong() {
+		List<PlaylistSong> listPlaylistSongBeforeDelate = 
+				this.playListSongDao.getListOfPlaylistSongById(1);
+	    
+		assertEquals("Test Size list of playlistSong", 
+				3, listPlaylistSongBeforeDelate.size());
+		
+	   this.playListSongDao.deleteSongFromPlaylistSong(1, 1);
+	   
+	   List<PlaylistSong> listPlaylistSongAfterDelate = 
+				this.playListSongDao.getListOfPlaylistSongById(1);
+	   
+	   assertEquals(2, listPlaylistSongAfterDelate.size());
 	}
 }
