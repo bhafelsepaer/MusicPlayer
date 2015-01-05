@@ -10,11 +10,22 @@
  <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
  <jsp:include page="/WEB-INF/views/fragments/sidebar.jsp" />
  <jsp:include page="/WEB-INF/views/fragments/settingsFragment.jsp" />
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+   $(document).ready(function(){
+       $(".deleteSong").on("click", function(){
+    	    var song_id = $(this).data("song-id");
+    	    
+       });
+   });
+ </script>
 </head>
 <body>
 <security:authorize access="isAuthenticated()">
-<core:forEach items="${SongInPlaylist}" var="song">
-  <a href="/musicplayer/playSong?song_id=${song.song_id}">${song.name}</a></br>
+<core:forEach items="${songInPlaylist}" var="song">
+  <a href="/musicplayer/playlist/playSongFromPlaylist?song_id=${song.song_id}">${song.name}</a>
+  <button class="deleteSong" type="button" data-song-id=${song.song_id}>Delete</button></br>
 </core:forEach>
 </security:authorize>
 </body>
