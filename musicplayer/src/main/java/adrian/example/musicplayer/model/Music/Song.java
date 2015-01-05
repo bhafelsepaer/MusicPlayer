@@ -38,19 +38,19 @@ public class Song implements Serializable {
 	@Column(name = "filename", length = 255, nullable = false)
 	private String filename;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "genre_id")
 	private Genres genres;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "album_id")
 	private Album album;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "artist_id")
 	private Artist artist;
 	
-	@OneToMany(mappedBy = "song", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "song", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<PlaylistSong> playlistSong;
 
 	public int getSong_id() {
