@@ -10,11 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import adrian.example.musicplayer.model.Music.Song;
 
 @Entity
-@Table(name = "playlist_song")
+@Table(name = "playlist_song",
+       uniqueConstraints = 
+       @UniqueConstraint(columnNames = {"song_id", "playlist_id"}))
 public class PlaylistSong {
    
 	@Id
@@ -22,11 +28,11 @@ public class PlaylistSong {
 	@Column(name = "playlist_song_id")
 	private int playlistSong_id;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "playlist_id", nullable = false)
 	private Playlist playlist;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "song_id", nullable = false)
 	private Song song;
 	
@@ -49,7 +55,4 @@ public class PlaylistSong {
 	public void setPlaylist(Playlist playlist) {
 		this.playlist = playlist;
 	}
-	
-	
-	
 }
