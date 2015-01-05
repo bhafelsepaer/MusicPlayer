@@ -23,6 +23,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	}
 	
 	@Override
+	@Transactional
 	public Playlist getPlaylistById(int playlist_id) {
 		return this.playListDao.getPlaylistById(playlist_id);
 	}

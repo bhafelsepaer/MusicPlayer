@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ import adrian.example.musicplayer.model.Music.Song;
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
 import adrian.example.musicplayer.model.Music.playlist.PlaylistSong;
 
-@Repository
-public class PlayListSongDaoImpl implements PlayListSongDao{
+@Repository("playlistSongDao")
+public class PlayListSongDaoImpl implements PlayListSongDao {
 
 	@Autowired
 	private SessionFactory SessionFactory;
@@ -42,16 +43,40 @@ public class PlayListSongDaoImpl implements PlayListSongDao{
 	}
 
 	@Override
-	public List<PlaylistSong> getPlaylistSongById(int playlistSongId) {
+	public List<PlaylistSong> getListOfPlaylistSongById(int playlistId) {
 		Session session = this.SessionFactory.getCurrentSession();
 		
 		@SuppressWarnings("unchecked")
 		List<PlaylistSong> playlistSong = (List<PlaylistSong>) 
 				session.createQuery("FROM PlaylistSong playlistSong JOIN FETCH playlistSong.song "
 						+ "WHERE playlistSong.playlist.playlist_id  = :playlistSongId")
-				.setParameter("playlistSongId", playlistSongId).list();
+				.setParameter("playlistSongId", playlistId).list();
 		
 		return playlistSong;
 	}
 
+	@Override
+	public void deleteSongFromPlaylistSong(int playlist_id, int song_id) {
+		Session session = this.SessionFactory.getCurrentSession();
+		
+		Query query = session.createQuery("DELETE PlaylistSong playlistSong "
+				+ "WHERE playlistSong.playlist.playlist_id = :playlist_id AND "
+				+ "playlistSong.song.song_id = :song_id");
+		query.setParameter("playlist_id", playlist_id);
+		query.setParameter("song_id", song_id);
+		
+		query.executeUpdate();
+	}
+
+	@Override
+	public PlaylistSong getPlaylistSong(int playlist_id, int song_id) {
+		Session session = this.SessionFactory.getCurrentSession();
+		
+		PlaylistSong playlistSong = (PlaylistSong) session.createQuery(""
+				+ "FROM PlaylistSong playlistSong WHERE playlistSong.playlist.playlist_id = :playlist_id AND "
+				+ "playlistSong.song.song_id = :song_id").setParameter("playlist_id", playlist_id)
+				.setParameter("song_id", song_id).uniqueResult();
+		
+		return playlistSong;
+	}
 }
