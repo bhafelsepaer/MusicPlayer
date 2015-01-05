@@ -8,5 +8,10 @@ public interface PlayListSongDao {
 
 	void savePlaylistSong(int song_id, int playlist_id);
 	
-	List<PlaylistSong> getPlaylistSongById(int playlistSongId);
+	List<PlaylistSong> getListOfPlaylistSongById(int playlistId);
+	
+	PlaylistSong getPlaylistSong(int playlist_id, int song_id);
+	
+	void deleteSongFromPlaylistSong(int playlist_id, int song_id);
+	
 }
