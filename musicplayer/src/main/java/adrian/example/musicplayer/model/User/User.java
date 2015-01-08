@@ -2,7 +2,6 @@ package adrian.example.musicplayer.model.User;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,13 +20,13 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import adrian.example.musicplayer.model.Music.RateSong;
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
 import adrian.example.musicplayer.validation.userValidation.CheckUserExist;
 import adrian.example.musicplayer.validation.userValidation.EmailEqualsConstraint;
@@ -104,6 +103,9 @@ public class User implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", insertable = true, nullable = false)
 	private Set<Playlist> playlist;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	private Set<RateSong> rateSong;
 	
 	public User() {}
 	
@@ -206,6 +208,14 @@ public class User implements Serializable{
 
 	public void setPlaylist(Set<Playlist> playlist) {
 		this.playlist = playlist;
+	}
+
+	public Set<RateSong> getRateSong() {
+		return rateSong;
+	}
+
+	public void setRateSong(Set<RateSong> rateSong) {
+		this.rateSong = rateSong;
 	}
 
 	public interface PasswordValidation {};
