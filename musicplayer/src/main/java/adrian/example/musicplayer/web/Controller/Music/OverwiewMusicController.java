@@ -36,12 +36,10 @@ public class OverwiewMusicController {
 	@Autowired
 	UserService userService;
 	
-	
 	@RequestMapping(value = "/genre/nightcore_genre", method = RequestMethod.GET)
 	public String genrePage(
 			@RequestParam(value = "genre_name", required = true) String genre_name,
 			HttpSession session, Principal principal) {
-		
 		
 		session.setAttribute("loadedSong", this.musicService.getSongByGenre(genre_name));
 		if(principal != null){
@@ -49,7 +47,6 @@ public class OverwiewMusicController {
 		    session.setAttribute("loadedPlaylist", 
 				this.playlistService.getPlaylistByUserId(user.getUser_id()));
 		}
-		
 		return "musicplayer/show_song";
 	}
 	
@@ -87,8 +84,8 @@ public class OverwiewMusicController {
 	public String showSong(@RequestParam(value="song_id", required = true)
 	                         int song_id, Model model) {
 		
-		Song song = musicService.loadSongById(song_id);
-		model.addAttribute("location",song.getFilename());
+		Song song = this.musicService.getSongById(song_id);
+		model.addAttribute("location", song.getFilename());
 		model.addAttribute("SongName", song.getName());
 		
 		return "musicplayer/show_song";
