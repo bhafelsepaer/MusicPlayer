@@ -14,8 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import adrian.example.musicplayer.model.User.User;
-
 @Entity
 @Table(name = "playlist", uniqueConstraints = 
        @UniqueConstraint(columnNames = "name"))
