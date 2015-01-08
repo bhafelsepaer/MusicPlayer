@@ -41,8 +41,14 @@
 		<!-- enable csrf protection -->
 		<csrf />
 		
+	   <session-management>
+           <concurrency-control max-sessions="1" error-if-maximum-exceeded="true"/>
+       </session-management>
 	</http>
 
+
+   
+    
    <beans:bean name="bcryptEncoder"
      class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
     
