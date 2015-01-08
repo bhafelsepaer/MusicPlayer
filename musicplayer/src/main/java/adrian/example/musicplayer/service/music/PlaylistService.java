@@ -8,7 +8,7 @@ public interface PlaylistService {
 	
 	List<Playlist> getPlaylistByUserId(int user_id);
 	
-	Playlist getPlaylistById(int playlist_id);
+	Playlist getPlaylistByPlaylistId(int playlist_id);
 	
 	void savePlaylist(int user_id, String playlistName);
 	
