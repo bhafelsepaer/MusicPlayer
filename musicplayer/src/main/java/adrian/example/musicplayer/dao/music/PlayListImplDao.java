@@ -29,7 +29,7 @@ public class PlayListImplDao implements PlayListDao {
 	}
 	
 	@Override
-	public Playlist getPlaylistById(int playlist_id) {
+	public Playlist getPlaylistByPlaylistId(int playlist_id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		Playlist playlist = (Playlist) session.get(Playlist.class, playlist_id);
