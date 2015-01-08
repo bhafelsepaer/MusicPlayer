@@ -2,10 +2,9 @@ package adrian.example.musicplayer.service.music;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import adrian.example.musicplayer.dao.music.PlayListDao;
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
@@ -17,15 +16,15 @@ public class PlaylistServiceImpl implements PlaylistService {
 	PlayListDao playListDao;
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Playlist> getPlaylistByUserId(int user_id) {
 		return this.playListDao.getPlaylistByUserId(user_id);
 	}
 	
 	@Override
-	@Transactional
-	public Playlist getPlaylistById(int playlist_id) {
-		return this.playListDao.getPlaylistById(playlist_id);
+	@Transactional(readOnly = true)
+	public Playlist getPlaylistByPlaylistId(int playlist_id) {
+		return this.playListDao.getPlaylistByPlaylistId(playlist_id);
 	}
 
 	@Override
