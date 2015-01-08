@@ -12,5 +12,5 @@ public interface MusicService {
 	
 	List<Song> getSongByArtist(String artist_name);
 	
-	Song loadSongById(int id);
+	Song getSongById(int id);
 }

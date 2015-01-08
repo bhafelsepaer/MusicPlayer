@@ -11,8 +11,6 @@
  <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
  <jsp:include page="/WEB-INF/views/fragments/settingsFragment.jsp" />
  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
- <link rel="stylesheet" href='<spring:url value="/resources/css/contextMenu/jquery.contextMenu.css"/>' />
- <script src='<spring:url value="/resources/javascript/contextMenu/jquery.contextMenu.js"/>'></script>
  
  
 <script>
