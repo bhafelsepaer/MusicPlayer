@@ -45,7 +45,7 @@ public class UserInformation implements Serializable{
 	@Column(name = "programming_skill", length = 255, nullable = true)
 	private String programmingSkill;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@PrimaryKeyJoinColumn
 	private User user;
 
