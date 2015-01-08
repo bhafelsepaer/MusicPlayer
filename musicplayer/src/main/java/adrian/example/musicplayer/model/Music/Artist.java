@@ -20,7 +20,6 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "ARTIST", uniqueConstraints = 
       { @UniqueConstraint(columnNames = "name")})
-
 public class Artist implements Serializable{
 	
 	@Id
