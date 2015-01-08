@@ -60,7 +60,7 @@ public class WelcomeControllerTest {
 		            .andExpect(view().name(containsString("home")))
 		            .andExpect(request().sessionAttribute("user_id", user_id))
 		            .andExpect(request().sessionAttribute("playlist", 
-		            		   this.playListService.getPlaylistById(user_id)))
+		            		   this.playListService.getPlaylistByPlaylistId(user_id)))
 		            .andExpect(forwardedUrl("/WEB-INF/views/home.jsp"))
 		            .andExpect(status().isOk());
 	}
