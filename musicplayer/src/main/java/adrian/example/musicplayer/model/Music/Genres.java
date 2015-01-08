@@ -3,6 +3,7 @@ package adrian.example.musicplayer.model.Music;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +32,7 @@ public class Genres implements Serializable {
 	@Column(name = "description", length = 255, nullable = true)
 	private String genresDescription;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Song> song;
 	
 	public int getGenres_id() {
