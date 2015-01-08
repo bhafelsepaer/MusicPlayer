@@ -43,8 +43,8 @@ public class PlaylistSongController {
 			@RequestParam(value = "playlist_id", required = true) int playlist_id){
 		
 		this.playListSongService.savePlaylistSong(song_id, playlist_id);
-        Song song = this.musicService.loadSongById(song_id);		
-        Playlist playlist = this.playlistService.getPlaylistById(playlist_id);
+        Song song = this.musicService.getSongById(song_id);		
+        Playlist playlist = this.playlistService.getPlaylistByPlaylistId(playlist_id);
         
 		return "succed save song: " + song.getName() + " to playlist: " + playlist.getName();
 	}
@@ -66,15 +66,26 @@ public class PlaylistSongController {
 		return "musicplayer/playlist/showSongInPlaylist";
 	}
 	
-	@RequestMapping(value = "/playSongFromPlaylist", method = RequestMethod.GET)
+	@RequestMapping(value = "/playSongFromPlaylist/{playlist_id}/{song_id}", method = RequestMethod.GET)
 	public String playSongFromPlaylist(
-			@RequestParam(value = "song_id", required = true) int song_id,
+			@PathVariable(value = "playlist_id") int playlist_id,
+			@PathVariable(value = "song_id") int song_id,
 			Model model){
 		
-		Song song = this.musicService.loadSongById(song_id);
-		model.addAttribute("location",song.getFilename());
+		Song song = this.musicService.getSongById(song_id);
+		model.addAttribute("location", song.getFilename());
 		model.addAttribute("SongName", song.getName());
 		
 		return  "musicplayer/playlist/showSongInPlaylist";
+	}
+	
+	@RequestMapping(value = "/deleteSongFromPlaylist/{playlist_id}/{song_id}", method = RequestMethod.GET)
+	public String deleteSongFromPlaylist(
+			@PathVariable(value = "playlist_id") int playlist_id,
+			@PathVariable(value = "song_id") int song_id){
+		
+		this.playListSongService.deleteSongFromPlaylistSong(playlist_id, song_id);
+		
+		return "redirect:/playlist/showPlaylistSong/" + playlist_id;
 	}
 }
