@@ -50,12 +50,8 @@ public class UserDaoImpl  implements UserDao {
 	    User user = (User) session
 	    .createQuery("FROM User WHERE login = :login")
 	    .setParameter("login", login).uniqueResult();
-		
-	    if(user != null){
-	    	 return user;
-	    }else{
-	    	return null;
-	    }
+	    
+	    return user;
 	}
 	
 	@Override
@@ -92,7 +88,8 @@ public class UserDaoImpl  implements UserDao {
 	}
 	
 	@Override
-	public void updatePassword(int user_id, String password) {
+	public void updatePassword(int user_id, String password)
+			throws ObjectNotFoundException{
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		User user = (User) session.load(User.class, user_id);
@@ -113,11 +110,10 @@ public class UserDaoImpl  implements UserDao {
 	
 	@Override
 	public void updateOrSaveUserInformation(int user_id,
-			UserInformation userInformation) throws ObjectNotFoundException {
+			UserInformation userInformation) {
 		Session session = this.sessionFactory.getCurrentSession();
 	
 		User user = (User) session.get(User.class, user_id);
-		
 		
 	    UserInformation userInfo = user.getUserInformation();
 		userInfo.setAge(userInformation.getAge());
@@ -132,12 +128,12 @@ public class UserDaoImpl  implements UserDao {
 	}
 
 	@Override
-	public boolean checkPassword(int user_id, String CurrentPassword) {
+	public boolean checkPassword(int user_id, String CurrentPassword) 
+    	throws ObjectNotFoundException {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		User user  = (User) session.load(User.class, user_id);
 		String passwordUser = user.getPassword();
-		
 		boolean passwordMatch = passwordEncoder.matches(CurrentPassword, passwordUser);
 		return passwordMatch;
 	}
@@ -145,8 +141,6 @@ public class UserDaoImpl  implements UserDao {
 	@Override
 	public void saveUser(User user) {
 		Session session = this.sessionFactory.getCurrentSession();
-		
-		
 		session.persist(user);
 		
 		RoleUser roleUser = new RoleUser();
