@@ -34,7 +34,6 @@ public class PlaylistController {
 			      @RequestParam(value = "playlistName", required = true) String playlistName) {
 		    
 		this.playListService.savePlaylist(user_id, playlistName);
-		
 		return "saved_playlist " + playlistName;
 	}
 	
@@ -55,7 +54,6 @@ public class PlaylistController {
 			@RequestParam(value = "playlist_name", required = true) String playlist_name){
 		
 		this.playListService.deletePlaylist(playlist_id);
-		
 		return "delete_playlist " + playlist_name;
 	}
 }
