@@ -60,10 +60,10 @@ public class PlaylistSongControllerTest {
 		int playlist_id = 2;
 		
 		Song song = 
-				this.musicService.loadSongById(song_id);
+				this.musicService.getSongById(song_id);
 		
 		Playlist playlist = 
-				this.playlistService.getPlaylistById(playlist_id);
+				this.playlistService.getPlaylistByPlaylistId(playlist_id);
 		
 		this.mockMvc.perform(get("/playlist/saveSongToPlaylist")
 				    .param("song_id", "" + song_id)
@@ -99,11 +99,12 @@ public class PlaylistSongControllerTest {
 	@Test
 	public void test_playSongFromPlaylist() throws Exception {
 		int song_id = 1;
-		
+		int playlist_id = 1;
 		Song song = 
-				this.musicService.loadSongById(song_id);
+				this.musicService.getSongById(song_id);
 		
-		this.mockMvc.perform(get("/playlist/playSongFromPlaylist")
+		this.mockMvc.perform(
+				get("/playlist/playSongFromPlaylist/" + playlist_id + "/" + song_id)
 				.param("song_id", "" + song_id))
 				.andExpect(model().attribute("location", song.getFilename()))
 				.andExpect(model().attribute("SongName", song.getName()))

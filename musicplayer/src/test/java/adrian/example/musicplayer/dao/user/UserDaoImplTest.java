@@ -34,7 +34,7 @@ public class UserDaoImplTest {
 	public void setUp() throws Exception {}
 	
 	@Test
-	public void saveUser() throws Exception {
+	public void test_saveUser() throws Exception {
 		User userToSave = new User();
 		userToSave.setLogin("User2");
 		userToSave.setActive_cod(54321);
@@ -59,14 +59,14 @@ public class UserDaoImplTest {
 	} 
 	
 	@Test
-	public void getUser_id() throws Exception {
+	public void test_getUser_id() throws Exception {
 		int user_id = userDaoImpl.getUser_id("TestLogin");
 		
 		assertEquals("Tested User id" ,1 , user_id);
 	} 
 	
 	@Test
-	public void findLogin() throws Exception {
+	public void test_findUserByLogin() throws Exception {
 		User user = this.userDaoImpl.findUserByLogin("TestLogin");
 		
 		assertEquals("Tested User id", 1, user.getUser_id());
@@ -81,7 +81,7 @@ public class UserDaoImplTest {
 	
 	
 	@Test
-	public void findUserById() throws Exception {
+	public void test_findUserById() throws Exception {
 		User user = (User) this.userDaoImpl.findUserById(1);
 		
 		assertEquals("Tested User id", 1, user.getUser_id());
@@ -96,7 +96,7 @@ public class UserDaoImplTest {
 	} 
 	
 	@Test
-	public void getUserInformationById() throws Exception {
+	public void test_etUserInformationById() throws Exception {
 		UserInformation userInformation = this.userDaoImpl.getUserInformationById(1);
 		
 		assertEquals("Tested UserInformation id", 1, userInformation.getUser_information_id());
@@ -109,7 +109,7 @@ public class UserDaoImplTest {
 	} 
 	
 	@Test
-	public void updateUserInformation() throws Exception {
+	public void test_updateUserInformation() throws Exception {
 		
 		User userBeforeUpdate = (User) this.userDaoImpl.findUserById(1);
 		
@@ -127,7 +127,7 @@ public class UserDaoImplTest {
 	} 
 	
 	@Test
-	public void updatePassword() throws Exception {
+	public void test_updatePassword() throws Exception {
 		User userBeforeUpdate = (User) this.userDaoImpl.findUserById(1);
 		
 		assertEquals("Tested Password Before Update", 
@@ -143,7 +143,7 @@ public class UserDaoImplTest {
 	} 
 	
 	@Test
-	public void updateEmail() throws Exception {
+	public void test_updateEmail() throws Exception {
 		User userBeforeUpdate = (User) this.userDaoImpl.findUserById(1);
 		
 		assertEquals("Tested user email before update", "TestEmail@Test.com",
@@ -158,7 +158,7 @@ public class UserDaoImplTest {
 	} 
 	
 	@Test
-	public void updateOrSaveInformation() throws Exception {
+	public void test_updateOrSaveInformation() throws Exception {
         
 		User user = (User) this.userDaoImpl.findUserById(1);
 		
@@ -200,21 +200,21 @@ public class UserDaoImplTest {
 	} 
   
   @Test
-  public void checkPassword() throws Exception {
+  public void test_checkPassword() throws Exception {
 	  User user = (User) this.userDaoImpl.findUserById(1);
 	  assertTrue("Tested Password", userDaoImpl.checkPassword(user.getUser_id(), 
 			      "TestPassword12345@"));
   }
   
   @Test
-  public void checkUserVerify() throws Exception {
+  public void test_checkUserVerify() throws Exception {
 	  User user = (User) this.userDaoImpl.findUserById(1);
 	  assertTrue("Test User verify active code",
 			  this.userDaoImpl.checkUserVerify(user.getUser_id(), 12345));
   }
   
   @Test
-  public void setEnebledTrue() throws Exception {
+  public void test_setEnebledTrue() throws Exception {
 	  User userBeforeEnabled = (User) this.userDaoImpl.findUserById(1);
 	  assertFalse("Tested Enabled before update", userBeforeEnabled.isEnabled());
 	  

@@ -100,7 +100,7 @@ public class OverwiewMusicControllerTest {
 	
 	@Test
 	public void test_showeSong() throws Exception {
-		Song song = this.musicService.loadSongById(1);
+		Song song = this.musicService.getSongById(1);
 		
 		this.mockMvc.perform(get("/playSong")
 				    .param("song_id", "1"))

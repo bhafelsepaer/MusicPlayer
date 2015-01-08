@@ -62,7 +62,7 @@ public class MusicServiceImplTest {
 	
 	@Test
 	public void testloadSongById() {
-		Song loadedSong = this.musicServiceImpl.loadSongById(1);
+		Song loadedSong = this.musicServiceImpl.getSongById(1);
 		assertEquals("Tested SongId", 1, loadedSong.getSong_id());
 		assertEquals("Tested Name", "TestNameSong", loadedSong.getName());
 		assertEquals("Tested FileName", "TestFileNameSong", loadedSong.getFilename());

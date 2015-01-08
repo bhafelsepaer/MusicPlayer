@@ -63,7 +63,7 @@ public class MusicPlayerDaoImplTest {
 	
 	@Test 
 	public void testLoadSongById() {
-		Song loadedSong = this.musicPlayer.loadSongById(1);
+		Song loadedSong = this.musicPlayer.getSongById(1);
 		assertEquals("Tested Song ID", 1, loadedSong.getSong_id());
 		assertEquals("Tested  Name", "TestNameSong", loadedSong.getName());
 		assertEquals("Tested FileName", "TestFileNameSong", loadedSong.getFilename());

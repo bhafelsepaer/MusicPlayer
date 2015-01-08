@@ -32,7 +32,7 @@ public class PlaylistServiceImplTest {
 
 	@Test
 	public void test_getPlaylistById() {
-	    Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(1);
+	    Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistByPlaylistId(1);
 	    assertEquals("Tested Playlist id", 1, testedPlaylist.getPlaylist_id());
 	    assertEquals("Tested Playlist name", "TestPlaylist", testedPlaylist.getName());
 	}
@@ -40,19 +40,19 @@ public class PlaylistServiceImplTest {
 	@Test
 	public void test_savePlaylist() {
 		this.playListServiceImpl.savePlaylist(1, "TestPlaylist4");
-		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(4);
+		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistByPlaylistId(4);
 		assertEquals("Tested id", 4, testedPlaylist.getPlaylist_id());
 		assertEquals("Tested name", "TestPlaylist4", testedPlaylist.getName());
 	}
 	
 	@Test
 	public void test_updatePlaylist() {
-		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(1);
+		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistByPlaylistId(1);
 		assertEquals("Tested id before update", 1, testedPlaylist.getPlaylist_id());
 		assertEquals("Tested name before update", "TestPlaylist", testedPlaylist.getName());
 		
 		this.playListServiceImpl.updatePlaylist(1, "UpdateTestPlaylist");
-		Playlist Update_testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(1);
+		Playlist Update_testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistByPlaylistId(1);
 		assertEquals("Tested id after update", 1, Update_testedPlaylist.getPlaylist_id());
 		assertEquals("Tested name after update","UpdateTestPlaylist", Update_testedPlaylist.getName());
 	}
@@ -63,7 +63,7 @@ public class PlaylistServiceImplTest {
 				        .getPlaylistByUserId(1);
 		assertEquals("Tested size before delete", 3, testedListPlaylist.size());
 		
-		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistById(1);
+		Playlist testedPlaylist = (Playlist) this.playListServiceImpl.getPlaylistByPlaylistId(1);
 		assertEquals("Tested id of playlist", 1, testedPlaylist.getPlaylist_id());
 		assertEquals("Tested name of playlist", "TestPlaylist", testedPlaylist.getName());
 		
