@@ -50,9 +50,8 @@ public class MusicPlayerDaoImpl implements MusicPlayerDao {
 		return list_of_song_by_artist;
 	}
 
-
 	@Override
-	public Song loadSongById(int id) {
+	public Song getSongById(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		Song song = (Song)session.get(Song.class, id);
