@@ -34,6 +34,11 @@ public class RegistrationController {
 	@Autowired
 	BeanFactory beanFactory;
 	
+	@ModelAttribute("user")
+	public User getUser(){
+		return new User();
+	}
+	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registrationPageGet(Principal principal, Model model){
 
@@ -42,8 +47,6 @@ public class RegistrationController {
 		if(principal != null){
 			return "redirect:/";
 		}		
-		
-		model.addAttribute("user", new User());
 		
 		return "authorization/registration";
 	}
