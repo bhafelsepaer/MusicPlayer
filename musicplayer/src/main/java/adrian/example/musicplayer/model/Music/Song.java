@@ -13,13 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Cascade;
-
-import adrian.example.musicplayer.model.Music.playlist.Playlist;
 import adrian.example.musicplayer.model.Music.playlist.PlaylistSong;
 
 @Entity
@@ -53,6 +48,9 @@ public class Song implements Serializable {
 	@OneToMany(mappedBy = "song", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<PlaylistSong> playlistSong;
 
+	@OneToMany(mappedBy = "song", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<RateSong> rateSong;
+	
 	public int getSong_id() {
 		return song_id;
 	}
@@ -102,6 +100,14 @@ public class Song implements Serializable {
 
 	public void setPlaylistSong(Set<PlaylistSong> playlistSong) {
 		this.playlistSong = playlistSong;
+	}
+
+	public Set<RateSong> getRateSong() {
+		return rateSong;
+	}
+
+	public void setRateSong(Set<RateSong> rateSong) {
+		this.rateSong = rateSong;
 	}
 
 	
