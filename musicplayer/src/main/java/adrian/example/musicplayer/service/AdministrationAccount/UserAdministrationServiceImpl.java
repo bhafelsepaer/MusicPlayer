@@ -96,7 +96,7 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
 		boolean checkedPassword = false;
 		
 		try {
-		 checkedPassword = this.userDao.checkPassword(user_id, CurrentPassword);
+		    checkedPassword = this.userDao.checkPassword(user_id, CurrentPassword);
 		}catch(ObjectNotFoundException exception){
 			throw new ObjectNotFoundException(103, "User");
 		}
