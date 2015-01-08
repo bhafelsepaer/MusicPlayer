@@ -3,8 +3,10 @@ package adrian.example.musicplayer.model.Music;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "ALBUM", uniqueConstraints = @UniqueConstraint(columnNames = "album_name"))
+@Table(name = "ALBUM", uniqueConstraints = 
+       @UniqueConstraint(columnNames = "album_name"))
 public class Album implements Serializable {
 
 	@Id
@@ -30,7 +33,7 @@ public class Album implements Serializable {
 	@Column(name = "release_date", nullable = true)
 	private int release_date;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Song> song;
 	
 	public int getAlbum_id() {
