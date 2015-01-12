@@ -8,16 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import adrian.example.musicplayer.dao.user.UserDao;
 import adrian.example.musicplayer.model.User.User;
-import adrian.example.musicplayer.model.User.UserInformation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -64,7 +61,7 @@ public class UserServiceImplTest {
         
 		User loadedUser = (User) this.userServiceImpl.findLogin("User2");
 		
-		assertEquals("Tested User id", 2, loadedUser.getUser_id());
+		assertEquals("Tested User id", 6, loadedUser.getUser_id());
 		assertEquals("Tested User Login", "User2", loadedUser.getLogin());
 		assertTrue("Tested User Password", 
 				passwordEncoder.matches("password12345@", loadedUser.getPassword()));
