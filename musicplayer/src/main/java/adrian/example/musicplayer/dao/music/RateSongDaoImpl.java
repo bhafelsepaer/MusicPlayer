@@ -1,5 +1,7 @@
 package adrian.example.musicplayer.dao.music;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,8 @@ public class RateSongDaoImpl implements RateSongDao {
 		RateSong rateSong =  (RateSong) session.createQuery(
 				"FROM RateSong rateSong WHERE rateSong.user.user_id = :user_id"
 				+ " AND rateSong.song.song_id = :song_id")
-				.setParameter("user_id", user_id).
-				setParameter("song_id", song_id).uniqueResult();
+				.setParameter("user_id", user_id)
+				.setParameter("song_id", song_id).uniqueResult();
 		
 		if(rateSong == null){
 			rateSong = new RateSong();
@@ -46,8 +48,36 @@ public class RateSongDaoImpl implements RateSongDao {
 				this.sessionFactory.getCurrentSession();
 		
 		RateSong rateSong = (RateSong) session.get(RateSong.class, rating_id);
-		
 		return rateSong;
+	}
+
+	@Override
+	public double getRateSongByUser(int user_id, int song_id) {
+		Session session =
+		        this.sessionFactory.getCurrentSession();
+		
+		double ratingSong = (Double) session.createQuery("SELECT rating FROM "
+				+ "RateSong rateSong WHERE rateSong.song.song_id = :song_id AND "
+				+ "rateSong.user.user_id = :user_id")
+				.setParameter("song_id", song_id)
+				.setParameter("user_id", user_id)
+				.uniqueResult();
+		
+		return ratingSong;
+	}
+
+	@Override
+	public List<Double> getRateingSongBelongToSong(int song_id) {
+		Session session = 
+				this.sessionFactory.getCurrentSession();
+		
+		List<Double> allRatingSong = (List<Double>)
+				session.createQuery("SELECT rating FROM RateSong ratingSong "
+						+ "WHERE ratingSong.song.song_id = :song_id")
+						.setParameter("song_id", song_id).list();
+	     
+		System.out.println(allRatingSong.toString());
+		return  allRatingSong;
 	}
 
 }
