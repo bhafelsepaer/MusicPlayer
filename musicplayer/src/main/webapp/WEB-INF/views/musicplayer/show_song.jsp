@@ -25,7 +25,7 @@
 	
 	  $(".playlistId").change(function(){
 		 var playlistToSaveSong = $(this).find('option:selected').val();
-		 var a = $.parseJSON(playlistToSaveSong)
+		 var a = $.parseJSON(playlistToSaveSong);
 		 
 		 $.ajax({
 			type: "GET",
@@ -35,30 +35,110 @@
 				alert(response);
 			},
 			error: function(xhr, ajaxOptions, thrownError){
-				alert(thrownError);
+				alert(xhr.responseText);
 			}
 		 });
 		 $(this).find(".choicePlaylist").prop('selectedIndex', 0);
 		 $(this).toggle();
 	  });
-  });
+	  
+	  $(".activeSong a").on("contextmenu",function(e){
+		    e.preventDefault();
+		    $("#myMenu").appendTo($(this))
+		       .css({top: e.pageY + "px", left: e.pageX + "px"}).show();
+		    var song_id = $(this).data("song-id");
+		 
+	<security:authorize access="isAuthenticated()">
+		   $('.rateSong').unbind('click');
+		   $('.rateSong').on("click", function(){
+			  var rating = prompt("Please rate this song");
+			   $("#myMenu").hide();
+			   $.ajax({
+				 type: "GET",
+				 url: "http://localhost:8080/musicplayer/song/rateSongByUser",
+				 data: {user_id : ${user_id}, song_id: song_id, ratingSong: rating},
+				 success: function(response) {
+					 alert(response);
+				 }, error: function(jqXHR, textStatus, errorThrown) {
+					 alert(jqXHR + " " + textStatus + " " +  errorThrown);
+				 }
+			  }); 
+		   });
+		   
+		   $(".showRateUser").unbind('click');
+		   $(".showRateUser").on("click", function(){
+			   $("#myMenu").hide();
+			   $.ajax({
+				 type: "GET",
+				 url: "http://localhost:8080/musicplayer/song/showRatingSongbyUser",
+				 data: {user_id : ${user_id}, song_id: song_id},
+				 success: function(response){
+					 alert(response);
+				 }, error: function(jqXHR, textStatus, errorThrown) {
+					 alert(jqXHR.responseText);
+				 }
+			   });
+		   });
+    </security:authorize>
+		   $(".showAverageSongRating").unbind('click');
+		      $(".showAverageSongRating").on("click", function(){
+		    	 $("#myMenu").hide();
+		    	 $.ajax({
+		    		type: "GET",
+		    		url: "http://localhost:8080/musicplayer/song/showAverageRatingSong",
+		    		data: {song_id : song_id},
+		    		success: function(response) {
+		    			alert(response);
+		    		}, error: function(jqXHR, textStatus, errorThrown) {
+		    			alert(jqXHR.responseText);
+		    		}
+		    	 });
+		   });
+	     });
+	   });
  </script>
  
  <style>
  
+  #myMenu {
+         display:none;
+         z-index:1000;
+         position: absolute;
+         background-color:#C0C0C0;
+         border: 1px solid black;
+         padding: 2px;
+    }
+     
+  #myMenu ul {
+       list-style-type: none;
+       padding: 0;
+       margin: 0;
+    }
+     
  .playlistId {
      display: none;
      position: absolute;
      color: red;
  }
  </style>
-
+ 
 </head>
 <body>
 <div id="sidebar">
    <jsp:include page="/WEB-INF/views/fragments/sidebar.jsp" />
 </div>
 <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
+
+ <div id="myMenu">
+    <ul>
+    <security:authorize access="isAuthenticated()"> <li class="rateSong"><a href="#">Rating Song</a></li>
+      <li class="showRateUser"><a href="#">Show Rating User</a></li>
+      </security:authorize>
+      <security:authorize access="permitAll">
+              <li class="showAverageSongRating"><a href="#">Show Average Song</a></li>
+      </security:authorize>
+   </ul>
+</div>		
 
 <security:authorize access="permitAll">
 <div id="songContent">
@@ -69,7 +149,8 @@
     <c:forEach items="${loadedSong}" var="song" varStatus="xd">
      <tr>
         <td><div class="activeSong">
-           <a href="/musicplayer/playSong?song_id=${song.song_id}">${song.name}</a>
+           <a href="/musicplayer/playSong?song-id=${song.song_id}"
+           data-song-id=${song.song_id}>${song.name}</a>
        </div></td>
       <security:authorize access="isAuthenticated()">
         <td>
