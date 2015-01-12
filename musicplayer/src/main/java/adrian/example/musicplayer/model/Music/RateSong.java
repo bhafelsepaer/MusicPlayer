@@ -29,7 +29,7 @@ public class RateSong {
 	private int rateSong_id;
 	
 	@Column(name = "rate_song")
-	private int rating;
+	private double rating;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_rate_song_id", referencedColumnName = "user_id")
@@ -43,11 +43,11 @@ public class RateSong {
 		return rateSong_id;
 	}
 
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
 	
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 
