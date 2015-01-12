@@ -152,9 +152,6 @@ public class UserSettingsControllerTest {
     public void settingUserPasswordGetPrincipalEqualsLogin() throws Exception {
     	User userSpring = new User("TestLogin", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
 		Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
-		
-		adrian.example.musicplayer.model.User.User user = 
-				this.userAdministrationService.findLogin("TestLogin");
     	
     	this.mockMvc.perform(get("/settings_account_user/TestLogin/password")
     			    .principal(authentication))
@@ -297,8 +294,6 @@ public class UserSettingsControllerTest {
     
      @Test
      public void settingUserInformationPost() throws Exception {
-    	adrian.example.musicplayer.model.User.User user = 
-    			this.userAdministrationService.findLogin("TestLogin");
    	    
    	    User userSpring = new User("TestLogin", "", AuthorityUtils.createAuthorityList("ROLE_USER"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(userSpring, null, userSpring.getAuthorities());
