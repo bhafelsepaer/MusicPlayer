@@ -5,7 +5,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
+
+import static org.hamcrest.Matchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +26,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import adrian.example.musicplayer.model.Music.playlist.Playlist;
 import adrian.example.musicplayer.service.music.PlaylistService;
 import adrian.example.musicplayer.service.user.UserServiceImpl;
 
@@ -55,12 +60,13 @@ public class WelcomeControllerTest {
 				new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 		
 		int user_id  =  this.userService.findLogin("TestLogin").getUser_id();
+		List<Playlist> playlist = 
+				this.playListService.getPlaylistByUserId(user_id);
 		
 		this.mockMvc.perform(get("/").principal(authentication))
 		            .andExpect(view().name(containsString("home")))
 		            .andExpect(request().sessionAttribute("user_id", user_id))
-		            .andExpect(request().sessionAttribute("playlist", 
-		            		   this.playListService.getPlaylistByPlaylistId(user_id)))
+		            .andExpect(request().sessionAttribute("playlist", playlist))
 		            .andExpect(forwardedUrl("/WEB-INF/views/home.jsp"))
 		            .andExpect(status().isOk());
 	}
