@@ -66,10 +66,12 @@ public class PlaylistSongControllerTest {
 				this.playlistService.getPlaylistByPlaylistId(playlist_id);
 		
 		this.mockMvc.perform(get("/playlist/saveSongToPlaylist")
-				    .param("song_id", "" + song_id)
+				    .param("song-id", "" + song_id)
 				    .param("playlist_id", "" + playlist_id))
 				    .andExpect(status().isOk())
-				    .andExpect(content().string("succed save song: " + song.getName() + " to playlist: " + playlist.getName()));
+				    .andExpect(content().string(
+				    		"succed save song: " + song.getName() + 
+				    		" to playlist: " + playlist.getName()));
 	}
 	
 	@Test 
