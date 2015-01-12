@@ -11,19 +11,7 @@
 <link rel="stylesheet"
 	href="<spring:url value="/resources/css/tabNavigator.css"/>" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-<script>
-	$(document).ready(function() {
-		$("#tabs li").click(function() {
-			$("#tabs li").removeClass("active");
-			$(this).addClass("active");
-			$(".tab_content").hide();
-			var selected_tab = $(this).find("a").attr("href");
-			$(selected_tab).fadeIn();
-			return false;
-		});
-	});
-</script>
+<script src='<spring:url value="/resources/javascript/tabNavigatorFragments.js"/> '></script>
 
 <jsp:include page="/WEB-INF/views/fragments/sidebar.jsp" />
 <jsp:include page="/WEB-INF/views/fragments/mainPage.jsp" />
