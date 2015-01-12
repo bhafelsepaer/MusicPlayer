@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import adrian.example.musicplayer.model.Music.Song;
 import adrian.example.musicplayer.model.Music.playlist.Playlist;
@@ -24,7 +23,6 @@ import adrian.example.musicplayer.service.music.PlaylistService;
 
 @Controller
 @RequestMapping(value = "/playlist")
-@SessionAttributes({"user"})
 public class PlaylistSongController {
 	
 	@Autowired
