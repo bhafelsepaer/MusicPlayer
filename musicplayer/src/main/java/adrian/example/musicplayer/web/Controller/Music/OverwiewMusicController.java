@@ -1,20 +1,15 @@
 package adrian.example.musicplayer.web.Controller.Music;
 
 import java.security.Principal;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import adrian.example.musicplayer.model.Music.Song;
@@ -24,7 +19,7 @@ import adrian.example.musicplayer.service.music.PlaylistService;
 import adrian.example.musicplayer.service.user.UserService;
 
 @Controller
-@SessionAttributes("song")
+@SessionAttributes({"song"})
 public class OverwiewMusicController {
 
 	@Autowired
@@ -81,7 +76,7 @@ public class OverwiewMusicController {
 	}
 	
 	@RequestMapping(value = "/playSong", method = RequestMethod.GET)
-	public String showSong(@RequestParam(value="song_id", required = true)
+	public String showSong(@RequestParam(value="song-id", required = true)
 	                         int song_id, Model model) {
 		
 		Song song = this.musicService.getSongById(song_id);
