@@ -37,25 +37,28 @@ public class PlayListSongServiceImplTest {
 	@Test
 	public void test_savePlaylistSong() {
 		
+		int playlist_id = 2;
+		int song_id = 2;
+		
 		assertEquals("Test size PlaylistSong id = 2 Before Save", 0, 
-				this.playListSongServiceImpl.getListOfPlaylistSongById(2).size());
+				this.playListSongServiceImpl.getListOfPlaylistSongById(playlist_id).size());
         assertEquals("Check if List of PlaylistSong is empty", Arrays.asList(),  
-        		this.playListSongServiceImpl.getListOfPlaylistSongById(2));
+        		this.playListSongServiceImpl.getListOfPlaylistSongById(playlist_id));
         
 		this.playListSongServiceImpl.
-		     savePlaylistSong(1, 2);
+		     savePlaylistSong(song_id, playlist_id);
 		
 		List<PlaylistSong> playlistSongTest = 
-				this.playListSongServiceImpl.getListOfPlaylistSongById(2);
+				this.playListSongServiceImpl.getListOfPlaylistSongById(playlist_id);
 		
 		assertEquals("Test size PlaylistSong id = 2 After Save", 
 				1, playlistSongTest.size());
 		assertEquals("Test PlaylistSong id", 
 				4, playlistSongTest.get(0).getPlaylistSong_id());
 		assertEquals("Test Song id ", 
-				1, playlistSongTest.get(0).getSong().getSong_id());
+				2, playlistSongTest.get(0).getSong().getSong_id());
 		assertEquals("Test Song name", 
-				"TestNameSong", playlistSongTest.get(0).getSong().getName());
+				"TestNameSong2", playlistSongTest.get(0).getSong().getName());
 		assertEquals("Test Playlist id" , 
 				2, playlistSongTest.get(0).getPlaylist().getPlaylist_id());
 		assertEquals("Test Playlist Name", 
