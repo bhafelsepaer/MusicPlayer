@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -22,6 +23,7 @@ import adrian.example.musicplayer.model.Music.playlist.Playlist;
 @ContextConfiguration
 @Transactional
 @TransactionConfiguration
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class PlayListImplDaoTest {
 
 	@Autowired
@@ -39,9 +41,9 @@ public class PlayListImplDaoTest {
 	@Test
 	public void test_savePlaylist() {
 		this.playlistDao.savePlaylist(1, "TestPlaylist4");
-		Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistByPlaylistId(3);
-		assertEquals("Tested id", 3, testedPlaylist.getPlaylist_id());
-		assertEquals("Tested name", "TestPlaylist3", testedPlaylist.getName());
+		Playlist testedPlaylist = (Playlist) this.playlistDao.getPlaylistByPlaylistId(4);
+		assertEquals("Tested id", 4, testedPlaylist.getPlaylist_id());
+		assertEquals("Tested name", "TestPlaylist4", testedPlaylist.getName());
 	}
 	
 	@Test 

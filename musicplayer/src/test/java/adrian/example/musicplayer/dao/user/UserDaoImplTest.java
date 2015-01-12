@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -22,6 +23,8 @@ import adrian.example.musicplayer.model.User.UserInformation;
 @ContextConfiguration
 @TransactionConfiguration
 @Transactional
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+
 public class UserDaoImplTest {
 
 	@Autowired
@@ -36,7 +39,7 @@ public class UserDaoImplTest {
 	@Test
 	public void test_saveUser() throws Exception {
 		User userToSave = new User();
-		userToSave.setLogin("User2");
+		userToSave.setLogin("User6");
 		userToSave.setActive_cod(54321);
 		userToSave.setAddress("AddressSave");
 		userToSave.setEmail("SavedEmail@Test.com");
@@ -46,10 +49,10 @@ public class UserDaoImplTest {
 		
 		this.userDaoImpl.saveUser(userToSave);
         
-		User loadedUser = (User) this.userDaoImpl.findUserByLogin("User2");
+		User loadedUser = (User) this.userDaoImpl.findUserByLogin("User6");
 		
-		assertEquals("Tested User id", 2, loadedUser.getUser_id());
-		assertEquals("Tested User Login", "User2", loadedUser.getLogin());
+		assertEquals("Tested User id", 6, loadedUser.getUser_id());
+		assertEquals("Tested User Login", "User6", loadedUser.getLogin());
 		assertEquals("Tested User Password", 
 				"password12345@",
 				loadedUser.getPassword());
