@@ -12,19 +12,19 @@
  <jsp:include page="/WEB-INF/views/fragments/settingsFragment.jsp" />
  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
  
- 
 <script>
    $(document).ready(function(){
 	   
-	    $(".actualSong a").on("contextmenu",function(e){
+	    $(".activeSong a").on("contextmenu",function(e){
 		    e.preventDefault();
 		    $("#myMenu").appendTo($(this))
 		       .css({top: e.pageY + "px", left: e.pageX + "px"}).show();
 		    var song_id = $(this).data("song-id");
 		    
-		   $(this).unbind().on("click", function(){
+		   $('.rateSong').unbind('click');
+		   $('.rateSong').on("click", function(){
+			  var rating = prompt("Please rate this song");
 			   $("#myMenu").hide();
-			   var rating = prompt("Please rate this song");
 			   $.ajax({
 				 type: "GET",
 				 url: "http://localhost:8080/musicplayer/song/rateSongByUser",
@@ -32,16 +32,46 @@
 				 success: function(response) {
 					 alert(response);
 				 }, error: function(jqXHR, textStatus, errorThrown) {
-					 alert(textStatus);
+					 alert(jqXHR + " " + textStatus + " " +  errorThrown);
 				 }
 			  }); 
 		   });
+		   
+		   $(".showRateUser").unbind('click');
+		   $(".showRateUser").on("click", function(){
+			   $("#myMenu").hide();
+			   $.ajax({
+				 type: "GET",
+				 url: "http://localhost:8080/musicplayer/song/showRatingSongbyUser",
+				 data: {user_id : ${user_id}, song_id: song_id},
+				 success: function(response) {
+					 alert(response);
+				 }, error: function(jqXHR, textStatus, errorThrown) {
+					 alert(jqXHR.responseText);
+				 }
+			   });
+		   });
+		   
+		   $(".showAverageSongRating").unbind('click');
+		      $(".showAverageSongRating").on("click", function(){
+		    	 $("#myMenu").hide();
+		    	 $.ajax({
+		    		type: "GET",
+		    		url: "http://localhost:8080/musicplayer/song/showAverageRatingSong",
+		    		data: {song_id : song_id},
+		    		success: function(response) {
+		    			alert(response);
+		    		}, error: function(jqXHR, textStatus, errorThrown) {
+		    			alert(jqXHR.responseText);
+		    		}
+		    	 });
+		      });
 	     });
 	   });
 </script>
 
 <style>
-     form, .actualSong {
+     form, .activeSong {
         display: inline;
      }
      
@@ -60,33 +90,22 @@
        margin: 0;
      }
      
-     #inputRating {
-        display: none;
-        position:absolute;
-        width:300px;
-        z-index:15;
-        top:50%;
-        left:50%;
-        margin:-100px 0 0 -150px;
-        background-color: #C0C0C0;
-        border: 1px solid black;
-        padding 2px;
-     }
-     
 </style>
 </head>
 <body>
 <security:authorize access="isAuthenticated()">
  <jsp:include page="/WEB-INF/views/fragments/sidebar.jsp" />
- 
+  
  <div id="myMenu">
     <ul>
-			<li class="rateSong"><a href="#">Edit</a></li>
+      <li class="rateSong"><a href="#">Rating Song</a></li>
+      <li class="showRateUser"><a href="#">Show Rating User</a></li>
+      <li class="showAverageSongRating"><a href="#">Show Average Song</a></li>
    </ul>
 </div>		
 
 <core:forEach items="${songInPlaylist}" var="song">
-    <div class="actualSong">
+    <div class="activeSong">
        <a href="/musicplayer/playlist/playSongFromPlaylist/${playlist_id}/${song.song_id}" 
        data-song-id = "${song.song_id}" >${song.name}</a>
     </div>
