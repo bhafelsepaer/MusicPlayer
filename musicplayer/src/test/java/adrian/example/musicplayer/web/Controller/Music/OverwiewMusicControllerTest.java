@@ -103,7 +103,7 @@ public class OverwiewMusicControllerTest {
 		Song song = this.musicService.getSongById(1);
 		
 		this.mockMvc.perform(get("/playSong")
-				    .param("song_id", "1"))
+				    .param("song-id", "1"))
 				    .andExpect(model().attribute("location", song.getFilename()))
 				    .andExpect(model().attribute("SongName", song.getName()))
 				    .andExpect(view().name("musicplayer/show_song"))
